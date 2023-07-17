@@ -1,0 +1,20 @@
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 52px;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.nav-item {
+	height: 100%;
+	padding: 4px 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: aqua;
+	color: white;
+	font-weight: 500;
+	margin-right: 4px;
+}
