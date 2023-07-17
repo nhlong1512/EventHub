@@ -1,0 +1,29 @@
+.checklist-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.checkbox-container {
+  padding: 8px 0;
+}
+
+.checkbox-container input {
+  margin-right: 8px;
+  height: 16px;
+  width: 16px;
+}
+
+.checked-items {
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+}
+
+.checked-items li {
+  padding-right: 8px;
+  color: blueviolet;
+}

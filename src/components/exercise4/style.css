@@ -1,0 +1,21 @@
+.click-counting-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.click-counting-container button {
+  background-color: aqua;
+  margin-top: 8px;
+  height: 40px;
+  width: 80px;
+  border: solid 1px black;
+  border-radius: 8px;
+}
+
+.click-counting-container button:hover {
+  cursor: pointer;
+}
