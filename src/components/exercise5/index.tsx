@@ -1,85 +1,94 @@
-import { TextField, Button, Zoom, Alert } from "@mui/material"
-import { useState } from "react"
+import { TextField, Button, Zoom, Alert, Input } from "@mui/material"
+import { useEffect, useState } from "react"
+import constants from "../../assets/constants/app.constants"
 import "./style.css"
 
 export default function Exercise5() {
 	const [firstName, setFirstName] = useState("")
-
 	const [lastName, setLastName] = useState("")
-
-	const [result, setResult] = useState("")
-
-	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-
+	const [fullName, setFullName] = useState("")
+	const [disabledSubmit, setDisabledSubmit] = useState(true)
 	const [firstNameError, setFirstNameError] = useState(false)
-
 	const [lastNameError, setLastNameError] = useState(false)
 
-	const handleFormOnSubmit = () => {
-		if (isValidInputs())
-			setResult(firstName + " " + lastName)
-		else {
-			setResult("")
-		}
+	function handleFormOnSubmit() {
+		if (isValidInputs()) setFullName(formatFullName())
+		else setFullName("")
 	}
 
-	const handleOnKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-		if (e.key === "Enter" && !isButtonDisabled) handleFormOnSubmit()
+	function handleInputOnchange(
+		value: string,
+		setValue: React.Dispatch<React.SetStateAction<string>>
+	) {
+		if (value.length <= constants.maxNameLength) setValue(value)
+		if (fullName) setFullName("")
+		if (firstNameError) setFirstNameError(false)
+		if (lastNameError) setLastNameError(false)
 	}
 
-	const isValidInputs = () => {
-		if (/[^a-zA-Z]/i.test(firstName) || firstName.includes("  ")){
+	// handle if users press enter to submit form
+	function handleOnKeyDown(e: React.KeyboardEvent<HTMLFormElement>) {
+		if (e.key === "Enter" && !disabledSubmit) handleFormOnSubmit()
+	}
+
+	// check if inputs are valid before submit
+	function isValidInputs() {
+		if (constants.nameRegex.test(firstName) || firstName.includes("  ")) {
 			setFirstNameError(true)
 			return false
 		}
-		if (/[^a-zA-Z]/i.test(lastName) || lastName.includes("  ")){
+		if (constants.nameRegex.test(lastName) || lastName.includes("  ")) {
 			setLastNameError(true)
 			return false
 		}
 		return true
 	}
 
-	const handleInputOnchange = (
-		value: string,
-		setValue: React.Dispatch<React.SetStateAction<string>>
-	) => {
-		setValue(value)
-		setIsButtonDisabled(firstName === "" || lastName === "")
-		if(result) setResult("")
-		if(firstNameError) setFirstNameError(false)
-		if(lastNameError) setLastNameError(false)
+	// Format name (trim and capitalize from first name and last name)
+	function formatFullName() {
+		let nameArray = firstName.split(" ").concat(lastName.split(" "))
+		return nameArray.reduce((acc, ele) => {
+			return acc + " " + (ele.charAt(0).toUpperCase() + ele.slice(1)).trim();
+		}, "").substring(1)
 	}
+
+	// reset disableSubmit on changing inputs
+	useEffect(() => {
+		setDisabledSubmit(firstName === "" || lastName === "")
+	}, [firstName, lastName])
 
 	return (
 		<div className="exercise-container form-container">
-			<form>
+
+			<div className="title">Simple form</div>
+
+			<form onKeyDown={e => handleOnKeyDown(e)}>
 				<TextField
 					id="outlined-basic"
 					label="First name"
 					variant="outlined"
-					value={firstName}
-					onChange={(e) => handleInputOnchange(e.target.value, setFirstName)}
-					onKeyDown={(e) => handleOnKeyDown(e)}
 					margin="dense"
-					fullWidth
+					onChange={e => handleInputOnchange(e.target.value, setFirstName)}
+					value={firstName}
 					error={firstNameError}
+					fullWidth
+					autoFocus
 				/>
 
 				<TextField
 					id="outlined-basic"
 					label="Last name"
 					variant="outlined"
-					value={lastName}
-					onChange={(e) => handleInputOnchange(e.target.value, setLastName)}
-					onKeyDown={(e) => handleOnKeyDown(e)}
 					margin="dense"
-					fullWidth
+					onChange={e => handleInputOnchange(e.target.value, setLastName)}
+					value={lastName}
 					error={lastNameError}
+					fullWidth
 				/>
 
 				<Button
 					variant="contained"
-					disabled={isButtonDisabled}
+					disabled={disabledSubmit}
 					onClick={handleFormOnSubmit}
 				>
 					Greet me
@@ -89,27 +98,26 @@ export default function Exercise5() {
 			<div className="alert-container">
 				<Zoom in={firstNameError || lastNameError} className="alert">
 					<Alert severity="error">
-						- Name cannot be empty. <br/>
-						- Name cannot contains numbers, special characters. <br/>
+						- Name cannot be empty. <br />
+						- Name cannot contains numbers, special characters. <br />
 						- Name cannot contains only spaces or consecutive spaces.
 					</Alert>
 				</Zoom>
 
-				<Zoom in={result !== ""}  className="alert">
+				<Zoom in={fullName !== ""} className="alert">
 					<Alert
 						severity="success"
 						action={
 							<Button color="inherit" size="small" onClick={() => {
-								setResult("")
+								setFullName("")
 								setFirstName("")
 								setLastName("")
-								setIsButtonDisabled(true)
 							}}>
 								Hide
 							</Button>
 						}
 					>
-						Full name is <strong>{result}</strong>
+						Full name is <strong>"{fullName}"</strong>
 					</Alert>
 				</Zoom>
 			</div>

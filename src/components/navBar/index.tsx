@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import constants from "../../assets/constants/app.constants";
 import style from "./style.module.css";
 
 export default function NavBar() {
 
-  const [navItemStyles, setnavItemStyles] = useState([
+  const [navItemStyles, setNavItemStyles] = useState([
     style["nav-item"],
     style["nav-item"],
     style["nav-item"],
@@ -23,6 +24,7 @@ export default function NavBar() {
       : "1";
   }
 
+  // Highlight focus navigation item
   const handleNavBar = (pathnamePostfix: string) => {
     let currentStyleIndex = parseInt(pathnamePostfix) - 1
     let newNavItemStyles = navItemStyles.map((item, index) => {
@@ -30,12 +32,12 @@ export default function NavBar() {
         ? clsx(style["nav-item"], style.focused)
         : style["nav-item"]
     })
-    setnavItemStyles(newNavItemStyles)
+    setNavItemStyles(newNavItemStyles)
   }
 
-  // Reset page title on navigation
+  // Reset page title by current pathname
   useEffect(() => {
-    document.title = "Duc Anh - Exercise " + getCurrentPathnamePostFix()
+    document.title = constants.pageTitlePrefix + getCurrentPathnamePostFix()
   }, [navItemStyles])
 
   // Handle navigation bar at the first time page rendered
