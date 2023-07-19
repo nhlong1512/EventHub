@@ -1,6 +1,7 @@
 export default function Exercise1() {
   return (
     <div
+      className="exercise-container"
       style={{
         backgroundColor: "#FEC801",
 				width: "100%",
@@ -9,8 +10,7 @@ export default function Exercise1() {
         justifyContent: "center",
         alignItems: "center",
         fontSize: 30,
-        fontWeight: 500,
-        color: "white"
+        fontWeight: 500
       }}
     >
       Hello world

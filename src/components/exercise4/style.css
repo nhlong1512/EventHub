@@ -7,15 +7,11 @@
   font-size: 20px;
 }
 
-.click-counting-container button {
-  background-color: aqua;
-  margin-top: 8px;
-  height: 40px;
-  width: 80px;
-  border: solid 1px black;
-  border-radius: 8px;
+.click-counting-container p {
+  margin-bottom: 16px;
 }
 
-.click-counting-container button:hover {
-  cursor: pointer;
+.click-counting-container i {
+  color: brown;
+  font-style: normal;
 }

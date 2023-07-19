@@ -1,5 +1,5 @@
 .animal-list {
-	width: 80px;
+	width: 110px;
 	margin: auto;
 }
 
@@ -9,7 +9,14 @@
 	border: solid 1px silver;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	text-transform: uppercase;
 	font-weight: 500;
+}
+
+.animal img {
+	width: 32px;
+	height: 32px;
+	padding: 4px;
+	margin-right: 4px;
 }

@@ -15,7 +15,7 @@ export default function Exercise3() {
   }
 
   return (
-    <div className="checklist-container">
+    <div className="checklist-container exercise-container">
       <p>Your Checklist</p>
       <div>
         <div className="checkbox-container">
