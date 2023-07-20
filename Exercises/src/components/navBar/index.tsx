@@ -18,14 +18,14 @@ export default function NavBar() {
     style["nav-item"],
   ])
 
-  const getCurrentPathnamePostFix = () => {
+  function getCurrentPathnamePostFix() {
     return window.location.pathname.length > 1 
       ? window.location.pathname.slice(-1)
       : "1";
   }
 
   // Highlight focus navigation item
-  const handleNavBar = (pathnamePostfix: string) => {
+  function handleNavBar(pathnamePostfix: string) {
     let currentStyleIndex = parseInt(pathnamePostfix) - 1
     let newNavItemStyles = navItemStyles.map((item, index) => {
       return currentStyleIndex===index
@@ -76,7 +76,7 @@ export default function NavBar() {
         <Link className={navItemStyles[4]} onClick={()=>handleNavBar("5")} to={"exercise5"}>Exercise 5</Link>
       </li>
       <li>
-        <Link className={navItemStyles[5]} onClick={()=>handleNavBar("5")} to={"/exercise6"}>Exercise 6</Link>
+        <Link className={navItemStyles[5]} onClick={()=>handleNavBar("6")} to={"/exercise6"}>Exercise 6</Link>
       </li>
       <li>
         <Link className={navItemStyles[6]} onClick={()=>handleNavBar("7")} to={"/exercise7"}>Exercise 7</Link>

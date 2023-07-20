@@ -1,9 +1,11 @@
 # ReactJS training
 
-## Tech stack
+## Main libraries
 - ReactJS
 - Material UI
 - React Router DOM
+- Axios
+
 
 ## About
 - <strong>Exercise 1:</strong> Hello world
