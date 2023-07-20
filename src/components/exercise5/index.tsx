@@ -1,4 +1,4 @@
-import { TextField, Button, Zoom, Alert, Input } from "@mui/material"
+import { TextField, Button, Zoom, Alert } from "@mui/material"
 import { useEffect, useState } from "react"
 import constants from "../../assets/constants/app.constants"
 import "./style.css"
@@ -21,6 +21,8 @@ export default function Exercise5() {
 		setValue: React.Dispatch<React.SetStateAction<string>>
 	) {
 		if (value.length <= constants.maxNameLength) setValue(value)
+
+		// hide error alert and fullName alert
 		if (fullName) setFullName("")
 		if (firstNameError) setFirstNameError(false)
 		if (lastNameError) setLastNameError(false)
@@ -46,9 +48,11 @@ export default function Exercise5() {
 
 	// Format name (trim and capitalize from first name and last name)
 	function formatFullName() {
-		let nameArray = firstName.split(" ").concat(lastName.split(" "))
-		return nameArray.reduce((acc, ele) => {
-			return acc + " " + (ele.charAt(0).toUpperCase() + ele.slice(1)).trim();
+		let firstNameWords = firstName.split(" ").filter(word => word)
+		let lastNameWords = lastName.split(" ").filter(word => word)
+
+		return [...firstNameWords, ...lastNameWords].reduce((curr, next) => {
+			return curr + " " + (next.charAt(0).toUpperCase() + next.slice(1))
 		}, "").substring(1)
 	}
 
