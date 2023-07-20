@@ -1,3 +1,11 @@
 /.vscode
 
-/Exercises/node_modules
+/react-exercises/node_modules
+
+/ticket-booking-webapp/node_modules
+
+/ticket-booking-api/TicketBookingAPI.app/bin
+/ticket-booking-api/TicketBookingAPI.app/obj
+
+/ticket-booking-api/TicketBookingAPI.data/bin
+/ticket-booking-api/TicketBookingAPI.data/obj
