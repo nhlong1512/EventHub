@@ -2,7 +2,7 @@
 Netpower internship project
 
 ## Repository structure
-
+```
 |
 | - - - react-exercises/
 |
@@ -15,6 +15,7 @@ Netpower internship project
 				| - - - TicketBookingAPI.data
 				|
 				| - - - TicketBookingAPI.app
+```
 
 ## Tech stack for Ticket Booking
 
