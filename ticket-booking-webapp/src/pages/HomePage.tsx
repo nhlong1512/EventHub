@@ -8,15 +8,11 @@ import { FETCH_API } from "../config";
 const HomePage = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    fetchEvents();
-  }, []);
-
+  
   const fetchEvents = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('https://b260-203-205-32-159.ngrok-free.app/api/Event');
+      const response = await axios.get('https://26c9-203-205-32-159.ngrok-free.app/api/Event');
       console.log(response);
       // setEvents(response.data);
     } catch (error) {
@@ -25,8 +21,11 @@ const HomePage = () => {
       setIsLoading(false);
     }
   };
+  useEffect(() => {
+    fetchEvents();
+  }, []);
   return (
-    <Container className="py-[80px] flex justify-center flex-col">
+    <Container className="my-[80px] flex justify-center flex-col">
       <EventsList />
       <Button
         variant="contained"
