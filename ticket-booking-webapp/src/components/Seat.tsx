@@ -11,7 +11,7 @@ const Seat = ({ typeSeat, statusSeat, seatId }: Props) => {
   if (statusSeat === "banned") {
     return (
       <div className="w-[40px] h-[40px] border-[#ccc] border-[2px] border-solid rouned-[2px] flex justify-center items-center cursor-pointer hover:opacity-80 banned">
-        <p className="m-0">X</p>
+        <p className="m-0 text-[24px]">X</p>
       </div>
     );
   }
@@ -30,7 +30,7 @@ const Seat = ({ typeSeat, statusSeat, seatId }: Props) => {
     );
   }
   if (statusSeat === "none") {
-    if (typeSeat === "normal") {
+    if (typeSeat === "standard") {
       return (
         <div className="w-[40px] h-[40px] border-main border-[2px] border-solid rouned-[2px] flex justify-center items-center cursor-pointer hover:opacity-80">
           <p className="m-0">{seatId}</p>
