@@ -17,7 +17,7 @@ namespace TicketBooking.API.Configurations
       builder.Property(e => e.CreatedAt).HasDefaultValue(null);
       builder.Property(e => e.IsDeleted).HasDefaultValue(false);
       builder.Property(e => e.Image).HasDefaultValue("");
-      builder.Property(e => e.Price).IsRequired();
+      builder.Property(e => e.MinPrice).IsRequired();
       builder.Property(e => e.Title).IsRequired();
       builder.Property(e => e.Date).IsRequired();
       builder.Property(e => e.Type).IsRequired();

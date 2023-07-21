@@ -8,7 +8,7 @@ namespace TicketBooking.API.Models
     public string Image { get; set; }
     public string Title { get; set; }
     public EventType Type { get; set; }
-    public int Price { get; set; }
+    public int MinPrice { get; set; }
     public DateTime Date { get; set; }
     public string Location { get; set; }
     public EventStatus Status { get; set; }
@@ -16,5 +16,7 @@ namespace TicketBooking.API.Models
     public DateTime? CreatedAt { get; set; }
     public DateTime? DeletedAt { get; set; }
     public bool IsDeleted { get; set; }
+    public ICollection<Invoice> Invoice { get; set;} 
+    public ICollection<Chair> Chairs { get; set;} 
   }
 }

@@ -4,7 +4,7 @@ using TicketBooking.API.Models;
 
 namespace TicketBooking.API.EF
 {
-  class ApplicationDbContext: DbContext
+  public class ApplicationDbContext: DbContext
   {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options) {}
 
@@ -16,5 +16,7 @@ namespace TicketBooking.API.EF
     }
 
     public DbSet<Event> Events { get; set; }
+    public DbSet<Chair> Chairs { get; set; }
+    public DbSet<Invoice> Invoice { get; set; }
   }
 }
