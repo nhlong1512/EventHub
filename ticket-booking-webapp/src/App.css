@@ -1,3 +1,40 @@
 .App {
   text-align: center;
 }
+
+.normal-type .available {
+  border: 1px solid green;
+}
+
+.normal-type .active{
+  background-color: green;
+  color: white;
+}
+
+.vip-type .available{
+  border: 2px solid red;
+}
+
+.vip-type .active{
+  background-color: red;
+  color: white;
+}
+
+.sweetbox-type .available{
+  border: 1px solid pink;
+}
+
+.sweetbox-type .active{
+  background-color: pink;
+  color: white;
+}
+
+.picked {
+  background-color: #ccc;
+  color: white;
+}
+
+.banned {
+  background: #ccc;
+  color: white;
+}
