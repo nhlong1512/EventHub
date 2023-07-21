@@ -1,6 +1,6 @@
 namespace TicketBooking.API.Enum
 {
-	public enum ChairStatus
+	public enum SeatStatus
 	{
 		Free,
 		Chosen,

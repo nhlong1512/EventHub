@@ -1,6 +1,6 @@
 namespace TicketBooking.API.Enum
 {
-	public enum ChairType
+	public enum SeatType
 	{
 		Vip,
 		Normal,

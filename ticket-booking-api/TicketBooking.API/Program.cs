@@ -6,11 +6,26 @@ using TicketBooking.API.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
+
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 
-builder.Services.AddDbContext<ApplicationDbContext> (option => {
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicies", policy =>
+    {
+        policy
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
+builder.Services.AddDbContext<ApplicationDbContext>(option =>
+{
     option.UseSqlServer(builder.Configuration.GetConnectionString("TicketBooking"));
 });
 
@@ -24,6 +39,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("MyPolicies");
 
 app.UseAuthorization();
 

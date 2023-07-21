@@ -10,7 +10,8 @@ namespace TicketBooking.API.Models
 		public DateTime? CreatedAt { get; set; }
 		public DateTime? DeletedAt { get; set; }
 		public bool IsDeleted { get; set; }
-		public ICollection<Chair> Chairs { get; set; }
+		public ICollection<Seat> Seats { get; set; }
+		public Guid EventId { get; set; }
 		public Event Event { get; set; }
 	}
 }

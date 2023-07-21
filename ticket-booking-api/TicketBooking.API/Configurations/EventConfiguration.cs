@@ -20,7 +20,8 @@ namespace TicketBooking.API.Configurations
       builder.Property(e => e.MinPrice).IsRequired();
       builder.Property(e => e.Title).IsRequired();
       builder.Property(e => e.Date).IsRequired();
-      builder.Property(e => e.Type).IsRequired();
+      builder.Property(e => e.Location).IsRequired();
+      builder.Property(e => e.City).HasDefaultValue(null);
     }
   }
 }
