@@ -1,0 +1,1 @@
+export const FETCH_API = 'https://b260-203-205-32-159.ngrok-free.app/api/Event';
