@@ -1,9 +1,13 @@
-import React from 'react'
+import { Container } from "@mui/material";
+import React from "react";
+import SeatsList from "../components/SeatsList";
 
 const EventDetailPage = () => {
   return (
-    <div>EventDetailPage</div>
-  )
-}
+    <Container className="my-[80px]">
+      <SeatsList />
+    </Container>
+  );
+};
 
-export default EventDetailPage
+export default EventDetailPage;
