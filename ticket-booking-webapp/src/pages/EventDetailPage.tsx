@@ -7,9 +7,9 @@ import SeatsList from "../components/SeatsList";
 const EventDetailPage = () => {
   return (
     <Container className="my-[80px]">
+      <EventDescription/>
       <SeatDescription/>
       <SeatsList />
-      <EventDescription/>
     </Container>
   );
 };

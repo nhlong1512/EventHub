@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { DatePicker } from "@mui/x-date-pickers";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const initEventTypes = [
   "Live Music",

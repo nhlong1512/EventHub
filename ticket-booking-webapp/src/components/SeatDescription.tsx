@@ -2,7 +2,7 @@ import React from "react";
 
 const SeatDescription = () => {
   return (
-    <div className="mb-[80px] flex justify-between">
+    <div className="my-[80px] flex justify-between">
       <div className="flex gap-[36px]">
         <div className="flex items-center gap-[12px]">
           <div
