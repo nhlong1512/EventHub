@@ -3,7 +3,7 @@ import React from "react";
 const EventDescription = () => {
   return (
     <div className="mt-[80px] flex gap-[50px] p-[20px] rounded-[20px] border-[#ccc] border-solid border-[4px]">
-      <div className="flex flex-row flex-[6] gap-[16px]">
+      <div className="flex flex-row flex-[7] gap-[16px]">
         <div>
           <img src={require("../assets/images/eventImg.jpg")} alt="event" className="w-[200px] h-full" />
         </div>
