@@ -1,7 +1,15 @@
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#5669FF",
+    },
+  },
+});
 const NavBar = () => {
   return (
     <div className="flex justify-between items-center px-[40px] py-[20px] border-b-[3px] border-b-[#ccc]">
@@ -12,11 +20,13 @@ const NavBar = () => {
           </div>
         </Link>
         <div className="">
-          <input
-            type="search"
-            className="m-0 block rounded border border-solid w-[300px] border-[#ccc] px-[16px] py-[8px] text-[18px] leading-[24px] outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-main focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] focus:outline-none"
-            placeholder="🔍 Search"
-          />
+          <ThemeProvider theme={theme}>
+            <TextField
+              label="Search"
+              variant="outlined"
+              className="w-[360px] rounded-[10px]"
+            />
+          </ThemeProvider>
         </div>
       </div>
       <div className="flex gap-[24px]">

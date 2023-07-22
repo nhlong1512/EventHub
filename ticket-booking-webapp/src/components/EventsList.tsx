@@ -7,11 +7,21 @@ const EventsList = () => {
       <Link to="/event/3" className="no-underline">
         <CardEvent />
       </Link>
-      <CardEvent />
-      <CardEvent />
-      <CardEvent />
-      <CardEvent />
-      <CardEvent />
+      <Link to="/event/3" className="no-underline">
+        <CardEvent />
+      </Link>
+      <Link to="/event/3" className="no-underline">
+        <CardEvent />
+      </Link>
+      <Link to="/event/3" className="no-underline">
+        <CardEvent />
+      </Link>
+      <Link to="/event/3" className="no-underline">
+        <CardEvent />
+      </Link>
+      <Link to="/event/3" className="no-underline">
+        <CardEvent />
+      </Link>
     </div>
   );
 };
