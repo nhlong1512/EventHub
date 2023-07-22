@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 import { DatePicker } from "@mui/x-date-pickers";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 const initEventTypes = [
   "Live Music",
@@ -75,6 +75,7 @@ const CreateEventPage = () => {
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
+      if (!e.target.files[0]) return;
       console.log(e.target.files[0]);
       setSelectedImage(e.target.files[0]);
     }
