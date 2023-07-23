@@ -1,11 +1,11 @@
 import classNames from "classnames";
 
-interface Props {
+interface PropsASeatDescription {
   typeSeat: string;
   statusSeat: string;
 }
 
-const ASeatDescription = ({ typeSeat, statusSeat }: Props) => {
+const ASeatDescription = ({ typeSeat, statusSeat }: PropsASeatDescription) => {
   return (
     <div className="flex items-center gap-[12px]">
       <div

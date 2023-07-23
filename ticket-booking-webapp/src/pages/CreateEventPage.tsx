@@ -50,6 +50,8 @@ const theme = createTheme({
   },
 });
 
+
+
 const CreateEventPage = () => {
   const [city, setCity] = useState<string>("");
   const [eventTypes, setEventTypes] = useState<string[]>([]);
@@ -255,7 +257,7 @@ const CreateEventPage = () => {
           <Button
             variant="contained"
             component="label"
-            className="flex w-[400px] text-[16px] py-[10px]"
+            className="flex w-[400px] text-[16px] py-[10px] rounded-[10px]"
             // onClick={handleUploadClick}
           >
             Create Event
