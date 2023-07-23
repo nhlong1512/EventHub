@@ -83,9 +83,8 @@ const CreateEventPage = () => {
 
   return (
     <Container className="mt-[80px] mb-[80px]">
-      {/* <h3 className="text-main text-[50px] leading-[60px] mb-[80px]">Create new event</h3> */}
       <div className="flex flex-row">
-        <div className="flex flex-[7] flex-col gap-[40px]">
+        <div className="flex flex-[7] flex-col gap-[20px]">
           <div className="flex items-center justify-between">
             <p className="my-0 text-[20px]">Title</p>
             <ThemeProvider theme={theme}>
@@ -107,10 +106,51 @@ const CreateEventPage = () => {
             </ThemeProvider>
           </div>
           <div className="flex items-center justify-between">
+            <p className="my-0 text-[20px]">Standard Price</p>
+            <ThemeProvider theme={theme}>
+              <TextField
+                label="Standard Price"
+                variant="outlined"
+                className="w-[400px]"
+              />
+            </ThemeProvider>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="my-0 text-[20px]">VIP Price</p>
+            <ThemeProvider theme={theme}>
+              <TextField
+                label="VIP Price"
+                variant="outlined"
+                className="w-[400px]"
+              />
+            </ThemeProvider>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="my-0 text-[20px]">Sweetbox Price</p>
+            <ThemeProvider theme={theme}>
+              <TextField
+                label="Sweetbox Price"
+                variant="outlined"
+                className="w-[400px]"
+              />
+            </ThemeProvider>
+          </div>
+
+          <div className="flex items-center justify-between">
             <p className="my-0 text-[20px]">Location</p>
             <ThemeProvider theme={theme}>
               <TextField
                 label="Location"
+                variant="outlined"
+                style={{ width: "400px" }}
+              />
+            </ThemeProvider>
+          </div>
+          <div className="flex items-center justify-between">
+            <p className="my-0 text-[20px]">Duration</p>
+            <ThemeProvider theme={theme}>
+              <TextField
+                label="Duration"
                 variant="outlined"
                 style={{ width: "400px" }}
               />
@@ -122,6 +162,9 @@ const CreateEventPage = () => {
               <DatePicker className="w-[400px]" />
             </ThemeProvider>
           </div>
+        </div>
+        <div className="flex-[1]"></div>
+        <div className="flex flex-col flex-[7] gap-[20px]">
           <div className="flex items-center justify-between">
             <p className="my-0 text-[20px]">City</p>
             <ThemeProvider theme={theme}>
@@ -174,14 +217,11 @@ const CreateEventPage = () => {
               </FormControl>
             </ThemeProvider>
           </div>
-        </div>
-        <div className="flex-[1]"></div>
-
-        <div className="flex flex-col items-start flex-[4] self-start gap-[40px]">
           <ThemeProvider theme={theme}>
             <Button
               variant="contained"
               component="label"
+              className="flex self-start"
               // onClick={handleUploadClick}
             >
               Upload File
@@ -209,6 +249,18 @@ const CreateEventPage = () => {
             </div>
           )}
         </div>
+      </div>
+      <div className="mt-[40px] flex justify-center">
+        <ThemeProvider theme={theme}>
+          <Button
+            variant="contained"
+            component="label"
+            className="flex w-[400px] text-[16px] py-[10px]"
+            // onClick={handleUploadClick}
+          >
+            Create Event
+          </Button>
+        </ThemeProvider>
       </div>
     </Container>
   );

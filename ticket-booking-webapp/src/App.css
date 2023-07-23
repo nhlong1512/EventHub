@@ -38,3 +38,7 @@
   background: #ccc;
   color: white;
 }
+
+.MuiPaper-root {
+  max-height: 100%!important;
+}
