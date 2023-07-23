@@ -9,7 +9,7 @@ interface Props {
   pickingSeats: ISeat[];
   setPickingSeats: (pickingSeats: ISeat[]) => void;
   seatsList: ISeat[];
-  // onClick: (seatId: number) => void;
+  setSeatsList: (seatsList: ISeat[]) => void;
 }
 
 const Seat = ({
@@ -19,14 +19,27 @@ const Seat = ({
   pickingSeats,
   setPickingSeats,
   seatsList,
+  setSeatsList,
 }: Props) => {
   const handleClickSeat = () => {
-    // onClick(seatId);
-    const seat = seatsList.find((seat) => seat.seatId === seatId)
-    if (seat) {
-      console.log(seat);
+    const seatPickingIndex = seatsList.findIndex(
+      (seat) => seat.seatId === seatId
+    );
+    //Update SeatsList status picking
+    if (seatPickingIndex === -1) {
+      return;
+    } else {
+      const updatedSeats = [...seatsList];
+      // Toggle the status between "picking" and "default"
+      updatedSeats[seatPickingIndex].statusSeat =
+        updatedSeats[seatPickingIndex].statusSeat === "picking"
+          ? "default"
+          : "picking";
+      setSeatsList(updatedSeats);
     }
   };
+  console.log(seatsList);
+
   return (
     <div
       className={classNames(

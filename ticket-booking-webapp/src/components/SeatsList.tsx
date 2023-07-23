@@ -130,6 +130,7 @@ const SeatsList = () => {
           pickingSeats={pickingSeats}
           setPickingSeats={setPickingSeats}
           seatsList = {seatsList}
+          setSeatsList = {setSeatsList}
         />
       ))}
     </div>
