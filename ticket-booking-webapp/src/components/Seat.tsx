@@ -1,25 +1,26 @@
 import React from "react";
 import classNames from "classnames";
 import { ISeat } from "../models/ISeat";
+import { Alert } from "@mui/material";
 
 interface Props {
   typeSeat: string;
   statusSeat: string;
   seatId: number;
-  pickingSeats: ISeat[];
-  setPickingSeats: (pickingSeats: ISeat[]) => void;
   seatsList: ISeat[];
   setSeatsList: (seatsList: ISeat[]) => void;
+  pickingSeatsCount: number;
+  setPickingSeatsCount: (pickingSeatsCount: number) => void;
 }
 
 const Seat = ({
   typeSeat,
   statusSeat,
   seatId,
-  pickingSeats,
-  setPickingSeats,
   seatsList,
   setSeatsList,
+  pickingSeatsCount,
+  setPickingSeatsCount,
 }: Props) => {
   const handleClickSeat = () => {
     const seatPickingIndex = seatsList.findIndex(
@@ -28,17 +29,26 @@ const Seat = ({
     //Update SeatsList status picking
     if (seatPickingIndex === -1) {
       return;
-    } else {
-      const updatedSeats = [...seatsList];
-      // Toggle the status between "picking" and "default"
-      updatedSeats[seatPickingIndex].statusSeat =
-        updatedSeats[seatPickingIndex].statusSeat === "picking"
-          ? "default"
-          : "picking";
-      setSeatsList(updatedSeats);
     }
+    const updatedSeats = [...seatsList];
+    if (
+      updatedSeats[seatPickingIndex].statusSeat === "picked" ||
+      updatedSeats[seatPickingIndex].statusSeat === "banned"
+    ) {
+      return;
+    }
+    if (updatedSeats[seatPickingIndex].statusSeat === "picking") {
+      updatedSeats[seatPickingIndex].statusSeat = "default";
+      setPickingSeatsCount(pickingSeatsCount - 1);
+    } else if (pickingSeatsCount < 3) {
+      updatedSeats[seatPickingIndex].statusSeat = "picking";
+      setPickingSeatsCount(pickingSeatsCount + 1);
+    } else {
+      alert("You cannot select more than 3 tickets!");
+      return;
+    }
+    setSeatsList(updatedSeats);
   };
-  console.log(seatsList);
 
   return (
     <div

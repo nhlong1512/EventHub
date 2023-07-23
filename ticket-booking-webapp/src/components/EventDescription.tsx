@@ -7,8 +7,16 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { ISeat } from "../models/ISeat";
+
+
+interface Props {
+  seatsList: ISeat[];
+  setSeatsList: (seatsList: ISeat[]) => void;
+}
+
 
 const theme = createTheme({
   palette: {
@@ -18,14 +26,21 @@ const theme = createTheme({
   },
 });
 
-const EventDescription = () => {
+const EventDescription = ({seatsList, setSeatsList}:Props) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
   const handleClickPaymentBtn = () => {
     setOpen(true);
   };
+  
+  const fetchPaymentPicking = () => {
+    const seats = seatsList.filter((seat) => seat.statusSeat === "picking");
+    console.log(seats);
+  }
+  useEffect(() => {
+    fetchPaymentPicking();
+  }, [seatsList])
 
   return (
     <div className="mt-[80px] flex gap-[50px] p-[20px] rounded-[20px] border-[#ccc] border-solid border-[4px]">
