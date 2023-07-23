@@ -20,6 +20,11 @@ const PRICE_STANDARD = 100000;
 const PRICE_VIP = 200000;
 const PRICE_SWEET_BOX = 300000;
 
+const VND = new Intl.NumberFormat('vi-VN', {
+  style: 'currency',
+  currency: 'VND',
+});
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -30,7 +35,6 @@ const theme = createTheme({
 
 const EventDescription = ({ seatsList, setSeatsList }: Props) => {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [seatsPicking, setSeatsPicking] = useState<ISeat[]>([]); // [10, 23, 49
   const [seatsNumber, setSeatsNumber] = useState<string>("");
@@ -100,10 +104,10 @@ const EventDescription = ({ seatsList, setSeatsList }: Props) => {
               </p>
               <p className="my-0">
                 {seat.typeSeat === "standard"
-                  ? PRICE_STANDARD
+                  ? VND.format(PRICE_STANDARD)
                   : seat.typeSeat === "vip"
-                  ? PRICE_VIP
-                  : PRICE_SWEET_BOX}{" "}
+                  ? VND.format(PRICE_VIP)
+                  : VND.format(PRICE_SWEET_BOX)}{" "}
                 x 1
               </p>
             </div>
@@ -112,7 +116,7 @@ const EventDescription = ({ seatsList, setSeatsList }: Props) => {
         {totalTickets > 0 ? (
           <div className="flex justify-between my-[16px]">
             <h3 className="my-0">Total</h3>
-            <h3 className="my-0">{totalPrice} đ</h3>
+            <h3 className="my-0">{VND.format(totalPrice)}</h3>
           </div>
         ) : (
           ""

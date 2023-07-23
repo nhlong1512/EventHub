@@ -1,14 +1,8 @@
 import classNames from "classnames";
-import { ISeat } from "../models/ISeat";
 
 interface PropsASeatDescription {
   typeSeat: string;
   statusSeat: string;
-}
-
-interface Props {
-  seatsList: ISeat[];
-  setSeatsList: (seatsList: ISeat[]) => void;
 }
 
 const ASeatDescription = ({ typeSeat, statusSeat }: PropsASeatDescription) => {
