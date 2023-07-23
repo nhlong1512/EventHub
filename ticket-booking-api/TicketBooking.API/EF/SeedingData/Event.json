@@ -1,0 +1,56 @@
+[
+  {
+    "Id": "e1",
+    "Duration": "7:30 PM - 9:30 PM",
+    "Title": "The click",
+    "Image": "https://gonewiththetwins.com/new/wp-content/uploads/2016/06/click.jpg",
+    "MinPrice": 60000,
+    "Location": "CGV Phu Tho",
+    "City": ""
+  },
+  {
+    "Id": "e2",
+    "Duration": "10:00 PM - 11:30 PM",
+    "Title": "Man in Black V",
+    "Image": "https://kenhcine.cgv.vn/media/catalog/product/1/5/1545333390524.jpg",
+    "MinPrice": 70000,
+    "Location": "CGV Phu Tho",
+    "City": ""
+  },
+  {
+    "Id": "e3",
+    "Duration": "7:30 PM - 9:30 PM",
+    "Title": "Django unchained",
+    "Image": "https://toplist.vn/images/800px/django-unchained-151603.jpg",
+    "MinPrice": 100000,
+    "Location": "CGV Hung Vuong",
+    "City": ""
+  },
+  {
+    "Id": "e4",
+    "Duration": "7:30 PM - 9:30 PM",
+    "Title": "Gala Cười 2023",
+    "Image": "https://kenh14cdn.com/thumb_w/600/203336854389633024/2022/12/13/photo1670894930473-1670894930937151252993.png",
+    "MinPrice": 100000,
+    "Location": "New Arena Theater",
+    "City": "Hà Nội"
+  },
+  {
+    "Id": "e5",
+    "Duration": "6:30 PM - 7:00 PM",
+    "Title": "Sky Tour",
+    "Image": "https://static2.yan.vn/YanNews/2167221/202110/sky-tour-movie-tuoi-tre-nhiet-huyet-va-dam-me-cua-son-tung-mtp-08241d81.jpg",
+    "MinPrice": 100000,
+    "Location": "New Arena Theater",
+    "City": "Hà Nội"
+  },
+  {
+    "Id": "e6",
+    "Duration": "7:30 PM - 9:30 PM",
+    "Title": "Mỹ Tâm - Liveshow tri âm",
+    "Image": "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/4/2/895272/Anh_2_Mytam_PR03.JPG",
+    "MinPrice": 100000,
+    "Location": "The Savarin Theater",
+    "City": "Hà Nội"
+  }
+]

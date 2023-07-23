@@ -1,10 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
 
 namespace TicketBooking.API.EF
 {
-  class ApplicationDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    class DbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
   {
     ApplicationDbContext IDesignTimeDbContextFactory<ApplicationDbContext>.CreateDbContext(string[] args)
     {

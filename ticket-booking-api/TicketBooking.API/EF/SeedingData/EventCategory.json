@@ -1,0 +1,30 @@
+[
+  {
+    "EventId": "e1",
+    "CategoryId": "c1"
+  },
+  {
+    "EventId": "e2",
+    "CategoryId": "c1"
+  },
+  {
+    "EventId": "e3",
+    "CategoryId": "c1"
+  },
+  {
+    "EventId": "e4",
+    "CategoryId": "c3"
+  },
+  {
+    "EventId": "e5",
+    "CategoryId": "c2"
+  },
+  {
+    "EventId": "e6",
+    "CategoryId": "c2"
+  },
+  {
+    "EventId": "e5",
+    "CategoryId": "c4"
+  }
+]
