@@ -31,7 +31,6 @@ const SeatDescription = () => {
           <p className="m-0 text-[18px]">Banned</p>
         </div>
       </div>
-
       <div className="flex gap-[36px]">
         <div className="flex items-center gap-[12px]">
           <div
