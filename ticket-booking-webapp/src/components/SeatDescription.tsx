@@ -1,60 +1,61 @@
-import React from "react";
+import classNames from "classnames";
+
+interface Props {
+  typeSeat: string;
+  statusSeat: string;
+}
+
+const ASeatDescription = ({ typeSeat, statusSeat }: Props) => {
+  return (
+    <div className="flex items-center gap-[12px]">
+      <div
+        className={classNames(
+          "w-[40px] h-[40px] border-[2px] rouned-[2px] border-solid flex justify-center items-center cursor-pointer hover:opacity-80",
+          {
+            "bg-[#88050c] border-[#88050c] text-[#fff]":
+              statusSeat === "picking",
+            "bg-[#ccc] border-[#ccc] text-[#fff]":
+              statusSeat === "banned" || statusSeat === "picked",
+            "border-main": statusSeat === "default" && typeSeat === "standard",
+            "border-[#e50914]": statusSeat === "default" && typeSeat === "vip",
+            "border-[#ee7a7a] bg-[#ee7a7a] text-[#fff]":
+              statusSeat === "default" && typeSeat === "sweet-box",
+          }
+        )}
+      >
+        {statusSeat === "banned" ? <p className="text-[20px]">X</p> : ""}
+      </div>
+      <p className="m-0 text-[18px]">
+        {statusSeat === "picking"
+          ? "Picking"
+          : statusSeat === "banned"
+          ? "Banned"
+          : statusSeat === "picked"
+          ? "Picked"
+          : typeSeat === "standard"
+          ? "Standard"
+          : typeSeat === "vip"
+          ? "VIP"
+          : typeSeat === "sweet-box"
+          ? "Sweet Box"
+          : ""}
+      </p>
+    </div>
+  );
+};
 
 const SeatDescription = () => {
   return (
     <div className="my-[80px] flex justify-between">
       <div className="flex gap-[36px]">
-        <div className="flex items-center gap-[12px]">
-          <div
-            className="w-[40px] h-[40px] bg-[#88050c] text-[#fff] border-[2px] 
-        rouned-[2px] border-solid border-[#88050c] flex justify-center items-center 
-        cursor-pointer hover:opacity-80 picked"
-          ></div>
-          <p className="m-0 text-[18px]">Picking</p>
-        </div>
-        <div className="flex items-center gap-[12px]">
-          <div
-            className="w-[40px] h-[40px] border-[#ccc] border-[2px] border-solid
-         rouned-[2px] flex justify-center items-center cursor-pointer 
-         hover:opacity-80 picked"
-          ></div>
-          <p className="m-0 text-[18px]">Picked</p>
-        </div>
-        <div className="flex items-center gap-[12px]">
-          <div
-            className="w-[40px] h-[40px] border-[#ccc] border-[2px] border-solid 
-        rouned-[2px] flex justify-center items-center cursor-pointer hover:opacity-80 
-        banned"
-          >
-            <p className="m-0 text-[24px]">X</p>
-          </div>
-          <p className="m-0 text-[18px]">Banned</p>
-        </div>
+        <ASeatDescription typeSeat="vip" statusSeat="picking" />
+        <ASeatDescription typeSeat="vip" statusSeat="picked" />
+        <ASeatDescription typeSeat="vip" statusSeat="banned" />
       </div>
       <div className="flex gap-[36px]">
-        <div className="flex items-center gap-[12px]">
-          <div
-            className="w-[40px] h-[40px] border-main border-[2px] border-solid
-         rouned-[2px] flex justify-center items-center cursor-pointer hover:opacity-80"
-          ></div>
-          <p className="m-0 text-[18px]">Standard</p>
-        </div>
-        <div className="flex items-center gap-[12px]">
-          <div
-            className="w-[40px] h-[40px] border-[#e50914] text-[#000] 
-        border-[2px] border-solid rouned-[2px] flex justify-center items-center 
-        cursor-pointer hover:opacity-80 active"
-          ></div>
-          <p className="m-0 text-[18px]">VIP</p>
-        </div>
-        <div className="flex items-center gap-[12px]">
-          <div
-            className="w-[40px] h-[40px] border-[2px] border-solid border-[#ee7a7a] 
-        bg-[#ee7a7a] text-[#fff] rouned-[2px] flex justify-center items-center 
-        cursor-pointer hover:opacity-80 active"
-          ></div>
-          <p className="m-0 text-[18px]">Sweet Box</p>
-        </div>
+        <ASeatDescription typeSeat="standard" statusSeat="default" />
+        <ASeatDescription typeSeat="vip" statusSeat="default" />
+        <ASeatDescription typeSeat="sweet-box" statusSeat="default" />
       </div>
     </div>
   );
