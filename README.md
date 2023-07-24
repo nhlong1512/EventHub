@@ -26,6 +26,6 @@ Netpower internship project
 
 - Web application: ReactJS
 
-- API: ASP.NET Core 7.0, EF Core 7.0
+- API: ASP.NET Core 7.0, Entity Framework Core 7.0
 
-- Database: SQL Server
+- Other services: Azure Database, Azure Blob Storage
