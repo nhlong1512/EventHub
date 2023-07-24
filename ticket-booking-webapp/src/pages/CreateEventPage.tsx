@@ -162,6 +162,16 @@ const CreateEventPage = () => {
                 />
               </ThemeProvider>
             </div>
+            <div className="flex items-center justify-between">
+              <p className="my-0 text-[20px]">Stage Name</p>
+              <ThemeProvider theme={theme}>
+                <TextField
+                  label="Stage Name"
+                  variant="outlined"
+                  style={{ width: "400px" }}
+                />
+              </ThemeProvider>
+            </div>
 
             <div className="flex items-center justify-between">
               <p className="my-0 text-[20px]">Location</p>

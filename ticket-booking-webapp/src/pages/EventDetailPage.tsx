@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { CircularProgress, Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../api";
@@ -10,7 +10,6 @@ import { ISeat } from "../models/ISeat";
 
 const EventDetailPage = () => {
   const { eventId } = useParams<{ eventId: string }>();
-  console.log("eventId: ", eventId);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [event, setEvent] = useState<IEvent>();
@@ -24,7 +23,9 @@ const EventDetailPage = () => {
         },
       });
       console.log(response.data);
-      setEvent(response.data);
+      if (response.data) {
+        setEvent(response.data);
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -150,14 +151,23 @@ const EventDetailPage = () => {
 
   return (
     <Container className="my-[80px]">
-      <EventDescription seatsList={seatsList} setSeatsList={setSeatsList} />
-      <SeatDescription />
-      <SeatsList
-        seatsList={seatsList}
-        setSeatsList={setSeatsList}
-        pickingSeatsCount={pickingSeatsCount}
-        setPickingSeatsCount={setPickingSeatsCount}
-      />
+      {isLoading ? (
+        <div className="flex justify-center">
+          <CircularProgress />
+          <p>Loading...</p>
+        </div>
+      ) : (
+        <div>
+          <EventDescription event={event} seatsList={seatsList} setSeatsList={setSeatsList} />
+          <SeatDescription />
+          <SeatsList
+            seatsList={seatsList}
+            setSeatsList={setSeatsList}
+            pickingSeatsCount={pickingSeatsCount}
+            setPickingSeatsCount={setPickingSeatsCount}
+          />
+        </div>
+      )}
     </Container>
   );
 };
