@@ -78,11 +78,23 @@ namespace TicketBooking.API.Controller
 		[HttpPost]
 		[ProducesResponseType(200, Type = typeof(string))]
 		[ProducesResponseType(400)]
-		public ActionResult CreateEvent([FromBody] EventRequest eventRequest)
+		public async Task<ActionResult> CreateEvent([FromForm] EventRequest eventRequest)
 		{
-			var result = __eventRepository.CreateEvent(eventRequest);
-			return Ok("Ok");
-		}
+			if(eventRequest.Image.ContentType != "image/jpeg" && eventRequest.Image.ContentType != "image/img")
+				return BadRequest();
 
+			var result = await __eventRepository.CreateEvent(eventRequest);
+
+			if(!result)
+			{
+				ModelState.AddModelError("", "Some thing wrong while adding");
+				return BadRequest(ModelState);
+			}
+
+			if(!ModelState.IsValid)
+				return BadRequest();
+
+			return Ok("Success");
+		}
 	}
 }

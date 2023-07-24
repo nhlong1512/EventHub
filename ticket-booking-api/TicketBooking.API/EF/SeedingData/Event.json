@@ -2,55 +2,61 @@
   {
     "Id": "e1",
     "Duration": "7:30 PM - 9:30 PM",
-    "Title": "The click",
-    "Image": "https://gonewiththetwins.com/new/wp-content/uploads/2016/06/click.jpg",
-    "MinPrice": 60000,
-    "Location": "CGV Phu Tho",
+    "Title": "[MÂY LANG THANG] LIVESHOW PHAN MẠNH QUỲNH KM TRẦN MINH DŨNG",
+    "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/18/AA2A4B.jpg",
+    "MinPrice": 350000,
+    "Location": "The Nest, Thôn Măng Lin, Phường 7, Đà Lạt",
+    "StageName": "Mây In The Nest",
     "City": ""
   },
   {
     "Id": "e2",
     "Duration": "10:00 PM - 11:30 PM",
-    "Title": "Man in Black V",
-    "Image": "https://kenhcine.cgv.vn/media/catalog/product/1/5/1545333390524.jpg",
-    "MinPrice": 70000,
-    "Location": "CGV Phu Tho",
+    "Title": "[MÂY LANG THANG] PHƯƠNG UYÊN",
+    "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/18/238BEE.jpg",
+    "MinPrice": 450000,
+    "Location": "The Nest, Thôn Măng Lin, Phường 7, Đà Lạt",
+    "StageName": "Mây In The Nest",
     "City": ""
   },
   {
     "Id": "e3",
     "Duration": "7:30 PM - 9:30 PM",
-    "Title": "Django unchained",
-    "Image": "https://toplist.vn/images/800px/django-unchained-151603.jpg",
-    "MinPrice": 100000,
-    "Location": "CGV Hung Vuong",
-    "City": ""
+    "Title": "[MÂY LANG THANG HÀ NỘI] LIVESHOW TUẤN NGỌC",
+    "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/13/23D46F.jpg",
+    "MinPrice": 5000000,
+    "Location": "89 Phố Huế, Ngô Thì Nhậm, Hai Bà Trưng, Hà Nội",
+    "StageName": "Rạp Đại Nam",
+    "City": "Hà Nội"
   },
   {
     "Id": "e4",
     "Duration": "7:30 PM - 9:30 PM",
-    "Title": "Gala Cười 2023",
-    "Image": "https://kenh14cdn.com/thumb_w/600/203336854389633024/2022/12/13/photo1670894930473-1670894930937151252993.png",
-    "MinPrice": 100000,
-    "Location": "New Arena Theater",
-    "City": "Hà Nội"
+    "Title": "[MÂY LANG THANG CẦN THƠ] LIVESHOW ƯNG HOÀNG PHÚC & PHẠM QUỲNH ANH",
+    "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/23/B8A309.jpg",
+    "MinPrice": 350000,
+    "Location": "209 Đường 30 Tháng 4, Xuân Khánh, Ninh Kiều, TP. Cần Thơ",
+    "StageName": "Nhà Hát Lớn",
+    "City": "Cần Thơ"
   },
   {
     "Id": "e5",
     "Duration": "6:30 PM - 7:00 PM",
-    "Title": "Sky Tour",
-    "Image": "https://static2.yan.vn/YanNews/2167221/202110/sky-tour-movie-tuoi-tre-nhiet-huyet-va-dam-me-cua-son-tung-mtp-08241d81.jpg",
-    "MinPrice": 100000,
-    "Location": "New Arena Theater",
-    "City": "Hà Nội"
+    "Title": "[MÂY LANG THANG ĐÀ NẴNG] LIVESHOW TRUNG QUÂN IDOL",
+    "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/23/46B510.jpg",
+    "MinPrice": 500000,
+    "StageName": "SHERATON Đà Nẵng",
+    "Location": "Bờ Đông cầu Rồng, đường Trần Hưng Đạo, quận Sơn Trà, Đà Nẵng",
+    "City": ""
   },
   {
     "Id": "e6",
     "Duration": "7:30 PM - 9:30 PM",
-    "Title": "Mỹ Tâm - Liveshow tri âm",
-    "Image": "https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/4/2/895272/Anh_2_Mytam_PR03.JPG",
-    "MinPrice": 100000,
-    "Location": "The Savarin Theater",
-    "City": "Hà Nội"
+    "Title": "[HBSO] ROCK SYMPHONY VOL.3",
+    "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/10/AA7A83.jpg",
+    "MinPrice": 450000,
+    "StageName": "NHÀ HÁT GIAO HƯỞNG NHẠC VŨ KỊCH",
+    "Location": "89 Phố Huế, Ngô Thì Nhậm, Hai Bà Trưng, Hà Nội",
+    "City": ""
   }
 ]

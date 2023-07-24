@@ -1,18 +1,50 @@
 [
   {
     "Id": "c1",
-    "Name": "Theater"
+    "Name": "Theater & Play"
   },
   {
     "Id": "c2",
-    "Name": "Music"
+    "Name": "Live music"
   },  
   {
     "Id": "c3",
-    "Name": "Comedy"
+    "Name": "Art & Culture"
   },
   {
     "Id": "c4",
-    "Name": "Play"
+    "Name": "Nightlife"
+  },
+  {
+    "Id": "c5",
+    "Name": "Outdoor"
+  },
+  {
+    "Id": "c6",
+    "Name": "Conference"
+  },  
+  {
+    "Id": "c7",
+    "Name": "Seminar"
+  },
+  {
+    "Id": "c8",
+    "Name": "Exhibitions"
+  },
+  {
+    "Id": "c9",
+    "Name": "Meetups"
+  },
+  {
+    "Id": "c10",
+    "Name": "Sports"
+  },  
+  {
+    "Id": "c11",
+    "Name": "Comunity"
+  },
+  {
+    "Id": "c12",
+    "Name": "Attractions"
   }
 ]

@@ -9,14 +9,15 @@ builder.Services
     .AddControllersWithViews()
     .AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling
-        = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-    );
+        = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IEventRepository, EventRepository>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -33,7 +34,7 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddDbContext<ApplicationDbContext>(option =>
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("TicketBooking"));
+    option.UseSqlServer(builder.Configuration.GetConnectionString("TicketBookingDatabase"));
 });
 
 

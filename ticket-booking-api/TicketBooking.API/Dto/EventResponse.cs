@@ -10,6 +10,8 @@ namespace TicketBooking.API.Dto
     public string Title { get; set; }
     public int MinPrice { get; set; }
     public DateTime Date { get; set; }
+    public string StageName { get; set; }
+
     public string Location { get; set; }
     public string? City { get; set; }
     public EventStatus Status { get; set; }

@@ -12,7 +12,7 @@ namespace TicketBooking.API.EF
         .AddJsonFile("appsettings.json")
         .Build();
 
-      var connectionString = configuration.GetConnectionString("TicketBooking");
+      var connectionString = configuration.GetConnectionString("TicketBookingDatabase");
 
       var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
       optionsBuilder.UseSqlServer(connectionString);

@@ -3,6 +3,8 @@ using TicketBooking.API.Dto;
 using TicketBooking.API.EF;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 
 namespace TicketBooking.API.Repository
 {
@@ -18,13 +20,13 @@ namespace TicketBooking.API.Repository
 		public ICollection<Event> GetEvents()
 		{
 			var result = __dbContext.Events.
-				Where(x=>!x.IsDeleted).
+				Where(x => !x.IsDeleted).
 				Include(x => x.Categories).
 				ToList();
 
-			foreach(var e in result)
+			foreach (var e in result)
 			{
-				foreach(var category in e.Categories)
+				foreach (var category in e.Categories)
 				{
 					category.Events = null;
 					category.UpdatedAt = null;
@@ -39,12 +41,21 @@ namespace TicketBooking.API.Repository
 		public Event? GetEvent(string eventId)
 		{
 			var result = __dbContext.Events
-				.Where(x=>(x.Id == eventId) && (!x.IsDeleted))
+				.Where(x => (x.Id == eventId) && (!x.IsDeleted))
 				.Include(x => x.SeatEvents)
 				.ThenInclude(x => x.Seat)
+				.Include(x => x.Categories)
 				.FirstOrDefault();
 
-			foreach( var e in result.SeatEvents)
+			foreach (var category in result.Categories)
+			{
+				category.Events = null;
+				category.UpdatedAt = null;
+				category.CreatedAt = null;
+				category.DeletedAt = null;
+			}
+
+			foreach (var e in result.SeatEvents)
 			{
 				e.Event = null;
 				e.Seat.SeatEvents = null;
@@ -71,9 +82,54 @@ namespace TicketBooking.API.Repository
 			__dbContext.SaveChanges();
 		}
 
-		public bool CreateEvent(EventRequest eventRequest)
+		public async Task<bool> CreateEvent(EventRequest eventRequest)
 		{
-			return true;
+			var newEventId = Guid.NewGuid().ToString(); 
+
+			string imgUrl = await UpLoadImage(eventRequest.Image, newEventId);
+			
+			var newEvent = new Event 
+			{
+				Id = newEventId,
+				Duration = eventRequest.Duration,
+				Title = eventRequest.Title,
+				Image = imgUrl,
+				MinPrice = eventRequest.Prices.Min(),
+				StageName = eventRequest.StageName,
+				City = eventRequest.City,
+				Date = eventRequest.Date,
+				CreatedAt = DateTime.Now
+			};
+
+			__dbContext.Add(newEvent);
+
+
+			// add instances to SeatEvent
+
+			var changesNo = __dbContext.SaveChanges();
+
+			return changesNo!=0;
 		}
-  }
+
+		public async Task<string> UpLoadImage(IFormFile formFile, string eventId)
+		{
+			IConfigurationRoot configuration = new ConfigurationBuilder()
+				.SetBasePath(Directory.GetCurrentDirectory())
+				.AddJsonFile("appsettings.json")
+				.Build();
+
+			var connectionString = configuration.GetConnectionString("TicketBookingStorage");
+			var blobServiceClient = new BlobServiceClient(connectionString);
+			var containerClient = blobServiceClient.GetBlobContainerClient("img");
+			var stream = formFile.OpenReadStream();
+			var blobClient = containerClient.GetBlobClient(eventId);
+
+			await blobClient.UploadAsync(
+				stream, 
+				httpHeaders: new BlobHttpHeaders { ContentType = formFile.ContentType }, 
+				conditions: null);
+
+			return blobClient.Uri.ToString();
+		}
+	}
 }

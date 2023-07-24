@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TicketBooking.API.EF;
 
@@ -11,9 +12,11 @@ using TicketBooking.API.EF;
 namespace TicketBooking.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230724074656_updateSeedingEvent")]
+    partial class updateSeedingEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,12 +30,12 @@ namespace TicketBooking.API.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)")
-                        .HasDefaultValue("d014d303-ef13-4201-b8d0-ec76463324ea");
+                        .HasDefaultValue("ff69adf6-9d7e-41a2-9e2d-a11a7a6c2b72");
 
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 24, 15, 59, 4, 597, DateTimeKind.Local).AddTicks(2344));
+                        .HasDefaultValue(new DateTime(2023, 7, 24, 14, 46, 55, 217, DateTimeKind.Local).AddTicks(133));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -133,7 +136,7 @@ namespace TicketBooking.API.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)")
-                        .HasDefaultValue("5d0a0813-479f-4a92-b4fa-861222ace024");
+                        .HasDefaultValue("580b0885-814b-42cd-807f-afe230c2e939");
 
                     b.Property<string>("City")
                         .IsUnicode(true)
@@ -142,7 +145,7 @@ namespace TicketBooking.API.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 24, 15, 59, 4, 592, DateTimeKind.Local).AddTicks(3964));
+                        .HasDefaultValue(new DateTime(2023, 7, 24, 14, 46, 55, 212, DateTimeKind.Local).AddTicks(3399));
 
                     b.Property<DateTime>("Date")
                         .ValueGeneratedOnAdd()
@@ -174,10 +177,6 @@ namespace TicketBooking.API.Migrations
                     b.Property<int>("MinPrice")
                         .HasColumnType("int");
 
-                    b.Property<string>("StageName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -206,7 +205,6 @@ namespace TicketBooking.API.Migrations
                             IsDeleted = false,
                             Location = "The Nest, Thôn Măng Lin, Phường 7, Đà Lạt",
                             MinPrice = 350000,
-                            StageName = "Mây In The Nest",
                             Status = 0,
                             Title = "[MÂY LANG THANG] LIVESHOW PHAN MẠNH QUỲNH KM TRẦN MINH DŨNG"
                         },
@@ -220,7 +218,6 @@ namespace TicketBooking.API.Migrations
                             IsDeleted = false,
                             Location = "The Nest, Thôn Măng Lin, Phường 7, Đà Lạt",
                             MinPrice = 450000,
-                            StageName = "Mây In The Nest",
                             Status = 0,
                             Title = "[MÂY LANG THANG] PHƯƠNG UYÊN"
                         },
@@ -232,11 +229,10 @@ namespace TicketBooking.API.Migrations
                             Duration = "7:30 PM - 9:30 PM",
                             Image = "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/13/23D46F.jpg",
                             IsDeleted = false,
-                            Location = "89 Phố Huế, Ngô Thì Nhậm, Hai Bà Trưng, Hà Nội",
+                            Location = "Rạp Đại Nam, 89 Phố Huế, Ngô Thì Nhậm, Hai Bà Trưng, Hà Nội",
                             MinPrice = 5000000,
-                            StageName = "Rạp Đại Nam",
                             Status = 0,
-                            Title = "[MÂY LANG THANG HÀ NỘI] LIVESHOW TUẤN NGỌC"
+                            Title = "Django unchained"
                         },
                         new
                         {
@@ -248,7 +244,6 @@ namespace TicketBooking.API.Migrations
                             IsDeleted = false,
                             Location = "209 Đường 30 Tháng 4, Xuân Khánh, Ninh Kiều, TP. Cần Thơ",
                             MinPrice = 350000,
-                            StageName = "Nhà Hát Lớn",
                             Status = 0,
                             Title = "[MÂY LANG THANG CẦN THƠ] LIVESHOW ƯNG HOÀNG PHÚC & PHẠM QUỲNH ANH"
                         },
@@ -262,7 +257,6 @@ namespace TicketBooking.API.Migrations
                             IsDeleted = false,
                             Location = "Bờ Đông cầu Rồng, đường Trần Hưng Đạo, quận Sơn Trà, Đà Nẵng",
                             MinPrice = 500000,
-                            StageName = "SHERATON Đà Nẵng",
                             Status = 0,
                             Title = "[MÂY LANG THANG ĐÀ NẴNG] LIVESHOW TRUNG QUÂN IDOL"
                         },
@@ -274,9 +268,8 @@ namespace TicketBooking.API.Migrations
                             Duration = "7:30 PM - 9:30 PM",
                             Image = "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/10/AA7A83.jpg",
                             IsDeleted = false,
-                            Location = "89 Phố Huế, Ngô Thì Nhậm, Hai Bà Trưng, Hà Nội",
+                            Location = "NHÀ HÁT GIAO HƯỞNG NHẠC VŨ KỊCH TP. HỒ CHÍ MINH",
                             MinPrice = 450000,
-                            StageName = "NHÀ HÁT GIAO HƯỞNG NHẠC VŨ KỊCH",
                             Status = 0,
                             Title = "[HBSO] ROCK SYMPHONY VOL.3"
                         });
@@ -339,12 +332,12 @@ namespace TicketBooking.API.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)")
-                        .HasDefaultValue("ac9ed032-b211-4bac-864e-7b1551bedc3e");
+                        .HasDefaultValue("6ac223c4-69ec-4051-adb3-c0355d0af2fb");
 
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 24, 15, 59, 4, 594, DateTimeKind.Local).AddTicks(5815));
+                        .HasDefaultValue(new DateTime(2023, 7, 24, 14, 46, 55, 214, DateTimeKind.Local).AddTicks(4490));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -385,12 +378,12 @@ namespace TicketBooking.API.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(450)")
-                        .HasDefaultValue("205e7a67-3054-471c-b93f-ca3a5784814b");
+                        .HasDefaultValue("548b610d-8067-46dd-91fa-ee1c91077699");
 
                     b.Property<DateTime?>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 7, 24, 15, 59, 4, 596, DateTimeKind.Local).AddTicks(5869));
+                        .HasDefaultValue(new DateTime(2023, 7, 24, 14, 46, 55, 216, DateTimeKind.Local).AddTicks(2778));
 
                     b.Property<DateTime?>("DeletedAt")
                         .HasColumnType("datetime2");
@@ -1202,4536 +1195,4536 @@ namespace TicketBooking.API.Migrations
                         {
                             EventId = "e1",
                             SeatId = "A1",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A2",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A3",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A4",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A5",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A6",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A7",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A8",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A9",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A10",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A11",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A12",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A13",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A14",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A15",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A16",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A17",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "A18",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B1",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B2",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B3",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B4",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B5",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B6",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B7",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B8",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B9",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B10",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B11",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B12",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B13",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B14",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B15",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B16",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B17",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "B18",
-                            Price = 350000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C1",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C2",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C3",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C4",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C5",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C6",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C7",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C8",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C9",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C10",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C11",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C12",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C13",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C14",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C15",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C16",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C17",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "C18",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D1",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D2",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D3",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D4",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D5",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D6",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D7",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D8",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D9",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D10",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D11",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D12",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D13",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D14",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D15",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D16",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D17",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "D18",
-                            Price = 400000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E1",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E2",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E3",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E4",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E5",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E6",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E7",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E8",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E9",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E10",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E11",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E12",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E13",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E14",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E15",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E16",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E17",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "E18",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F1",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F2",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F3",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F4",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F5",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F6",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F7",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F8",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F9",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F10",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F11",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F12",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F13",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F14",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F15",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F16",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F17",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e1",
                             SeatId = "F18",
-                            Price = 450000,
+                            Price = 60000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A1",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A2",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A3",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A4",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A5",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A6",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A7",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A8",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A9",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A10",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A11",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A12",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A13",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A14",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A15",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A16",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A17",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "A18",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B1",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B2",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B3",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B4",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B5",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B6",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B7",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B8",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B9",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B10",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B11",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B12",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B13",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B14",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B15",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B16",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B17",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "B18",
-                            Price = 450000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C1",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C2",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C3",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C4",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C5",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C6",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C7",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C8",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C9",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C10",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C11",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C12",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C13",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C14",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C15",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C16",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C17",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "C18",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D1",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D2",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D3",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D4",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D5",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D6",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D7",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D8",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D9",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D10",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D11",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D12",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D13",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D14",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D15",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D16",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D17",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "D18",
-                            Price = 500000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E1",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E2",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E3",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E4",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E5",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E6",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E7",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E8",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E9",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E10",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E11",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E12",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E13",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E14",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E15",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E16",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E17",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "E18",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F1",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F2",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F3",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F4",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F5",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F6",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F7",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F8",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F9",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F10",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F11",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F12",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F13",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F14",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F15",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F16",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F17",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e2",
                             SeatId = "F18",
-                            Price = 550000,
+                            Price = 70000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A1",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A2",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A3",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A4",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A5",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A6",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A7",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A8",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A9",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A10",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A11",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A12",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A13",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A14",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A15",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A16",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A17",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "A18",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B1",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B2",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B3",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B4",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B5",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B6",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B7",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B8",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B9",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B10",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B11",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B12",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B13",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B14",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B15",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B16",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B17",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "B18",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C1",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C2",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C3",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C4",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C5",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C6",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C7",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C8",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C9",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C10",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C11",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C12",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C13",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C14",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C15",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C16",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C17",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "C18",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D1",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D2",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D3",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D4",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D5",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D6",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D7",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D8",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D9",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D10",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D11",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D12",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D13",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D14",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D15",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D16",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D17",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "D18",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E1",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E2",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E3",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E4",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E5",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E6",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E7",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E8",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E9",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E10",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E11",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E12",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E13",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E14",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E15",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E16",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E17",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "E18",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F1",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F2",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F3",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F4",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F5",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F6",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F7",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F8",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F9",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F10",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F11",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F12",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F13",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F14",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F15",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F16",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F17",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e3",
                             SeatId = "F18",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A1",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A2",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A3",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A4",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A5",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A6",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A7",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A8",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A9",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A10",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A11",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A12",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A13",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A14",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A15",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A16",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A17",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "A18",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B1",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B2",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B3",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B4",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B5",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B6",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B7",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B8",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B9",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B10",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B11",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B12",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B13",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B14",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B15",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B16",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B17",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "B18",
-                            Price = 350000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C1",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C2",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C3",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C4",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C5",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C6",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C7",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C8",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C9",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C10",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C11",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C12",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C13",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C14",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C15",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C16",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C17",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "C18",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D1",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D2",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D3",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D4",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D5",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D6",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D7",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D8",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D9",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D10",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D11",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D12",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D13",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D14",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D15",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D16",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D17",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "D18",
-                            Price = 400000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E1",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E2",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E3",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E4",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E5",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E6",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E7",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E8",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E9",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E10",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E11",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E12",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E13",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E14",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E15",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E16",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E17",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "E18",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F1",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F2",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F3",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F4",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F5",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F6",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F7",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F8",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F9",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F10",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F11",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F12",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F13",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F14",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F15",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F16",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F17",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e4",
                             SeatId = "F18",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A1",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A2",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A3",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A4",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A5",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A6",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A7",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A8",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A9",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A10",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A11",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A12",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A13",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A14",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A15",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A16",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A17",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "A18",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B1",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B2",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B3",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B4",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B5",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B6",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B7",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B8",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B9",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B10",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B11",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B12",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B13",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B14",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B15",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B16",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B17",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "B18",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C1",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C2",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C3",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C4",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C5",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C6",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C7",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C8",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C9",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C10",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C11",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C12",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C13",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C14",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C15",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C16",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C17",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "C18",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D1",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D2",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D3",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D4",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D5",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D6",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D7",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D8",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D9",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D10",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D11",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D12",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D13",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D14",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D15",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D16",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D17",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "D18",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E1",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E2",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E3",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E4",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E5",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E6",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E7",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E8",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E9",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E10",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E11",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E12",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E13",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E14",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E15",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E16",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E17",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "E18",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F1",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F2",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F3",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F4",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F5",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F6",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F7",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F8",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F9",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F10",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F11",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F12",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F13",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F14",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F15",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F16",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F17",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e5",
                             SeatId = "F18",
-                            Price = 600000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A1",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A2",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A3",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A4",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A5",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A6",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A7",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A8",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A9",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A10",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A11",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A12",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A13",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A14",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A15",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A16",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A17",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "A18",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B1",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B2",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B3",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B4",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B5",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B6",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B7",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B8",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B9",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B10",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B11",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B12",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B13",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B14",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B15",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B16",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B17",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "B18",
-                            Price = 450000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C1",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C2",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C3",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C4",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C5",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C6",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C7",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C8",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C9",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C10",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C11",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C12",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C13",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C14",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C15",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C16",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C17",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "C18",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D1",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D2",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D3",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D4",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D5",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D6",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D7",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D8",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D9",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D10",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D11",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D12",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D13",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D14",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D15",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D16",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D17",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "D18",
-                            Price = 500000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E1",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E2",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E3",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E4",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E5",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E6",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E7",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E8",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E9",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E10",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E11",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E12",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E13",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E14",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E15",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E16",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E17",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "E18",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F1",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F2",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F3",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F4",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F5",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F6",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F7",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F8",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F9",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F10",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F11",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F12",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F13",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F14",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F15",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F16",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F17",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         },
                         new
                         {
                             EventId = "e6",
                             SeatId = "F18",
-                            Price = 550000,
+                            Price = 100000,
                             SeatStatus = 0
                         });
                 });

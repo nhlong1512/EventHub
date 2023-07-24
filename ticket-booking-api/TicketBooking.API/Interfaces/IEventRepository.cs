@@ -8,6 +8,6 @@ namespace TicketBooking.API.Interfaces
 		public ICollection<Event> GetEvents();
 		public Event? GetEvent(string eventId);
 		public void DeleteEvent(Event e);
-		public bool CreateEvent(EventRequest eventRequest);
+		public Task<bool> CreateEvent(EventRequest eventRequest);
   }
 }
