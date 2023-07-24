@@ -3,16 +3,20 @@ import { useState, useEffect } from "react";
 import { Button, Container } from "@mui/material";
 import CardEvent from "../components/CardEvent";
 import EventsList from "../components/EventsList";
-import { FETCH_API } from "../config";
+import api from "../api";
 
 const HomePage = () => {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
+
   const fetchEvents = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('https://26c9-203-205-32-159.ngrok-free.app/api/Event');
+      const response = await api.get("/Event", {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
       console.log(response);
       // setEvents(response.data);
     } catch (error) {
