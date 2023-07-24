@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ISeat } from "../models/ISeat";
+import { VND } from "../utils/convertVND";
 
 interface Props {
   seatsList: ISeat[];
@@ -20,10 +21,6 @@ const PRICE_STANDARD = 100000;
 const PRICE_VIP = 200000;
 const PRICE_SWEET_BOX = 300000;
 
-const VND = new Intl.NumberFormat('vi-VN', {
-  style: 'currency',
-  currency: 'VND',
-});
 
 const theme = createTheme({
   palette: {
