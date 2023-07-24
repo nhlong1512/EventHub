@@ -1,27 +1,18 @@
 import { Link } from "react-router-dom";
+import { IEvent } from "../models/IEvents";
 import CardEvent from "./CardEvent";
 
-const EventsList = () => {
+interface Props {
+  events: IEvent[];
+}
+const EventsList = ({ events }: Props) => {
   return (
     <div className="flex gap-[24px] justify-center items-center flex-wrap">
-      <Link to="/event/3" className="no-underline">
-        <CardEvent />
-      </Link>
-      <Link to="/event/3" className="no-underline">
-        <CardEvent />
-      </Link>
-      <Link to="/event/3" className="no-underline">
-        <CardEvent />
-      </Link>
-      <Link to="/event/3" className="no-underline">
-        <CardEvent />
-      </Link>
-      <Link to="/event/3" className="no-underline">
-        <CardEvent />
-      </Link>
-      <Link to="/event/3" className="no-underline">
-        <CardEvent />
-      </Link>
+      {events.map((event, eventIndex) => (
+        <Link to={`/event/${event.id}`} key={event.id} className="no-underline">
+          <CardEvent event = {event} />
+        </Link>
+      ))}
     </div>
   );
 };
