@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using TicketBooking.API.Dto;
 using TicketBooking.API.EF;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
@@ -61,5 +62,18 @@ namespace TicketBooking.API.Repository
 
 			return result;
 		}
-	}
+
+		public void DeleteEvent(Event e)
+		{
+			e.IsDeleted = true;
+			e.DeletedAt = DateTime.Now;
+			__dbContext.Update(e);
+			__dbContext.SaveChanges();
+		}
+
+		public bool CreateEvent(EventRequest eventRequest)
+		{
+			return true;
+		}
+  }
 }

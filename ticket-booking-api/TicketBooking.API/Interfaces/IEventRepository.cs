@@ -1,3 +1,4 @@
+using TicketBooking.API.Dto;
 using TicketBooking.API.Models;
 
 namespace TicketBooking.API.Interfaces
@@ -6,5 +7,7 @@ namespace TicketBooking.API.Interfaces
 	{
 		public ICollection<Event> GetEvents();
 		public Event? GetEvent(string eventId);
-    }
+		public void DeleteEvent(Event e);
+		public bool CreateEvent(EventRequest eventRequest);
+  }
 }

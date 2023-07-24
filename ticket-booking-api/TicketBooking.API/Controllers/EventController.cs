@@ -52,5 +52,37 @@ namespace TicketBooking.API.Controller
 
 			return Ok(__mapper.Map<EventDetail>(e));
 		}
+
+		[HttpDelete("{eventId}")]
+		[ProducesResponseType(200, Type = typeof(string))]
+		[ProducesResponseType(400)]
+		public ActionResult DeleteEvent(string eventId)
+		{
+			var e = __eventRepository.GetEvent(eventId);
+
+			if(!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (e == null)
+			{
+				return NotFound();
+			}
+
+			__eventRepository.DeleteEvent(e);
+
+			return Ok("Success");
+		}
+
+		[HttpPost]
+		[ProducesResponseType(200, Type = typeof(string))]
+		[ProducesResponseType(400)]
+		public ActionResult CreateEvent([FromBody] EventRequest eventRequest)
+		{
+			var result = __eventRepository.CreateEvent(eventRequest);
+			return Ok("Ok");
+		}
+
 	}
 }
