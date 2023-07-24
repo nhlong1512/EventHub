@@ -80,7 +80,7 @@ namespace TicketBooking.API.Controller
 		[ProducesResponseType(400)]
 		public async Task<ActionResult> CreateEvent([FromForm] EventRequest eventRequest)
 		{
-			if(eventRequest.Image.ContentType != "image/jpeg" && eventRequest.Image.ContentType != "image/img")
+			if(eventRequest.Image.ContentType != "image/jpeg" && eventRequest.Image.ContentType != "image/png")
 				return BadRequest();
 
 			var result = await __eventRepository.CreateEvent(eventRequest);

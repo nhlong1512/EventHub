@@ -1,5 +1,3 @@
-using System.Buffers.Text;
-
 namespace TicketBooking.API.Dto
 {
   public class EventRequest
