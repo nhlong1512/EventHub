@@ -8,15 +8,24 @@ Netpower internship project
 |
 | - -  ticket-booking-api/
 			|
-			| - - - TicketBookingAPI.data
+			| - - - TicketBooking.API/
 			|
-			| - - - TicketBookingAPI.app
+			| - - - TicketBooking.API.sln
+```
+
+## Installation and Run
+```bash
+	docker-compose up
+```
+> After docker starting successfully, the web application is served at <http://localhost:3000> on your machine. To stop the web application, run:
+```bash
+	docker-compose down
 ```
 
 ## Tech stack for Ticket Booking
 
 - Web application: ReactJS
 
-- API: ASP.NET Core 7.0
+- API: ASP.NET Core 7.0, EF Core 7.0
 
-> All related libraries, installation and usage information can be found in each folder of project
+- Database: SQL Server

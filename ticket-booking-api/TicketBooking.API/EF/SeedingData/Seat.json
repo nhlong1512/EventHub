@@ -1,0 +1,529 @@
+[
+  {
+    "Id": "A1",
+    "Name": "A1",
+    "Type": 0
+  },
+  {
+    "Id": "A2",
+    "Name": "A2",
+    "Type": 0
+  },
+  {
+    "Id": "A3",
+    "Name": "A3",
+    "Type": 0
+  },
+  {
+    "Id": "A4",
+    "Name": "A4",
+    "Type": 0
+  },
+  {
+    "Id": "A5",
+    "Name": "A5",
+    "Type": 0
+  },
+  {
+    "Id": "A6",
+    "Name": "A6",
+    "Type": 0
+  },
+  {
+    "Id": "A7",
+    "Name": "A7",
+    "Type": 0
+  },
+  {
+    "Id": "A8",
+    "Name": "A8",
+    "Type": 0
+  },
+  {
+    "Id": "A9",
+    "Name": "A9",
+    "Type": 0
+  },
+  {
+    "Id": "A10",
+    "Name": "A10",
+    "Type": 0
+  },
+  {
+    "Id": "A11",
+    "Name": "A11",
+    "Type": 0
+  },
+  {
+    "Id": "A12",
+    "Name": "A12",
+    "Type": 0
+  },
+  {
+    "Id": "A13",
+    "Name": "A13",
+    "Type": 0
+  },
+  {
+    "Id": "A14",
+    "Name": "A14",
+    "Type": 0
+  },
+  {
+    "Id": "A15",
+    "Name": "A15",
+    "Type": 0
+  },
+  {
+    "Id": "A16",
+    "Name": "A16",
+    "Type": 0
+  },
+  {
+    "Id": "A17",
+    "Name": "A17",
+    "Type": 0
+  },
+  {
+    "Id": "A18",
+    "Name": "A18",
+    "Type": 0
+  },
+  {
+    "Id": "B1",
+    "Name": "B1",
+    "Type": 0
+  },
+  {
+    "Id": "B2",
+    "Name": "B2",
+    "Type": 0
+  },
+  {
+    "Id": "B3",
+    "Name": "B3",
+    "Type": 0
+  },
+  {
+    "Id": "B4",
+    "Name": "B4",
+    "Type": 0
+  },
+  {
+    "Id": "B5",
+    "Name": "B5",
+    "Type": 0
+  },
+  {
+    "Id": "B6",
+    "Name": "B6",
+    "Type": 0
+  },
+  {
+    "Id": "B7",
+    "Name": "B7",
+    "Type": 0
+  },
+  {
+    "Id": "B8",
+    "Name": "B8",
+    "Type": 0
+  },
+  {
+    "Id": "B9",
+    "Name": "B9",
+    "Type": 0
+  },
+  {
+    "Id": "B10",
+    "Name": "B10",
+    "Type": 0
+  },
+  {
+    "Id": "B11",
+    "Name": "B11",
+    "Type": 0
+  },
+  {
+    "Id": "B12",
+    "Name": "B12",
+    "Type": 0
+  },
+  {
+    "Id": "B13",
+    "Name": "B13",
+    "Type": 0
+  },
+  {
+    "Id": "B14",
+    "Name": "B14",
+    "Type": 0
+  },
+  {
+    "Id": "B15",
+    "Name": "B15",
+    "Type": 0
+  },
+  {
+    "Id": "B16",
+    "Name": "B16",
+    "Type": 0
+  },
+  {
+    "Id": "B17",
+    "Name": "B17",
+    "Type": 0
+  },
+  {
+    "Id": "B18",
+    "Name": "B18",
+    "Type": 0
+  },
+  {
+    "Id": "C1",
+    "Name": "C1",
+    "Type": 1
+  },
+  {
+    "Id": "C2",
+    "Name": "C2",
+    "Type": 1
+  },
+  {
+    "Id": "C3",
+    "Name": "C3",
+    "Type": 1
+  },
+  {
+    "Id": "C4",
+    "Name": "C4",
+    "Type": 1
+  },
+  {
+    "Id": "C5",
+    "Name": "C5",
+    "Type": 1
+  },
+  {
+    "Id": "C6",
+    "Name": "C6",
+    "Type": 1
+  },
+  {
+    "Id": "C7",
+    "Name": "C7",
+    "Type": 1
+  },
+  {
+    "Id": "C8",
+    "Name": "C8",
+    "Type": 1
+  },
+  {
+    "Id": "C9",
+    "Name": "C9",
+    "Type": 1
+  },
+  {
+    "Id": "C10",
+    "Name": "C10",
+    "Type": 1
+  },
+  {
+    "Id": "C11",
+    "Name": "C11",
+    "Type": 1
+  },
+  {
+    "Id": "C12",
+    "Name": "C12",
+    "Type": 1
+  },
+  {
+    "Id": "C13",
+    "Name": "C13",
+    "Type": 1
+  },
+  {
+    "Id": "C14",
+    "Name": "C14",
+    "Type": 1
+  },
+  {
+    "Id": "C15",
+    "Name": "C15",
+    "Type": 1
+  },
+  {
+    "Id": "C16",
+    "Name": "C16",
+    "Type": 1
+  },
+  {
+    "Id": "C17",
+    "Name": "C17",
+    "Type": 1
+  },
+  {
+    "Id": "C18",
+    "Name": "C18",
+    "Type": 1
+  },
+  {
+    "Id": "D1",
+    "Name": "D1",
+    "Type": 1
+  },
+  {
+    "Id": "D2",
+    "Name": "D2",
+    "Type": 1
+  },
+  {
+    "Id": "D3",
+    "Name": "D3",
+    "Type": 1
+  },
+  {
+    "Id": "D4",
+    "Name": "D4",
+    "Type": 1
+  },
+  {
+    "Id": "D5",
+    "Name": "D5",
+    "Type": 1
+  },
+  {
+    "Id": "D6",
+    "Name": "D6",
+    "Type": 1
+  },
+  {
+    "Id": "D7",
+    "Name": "D7",
+    "Type": 1
+  },
+  {
+    "Id": "D8",
+    "Name": "D8",
+    "Type": 1
+  },
+  {
+    "Id": "D9",
+    "Name": "D9",
+    "Type": 1
+  },
+  {
+    "Id": "D10",
+    "Name": "D10",
+    "Type": 1
+  },
+  {
+    "Id": "D11",
+    "Name": "D11",
+    "Type": 1
+  },
+  {
+    "Id": "D12",
+    "Name": "D12",
+    "Type": 1
+  },
+  {
+    "Id": "D13",
+    "Name": "D13",
+    "Type": 1
+  },
+  {
+    "Id": "D14",
+    "Name": "D14",
+    "Type": 1
+  },
+  {
+    "Id": "D15",
+    "Name": "D15",
+    "Type": 1
+  },
+  {
+    "Id": "D16",
+    "Name": "D16",
+    "Type": 1
+  },
+  {
+    "Id": "D17",
+    "Name": "D17",
+    "Type": 1
+  },
+  {
+    "Id": "D18",
+    "Name": "D18",
+    "Type": 1
+  },
+  {
+    "Id": "E1",
+    "Name": "E1",
+    "Type": 2  
+  },
+  {
+    "Id": "E2",
+    "Name": "E2",
+    "Type": 2  
+  },
+  {
+    "Id": "E3",
+    "Name": "E3",
+    "Type": 2  
+  },
+  {
+    "Id": "E4",
+    "Name": "E4",
+    "Type": 2  
+  },
+  {
+    "Id": "E5",
+    "Name": "E5",
+    "Type": 2 
+  },
+  {
+    "Id": "E6",
+    "Name": "E6",
+    "Type": 2  },
+  {
+    "Id": "E7",
+    "Name": "E7",
+    "Type": 2  },
+  {
+    "Id": "E8",
+    "Name": "E8",
+    "Type": 2  },
+  {
+    "Id": "E9",
+    "Name": "E9",
+    "Type": 2  },
+  {
+    "Id": "E10",
+    "Name": "E10",
+    "Type": 2
+  },
+  {
+    "Id": "E11",
+    "Name": "E11",
+    "Type": 2
+  },
+  {
+    "Id": "E12",
+    "Name": "E12",
+    "Type": 2
+  },
+  {
+    "Id": "E13",
+    "Name": "E13",
+    "Type": 2
+  },
+  {
+    "Id": "E14",
+    "Name": "E14",
+    "Type": 2
+  },
+  {
+    "Id": "E15",
+    "Name": "E15",
+    "Type": 2
+  },
+  {
+    "Id": "E16",
+    "Name": "E16",
+    "Type": 2
+  },
+  {
+    "Id": "E17",
+    "Name": "E17",
+    "Type": 2
+  },
+  {
+    "Id": "E18",
+    "Name": "E18",
+    "Type": 2
+  },
+  {
+    "Id": "F1",
+    "Name": "F1",
+    "Type": 2  },
+  {
+    "Id": "F2",
+    "Name": "F2",
+    "Type": 2  },
+  {
+    "Id": "F3",
+    "Name": "F3",
+    "Type": 2  },
+  {
+    "Id": "F4",
+    "Name": "F4",
+    "Type": 2  },
+  {
+    "Id": "F5",
+    "Name": "F5",
+    "Type": 2  },
+  {
+    "Id": "F6",
+    "Name": "F6",
+    "Type": 2  },
+  {
+    "Id": "F7",
+    "Name": "F7",
+    "Type": 2  },
+  {
+    "Id": "F8",
+    "Name": "F8",
+    "Type": 2  },
+  {
+    "Id": "F9",
+    "Name": "F9",
+    "Type": 2  },
+  {
+    "Id": "F10",
+    "Name": "F10",
+    "Type": 2
+  },
+  {
+    "Id": "F11",
+    "Name": "F11",
+    "Type": 2
+  },
+  {
+    "Id": "F12",
+    "Name": "F12",
+    "Type": 2
+  },
+  {
+    "Id": "F13",
+    "Name": "F13",
+    "Type": 2
+  },
+  {
+    "Id": "F14",
+    "Name": "F14",
+    "Type": 2
+  },
+  {
+    "Id": "F15",
+    "Name": "F15",
+    "Type": 2
+  },
+  {
+    "Id": "F16",
+    "Name": "F16",
+    "Type": 2
+  },
+  {
+    "Id": "F17",
+    "Name": "F17",
+    "Type": 2
+  },
+  {
+    "Id": "F18",
+    "Name": "F18",
+    "Type": 2
+  }
+]
