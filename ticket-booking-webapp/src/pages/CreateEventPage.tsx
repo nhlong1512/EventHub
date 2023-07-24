@@ -103,6 +103,7 @@ const CreateEventPage = () => {
               <TextField
                 label="From Price"
                 variant="outlined"
+                type = "number"
                 style={{ width: "400px" }}
               />
             </ThemeProvider>
@@ -113,6 +114,7 @@ const CreateEventPage = () => {
               <TextField
                 label="Standard Price"
                 variant="outlined"
+                type = "number"
                 className="w-[400px]"
               />
             </ThemeProvider>
@@ -123,6 +125,7 @@ const CreateEventPage = () => {
               <TextField
                 label="VIP Price"
                 variant="outlined"
+                type = "number"
                 className="w-[400px]"
               />
             </ThemeProvider>
@@ -133,6 +136,7 @@ const CreateEventPage = () => {
               <TextField
                 label="Sweetbox Price"
                 variant="outlined"
+                type = "number"
                 className="w-[400px]"
               />
             </ThemeProvider>
