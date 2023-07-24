@@ -13,7 +13,6 @@ const HomePage = () => {
     shallow
   );
 
-  console.log(searchString);
   const [events, setEvents] = useState<IEvent[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -25,7 +24,6 @@ const HomePage = () => {
           "ngrok-skip-browser-warning": "true",
         },
       });
-      console.log(response);
       setEvents(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -49,7 +47,6 @@ const HomePage = () => {
       event.city.toLowerCase().includes(searchString.toLowerCase().trim())
   );
 
-  console.log(filterEventsSearch);
 
   return (
     <Container className="my-[80px] flex justify-center items-center flex-col">

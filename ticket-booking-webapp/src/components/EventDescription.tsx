@@ -9,20 +9,17 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ISeat } from "../models/ISeat";
-import { VND } from "../utils/convertVND";
+import { ISeatEvent } from "../models/ISeat";
 import { IEvent } from "../models/IEvents";
 import { formatDateEventDetail } from "../utils/convertDateEvent";
+import { BiTimeFive, BiSolidMap } from "react-icons/bi";
 
 interface Props {
-  seatsList: ISeat[];
-  setSeatsList: (seatsList: ISeat[]) => void;
+  seatsList: ISeatEvent[] | undefined;
+  setSeatsList: (seatsList: ISeatEvent[]) => void;
   event: IEvent | undefined;
 }
 
-const PRICE_STANDARD = 100000;
-const PRICE_VIP = 200000;
-const PRICE_SWEET_BOX = 300000;
 
 const theme = createTheme({
   palette: {
@@ -35,14 +32,15 @@ const theme = createTheme({
 const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
   const [open, setOpen] = React.useState(false);
   const handleClose = () => setOpen(false);
-  const [seatsPicking, setSeatsPicking] = useState<ISeat[]>([]); // [10, 23, 49
+  const [seatsPicking, setSeatsPicking] = useState<ISeatEvent[]>([]); // [10, 23, 49
   const [seatsNumber, setSeatsNumber] = useState<string>("");
   const handleClickPaymentBtn = () => {
     setOpen(true);
   };
 
   const fetchPaymentPicking = () => {
-    const seats = seatsList.filter((seat) => seat.statusSeat === "picking");
+    if(seatsList === undefined) return;
+    const seats = seatsList.filter((seat) => seat.seatStatus === -1);
     setSeatsNumber(seats.map((seat) => seat.seatId).join(", "));
     setSeatsPicking(seats);
   };
@@ -53,16 +51,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
   //Calculate total price
   const totalTickets = seatsPicking.length;
   const totalPrice = seatsPicking.reduce((total, seat) => {
-    switch (seat.typeSeat) {
-      case "standard":
-        return total + PRICE_STANDARD;
-      case "vip":
-        return total + PRICE_VIP;
-      case "sweet-box":
-        return total + PRICE_SWEET_BOX;
-      default:
-        return total;
-    }
+    return total + seat.price;
   }, 0);
 
   return (
@@ -80,14 +69,26 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
             <div className="flex flex-col justify-between">
               <h3 className="my-0 text-[24px]">{event.title}</h3>
               <div className="flex flex-col">
-                <p className="my-0 text-[18px] font-[700]">
-                  {`${formatDateEventDetail(event.date)} (07:30 PM - 09:30 PM)`}
+                <p className="my-0 text-[18px] font-[700] flex items-center mb-[8px] gap-[10px]">
+                  <span className="flex items-center">
+                    <BiTimeFive className="text-[#999]" />
+                  </span>
+                  <span>
+                    {`${formatDateEventDetail(
+                      event.date
+                    )} (07:30 PM - 09:30 PM)`}
+                  </span>
                 </p>
-                <div className="flex flex-col gap-[6px]">
-                  <p className="my-0 text-[18px] font-[700]">RẠP ĐẠI NAM</p>
-                  <p className="my-0">
-                    {event.location}
-                  </p>
+                <div className="flex items-center gap-[10px]">
+                  <span className="flex items-center">
+                    <BiSolidMap className="text-[#999] text-[20px]" />
+                  </span>
+                  <div className="flex flex-col gap-[6px]">
+                    <p className="my-0 text-[18px] font-[700]">
+                      {event.stageName}
+                    </p>
+                    <p className="my-0">{event.location}</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -97,18 +98,14 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
               {seatsPicking.map((seat) => (
                 <div key={seat.seatId} className="flex justify-between">
                   <p className="my-0">
-                    {seat.typeSeat === "standard"
+                    {seat.seat.type === 0
                       ? `Standard ${`(${seat.seatId})`}`
-                      : seat.typeSeat === "vip"
+                      : seat.seat.type === 1
                       ? `VIP ${`(${seat.seatId})`}`
                       : `Sweet Box ${`(${seat.seatId})`}`}
                   </p>
                   <p className="my-0">
-                    {seat.typeSeat === "standard"
-                      ? PRICE_STANDARD.toLocaleString()
-                      : seat.typeSeat === "vip"
-                      ? PRICE_VIP.toLocaleString()
-                      : PRICE_SWEET_BOX.toLocaleString()}{" "}
+                    {seat.price.toLocaleString()}{" "}
                     x 1
                   </p>
                 </div>

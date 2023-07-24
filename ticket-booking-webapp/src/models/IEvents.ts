@@ -1,4 +1,5 @@
 import { ICategory } from './ICategory';
+import { ISeatEvent } from './ISeat';
 
 
 export interface IEvent{ 
@@ -10,5 +11,7 @@ export interface IEvent{
     location: string;
     city: string;
     status: number;
+    stageName: string;
     categories: ICategory[];
+    seatEvents: ISeatEvent[];
 }
