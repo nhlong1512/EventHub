@@ -1,21 +1,21 @@
 import React from "react";
 import classNames from "classnames";
-import { ISeat } from "../models/ISeat";
+import { ISeatEvent } from "../models/ISeat";
 import { Alert } from "@mui/material";
 
 interface Props {
-  typeSeat: string;
-  statusSeat: string;
-  seatId: number;
-  seatsList: ISeat[];
-  setSeatsList: (seatsList: ISeat[]) => void;
+  typeSeat: number;
+  seatStatus: number;
+  seatId: string;
+  seatsList: ISeatEvent[];
+  setSeatsList: (seatsList: ISeatEvent[]) => void;
   pickingSeatsCount: number;
   setPickingSeatsCount: (pickingSeatsCount: number) => void;
 }
 
 const Seat = ({
   typeSeat,
-  statusSeat,
+  seatStatus,
   seatId,
   seatsList,
   setSeatsList,
@@ -32,16 +32,16 @@ const Seat = ({
     }
     const updatedSeats = [...seatsList];
     if (
-      updatedSeats[seatPickingIndex].statusSeat === "picked" ||
-      updatedSeats[seatPickingIndex].statusSeat === "banned"
+      updatedSeats[seatPickingIndex].seatStatus === 1 ||
+      updatedSeats[seatPickingIndex].seatStatus === 2
     ) {
       return;
     }
-    if (updatedSeats[seatPickingIndex].statusSeat === "picking") {
-      updatedSeats[seatPickingIndex].statusSeat = "default";
+    if (updatedSeats[seatPickingIndex].seatStatus === -1) {
+      updatedSeats[seatPickingIndex].seatStatus = 0;
       setPickingSeatsCount(pickingSeatsCount - 1);
     } else if (pickingSeatsCount < 3) {
-      updatedSeats[seatPickingIndex].statusSeat = "picking";
+      updatedSeats[seatPickingIndex].seatStatus = -1;
       setPickingSeatsCount(pickingSeatsCount + 1);
     } else {
       alert("You cannot select more than 3 tickets!");
@@ -50,28 +50,29 @@ const Seat = ({
     setSeatsList(updatedSeats);
   };
 
+  
   return (
     <div
       className={classNames(
         "w-[40px] h-[40px] border-[2px] border-solid rouned-[2px] flex justify-center items-center cursor-pointer hover:opacity-80",
         {
           "bg-[#ccc] border-[#ccc] text-[#fff]":
-            statusSeat === "banned" || statusSeat === "picked",
-          "bg-[#88050c] border-[#88050c] text-[#fff]": statusSeat === "picking",
-          "border-main": statusSeat === "default" && typeSeat === "standard",
-          "border-[#e50914]": statusSeat === "default" && typeSeat === "vip",
+            seatStatus === 2 || seatStatus === 1,
+          "bg-[#88050c] border-[#88050c] text-[#fff]": seatStatus === -1,
+          "border-main": seatStatus === 0 && typeSeat === 0,
+          "border-[#e50914]": seatStatus === 0 && typeSeat === 1,
           "border-[#ee7a7a] bg-[#ee7a7a] text-[#fff]":
-            statusSeat === "default" && typeSeat === "sweet-box",
+            seatStatus === 0 && typeSeat === 2,
         }
       )}
       onClick={handleClickSeat}
     >
       <p
         className={classNames("m-0", {
-          "text-[24px]": statusSeat === "banned",
+          "text-[24px]": seatStatus === 2,
         })}
       >
-        {statusSeat === "banned" ? "X" : seatId}
+        {seatStatus === 2 ? "X" : seatId}
       </p>
     </div>
   );

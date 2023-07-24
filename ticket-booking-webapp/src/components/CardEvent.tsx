@@ -27,7 +27,7 @@ const CardEvent = ({ event }: Props) => {
             gutterBottom
             variant="h5"
             component="div"
-            className="text-[18px] font-[500] leading-[24px] h-[72px] hover:text-main"
+            className="text-[18px] font-[500] leading-[24px] h-[72px] hover:text-main uppercase"
           >
             {event.title}
           </Typography>

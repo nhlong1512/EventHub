@@ -1,7 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React from "react";
+import { useSearchStore } from "../store/search";
+import { shallow } from "zustand/shallow";
 
 const theme = createTheme({
   palette: {
@@ -11,8 +12,18 @@ const theme = createTheme({
   },
 });
 const NavBar = () => {
+  const [searchString, setSearchString] = useSearchStore(
+    (state) => [state.searchString, state.setSearchString],
+    shallow
+  );
+
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchString(event.target.value);
+  };
+  
+
   return (
-    <div className="flex justify-between items-center px-[40px] py-[20px] border-b-[3px] border-b-[#ccc]">
+    <div className="flex justify-between items-center px-[40px] py-[20px] border-0 border-b-[1px] border-b-[#ccc] border-solid bg-[#fff]">
       <div className="flex gap-[24px] items-center ">
         <Link to="/">
           <div className="cursor-pointer">
@@ -22,9 +33,11 @@ const NavBar = () => {
         <div className="">
           <ThemeProvider theme={theme}>
             <TextField
-              label="Search"
+              label="Search event..."
               variant="outlined"
               className="w-[360px] rounded-[10px]"
+              value={searchString}
+              onChange={handleSearchChange}
             />
           </ThemeProvider>
         </div>

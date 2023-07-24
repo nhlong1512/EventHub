@@ -7,7 +7,7 @@ interface Props {
 }
 const EventsList = ({ events }: Props) => {
   return (
-    <div className="flex gap-[24px] justify-center items-center flex-wrap">
+    <div className="flex gap-[24px] flex-wrap">
       {events.map((event, eventIndex) => (
         <Link to={`/event/${event.id}`} key={event.id} className="no-underline">
           <CardEvent event = {event} />

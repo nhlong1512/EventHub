@@ -5,3 +5,14 @@ export const formatDate = (dateString: string) => {
   const year = date.getFullYear().toString();
   return `${day}.${month}.${year}`;
 };
+
+export const formatDateEventDetail = (dateString: string) => {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", options);
+};
