@@ -49,7 +49,7 @@ const HomePage = () => {
 
 
   return (
-    <Container className="my-[80px] flex justify-center items-center flex-col">
+    <Container className="my-[80px] flex items-center justify-start self-start flex-col">
       {isLoading ? (
         <div>
           <CircularProgress />

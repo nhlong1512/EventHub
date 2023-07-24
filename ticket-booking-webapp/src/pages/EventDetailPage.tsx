@@ -41,6 +41,7 @@ const EventDetailPage = () => {
     setSeatsList(event?.seatEvents)
   }, [event])
   
+  console.log(event)
   
 
   const [pickingSeatsCount, setPickingSeatsCount] = useState<number>(0);

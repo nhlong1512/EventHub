@@ -11,7 +11,7 @@ interface Props {
 
 const SeatsList = ({seatsList, setSeatsList, pickingSeatsCount, setPickingSeatsCount}: Props) => {
   return (
-    <div className="flex gap-[20px] flex-wrap justify-center">
+    <div className="flex gap-[20px] flex-wrap justify-center self-start">
       {seatsList.map((seat, seatIndex) => (
         <Seat
           key={seat.seatId}

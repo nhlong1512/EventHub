@@ -23,7 +23,7 @@ const NavBar = () => {
   
 
   return (
-    <div className="flex justify-between items-center px-[40px] py-[20px] border-b-[3px] border-b-[#ccc]">
+    <div className="flex justify-between items-center px-[40px] py-[20px] border-0 border-b-[1px] border-b-[#ccc] border-solid bg-[#fff]">
       <div className="flex gap-[24px] items-center ">
         <Link to="/">
           <div className="cursor-pointer">

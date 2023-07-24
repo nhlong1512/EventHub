@@ -236,7 +236,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
                       id="phone"
                       label="Event name"
                       type="text"
-                      defaultValue="[MÂY LANG THANG HÀ NỘI] LIVESHOW TUẤN NGỌC - LƯU BÍCH"
+                      defaultValue={event.title}
                       InputProps={{
                         readOnly: true,
                       }}
