@@ -16,3 +16,12 @@ export const formatDateEventDetail = (dateString: string) => {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", options);
 };
+
+export const formatDateToStringCreateEvent = (selectedDate: string) => {
+  const dateObject = new Date(selectedDate);
+  dateObject.setHours(21);
+  dateObject.setMinutes(15);
+  const formattedDate = dateObject.toISOString().slice(0, 19);
+  console.log(formattedDate);
+  return formattedDate;
+};
