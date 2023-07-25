@@ -14,13 +14,39 @@ Netpower internship project
 ```
 
 ## Installation and Run
+
+### Setup local database instruction
+1. Install Docker on Linux or WSL
+2. Make sure you stop your local SQL Server database service
+3. Download image and build container
 ```bash
-	docker-compose up
+docker pull mcr.microsoft.com/azure-sql-edge
+docker run --cap-add SYS_PTRACE -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=TicketBooking.database.v1' -p 1433:1433 --name azuresql -d mcr.microsoft.com/azure-sql-edge
 ```
-> After docker starting successfully, the web application is served at <http://localhost:3000> on your machine. To stop the web application, run:
+4. Database is running now. If you want to start database service later , run
 ```bash
-	docker-compose down
+docker start azuresql
 ```
+
+### Go to TicketBooking.API project in "ticket-booking-api"
+1. Setup data
+```bash
+dotnet ef migrations add init
+dotnet ef database update
+```
+2. Run API
+```bash
+dotnet run
+```
+
+### Go to folder "ticket-booking-webapp"
+> run
+```bash
+npm i
+npm start
+```
+
+> Now webapp is running at <<<http://localhost:3000>>> on your local machine.
 
 ## Tech stack for Ticket Booking
 
