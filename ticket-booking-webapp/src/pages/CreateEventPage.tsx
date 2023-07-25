@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Chip,
@@ -13,12 +14,15 @@ import {
   TextField,
   ThemeProvider,
 } from "@mui/material";
+import FormData from "form-data";
 import { createTheme, makeStyles } from "@mui/material/styles";
 import { DatePicker } from "@mui/x-date-pickers";
 import axios from "axios";
 import { ChangeEvent, useEffect, useState } from "react";
+import api from "../api";
 import { PROVINCE_API } from "../config";
 import { IProvince } from "../models/IProvince";
+import { formatDateToStringCreateEvent } from "../utils/convertDateEvent";
 
 const initEventTypes = [
   "Live Music",
@@ -44,16 +48,85 @@ const theme = createTheme({
 });
 
 const CreateEventPage = () => {
+  const [title, setTitle] = useState<string>("");
+  const [standardPrice, setStandardPrice] = useState<number>(0);
+  const [vipPrice, setVipPrice] = useState<number>(0);
+  const [sweetboxPrice, setSweetboxPrice] = useState<number>(0);
+  const [stageName, setStageName] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [duration, setDuration] = useState<string>("");
+  const [eventDate, setEventDate] = useState<Date>();
   const [city, setCity] = useState<string>("");
   const [eventTypes, setEventTypes] = useState<string[]>([]);
+
   const [provinces, setProvinces] = useState<IProvince[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isPostSuccess, setIsPostSuccess] = useState<boolean>(false);
 
+  const handleDateChange = (date: Date | null) => {
+    if (date) {
+      setEventDate(date);
+    }
+  };
+
+  //Post Event
+  const handleCreateEvent = async () => {
+    if (!eventDate) return;
+    console.log("title: ", title);
+    console.log("standardPrice: ", standardPrice);
+    console.log("vipPrice: ", vipPrice);
+    console.log("sweetboxPrice: ", sweetboxPrice);
+    console.log("stageName: ", stageName);
+    console.log("location: ", location);
+    console.log("duration: ", duration);
+    console.log(
+      "eventDate: ",
+      formatDateToStringCreateEvent(eventDate.toISOString())
+    );
+    console.log("city: ", city);
+    console.log("eventTypes: ", eventTypes);
+    console.log("selectedImage: ", selectedImage);
+    try {
+      setIsLoading(true);
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "ngrok-skip-browser-warning": "true",
+        },
+      };
+      let data = new FormData();
+      if (!selectedImage) return;
+      data.append("Image", selectedImage);
+      data.append("Title", title);
+      data.append("Duration", duration);
+      data.append(
+        "Date",
+        formatDateToStringCreateEvent(eventDate.toISOString())
+      );
+      data.append("StageName", stageName);
+      data.append("Location", location);
+      data.append("City", city);
+      eventTypes.forEach((eventType) => {
+        data.append("Categories", eventType);
+      });
+      data.append("Prices", standardPrice);
+      data.append("Prices", vipPrice);
+      data.append("Prices", sweetboxPrice);
+      const response = await api.post("/Event", data, config);
+      console.log(response);
+      setIsPostSuccess(true);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  //Fetch Provinces
   const fetchProvinces = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get(PROVINCE_API);
-      console.log(response.data);
       const newProvinces = response.data.map((province: IProvince) => {
         const newProvince = { ...province };
         newProvince.name = newProvince.name.replace("Tỉnh ", "");
@@ -76,6 +149,7 @@ const CreateEventPage = () => {
     setCity(event.target.value);
   };
 
+  //Handle Change type Event
   const handleChangeEventType = (
     event: SelectChangeEvent<typeof eventTypes>
   ) => {
@@ -87,6 +161,7 @@ const CreateEventPage = () => {
       typeof value === "string" ? value.split(",") : value
     );
   };
+
   //Handle upload file image
   const [selectedImage, setSelectedImage] = useState<File>();
 
@@ -100,6 +175,11 @@ const CreateEventPage = () => {
 
   return (
     <Container className="mt-[80px] mb-[80px]">
+      {isPostSuccess && (
+        <Alert severity="success" className="mb-[20px]">
+          Create event successfully!
+        </Alert>
+      )}
       {isLoading ? (
         <div className="flex justify-center">
           <CircularProgress />
@@ -115,17 +195,9 @@ const CreateEventPage = () => {
                   label="Title"
                   variant="outlined"
                   style={{ width: "400px" }}
-                />
-              </ThemeProvider>
-            </div>
-            <div className="flex items-center justify-between">
-              <p className="my-0 text-[20px]">From Price</p>
-              <ThemeProvider theme={theme}>
-                <TextField
-                  label="From Price"
-                  variant="outlined"
-                  type="number"
-                  style={{ width: "400px" }}
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
                 />
               </ThemeProvider>
             </div>
@@ -137,6 +209,8 @@ const CreateEventPage = () => {
                   variant="outlined"
                   type="number"
                   className="w-[400px]"
+                  value={standardPrice === 0 ? "" : standardPrice.toString()}
+                  onChange={(e) => setStandardPrice(Number(e.target.value))}
                 />
               </ThemeProvider>
             </div>
@@ -148,6 +222,8 @@ const CreateEventPage = () => {
                   variant="outlined"
                   type="number"
                   className="w-[400px]"
+                  value={vipPrice === 0 ? "" : vipPrice.toString()}
+                  onChange={(e) => setVipPrice(Number(e.target.value))}
                 />
               </ThemeProvider>
             </div>
@@ -159,6 +235,8 @@ const CreateEventPage = () => {
                   variant="outlined"
                   type="number"
                   className="w-[400px]"
+                  value={sweetboxPrice === 0 ? "" : sweetboxPrice.toString()}
+                  onChange={(e) => setSweetboxPrice(Number(e.target.value))}
                 />
               </ThemeProvider>
             </div>
@@ -169,6 +247,9 @@ const CreateEventPage = () => {
                   label="Stage Name"
                   variant="outlined"
                   style={{ width: "400px" }}
+                  type="text"
+                  value={stageName}
+                  onChange={(e) => setStageName(e.target.value)}
                 />
               </ThemeProvider>
             </div>
@@ -180,6 +261,9 @@ const CreateEventPage = () => {
                   label="Location"
                   variant="outlined"
                   style={{ width: "400px" }}
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </ThemeProvider>
             </div>
@@ -190,13 +274,16 @@ const CreateEventPage = () => {
                   label="Duration"
                   variant="outlined"
                   style={{ width: "400px" }}
+                  type="text"
+                  value={duration}
+                  onChange={(e) => setDuration(e.target.value)}
                 />
               </ThemeProvider>
             </div>
             <div className="flex items-center justify-between">
               <p className="my-0 text-[20px]">Event Date</p>
               <ThemeProvider theme={theme}>
-                <DatePicker className="w-[400px]" />
+                <DatePicker className="w-[400px]" onChange={handleDateChange} />
               </ThemeProvider>
             </div>
           </div>
@@ -307,7 +394,7 @@ const CreateEventPage = () => {
             variant="contained"
             component="label"
             className="flex w-[400px] text-[16px] py-[10px] rounded-[10px]"
-            // onClick={handleUploadClick}
+            onClick={handleCreateEvent}
           >
             Create Event
           </Button>
