@@ -19,7 +19,7 @@ namespace TicketBooking.API.Controller
 		}
 
 		[HttpGet]
-		[ProducesResponseType(200, Type = typeof(IEnumerable<CategoryResponse>))]
+		[ProducesResponseType(204, Type = typeof(IEnumerable<CategoryResponse>))]
 		public ActionResult GetCategories()
 		{
 			var result = __mapper.Map<List<CategoryResponse>>(__categoryReposirory.GetCategories());

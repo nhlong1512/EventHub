@@ -19,6 +19,8 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+builder.Services.AddScoped<IInvoicerepository, InvoiceRepository>();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddCors(options =>
