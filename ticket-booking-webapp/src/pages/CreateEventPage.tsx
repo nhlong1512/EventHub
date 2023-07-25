@@ -23,6 +23,7 @@ import api from "../api";
 import { PROVINCE_API } from "../config";
 import { IProvince } from "../models/IProvince";
 import { formatDateToStringCreateEvent } from "../utils/convertDateEvent";
+import { useNavigate } from "react-router-dom";
 
 const initEventTypes = [
   "Live Music",
@@ -48,6 +49,7 @@ const theme = createTheme({
 });
 
 const CreateEventPage = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
   const [standardPrice, setStandardPrice] = useState<number>(0);
   const [vipPrice, setVipPrice] = useState<number>(0);
@@ -114,6 +116,7 @@ const CreateEventPage = () => {
       data.append("Prices", sweetboxPrice);
       const response = await api.post("/Event", data, config);
       console.log(response);
+      navigate("/");
       setIsPostSuccess(true);
     } catch (error) {
       console.error("Error fetching data:", error);
