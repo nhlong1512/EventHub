@@ -19,10 +19,15 @@ const HomePage = () => {
   const fetchEvents = async () => {
     try {
       setIsLoading(true);
-      const response = await api.get("/Event", {
+      const response = await api.get("/Event", 
+      {
+        params: {
+          isPublished: 'true',
+        },
         headers: {
           "ngrok-skip-browser-warning": "true",
         },
+        
       });
       setEvents(response.data);
     } catch (error) {

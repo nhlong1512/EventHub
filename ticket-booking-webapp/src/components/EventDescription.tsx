@@ -13,13 +13,13 @@ import { ISeatEvent } from "../Dto/ISeat";
 import { IEvent } from "../Dto/IEvents";
 import { formatDateEventDetail } from "../utils/convertDateEvent";
 import { BiTimeFive, BiSolidMap } from "react-icons/bi";
+import api from "../api";
 
 interface Props {
   seatsList: ISeatEvent[] | undefined;
   setSeatsList: (seatsList: ISeatEvent[]) => void;
   event: IEvent | undefined;
 }
-
 
 const theme = createTheme({
   palette: {
@@ -30,16 +30,76 @@ const theme = createTheme({
 });
 
 const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = () => setOpen(false);
-  const [seatsPicking, setSeatsPicking] = useState<ISeatEvent[]>([]); // [10, 23, 49
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [openInfo, setOpenInfo] = useState(false);
+  const [openConfirmationCode, setOpenConfirmationCode] = useState(false);
+  const handleCloseInfo = () => setOpenInfo(false);
+  const handleCloseConfirmationCode = () => setOpenConfirmationCode(false);
+  const [seatsPicking, setSeatsPicking] = useState<ISeatEvent[]>([]);
   const [seatsNumber, setSeatsNumber] = useState<string>("");
+  const [isSubmitInfo, setIsSubmitInfo] = useState<boolean>(false);
+
+  //Form data
+  const [fullName, setFullName] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+
   const handleClickPaymentBtn = () => {
-    setOpen(true);
+    setOpenInfo(true);
+    
   };
 
+  const handleSubmitDialogInfo = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get("/EmailValidation",  {
+        params: {
+          email: email,
+          fullName: fullName,
+        },
+        headers: {
+          "Content-Type": "text/plain",
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
+      setIsSubmitInfo(true);
+      setOpenConfirmationCode(true);
+      handleCloseInfo();
+      
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const hanldeSubmitConfirmationCode = async () => {
+    try {
+      setIsLoading(true);
+      const config = {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      };
+      if(!event?.id) return;
+      let postData = {
+        fullName: fullName,
+        mail: email,
+        phone: phoneNumber,
+        eventId: event?.id,
+        seatIds: seatsPicking.map((seat) => seat.seatId.toLowerCase()),
+      }
+      const response = await api.post("/Invoice", postData, config);
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setIsLoading(false);
+      handleCloseConfirmationCode();
+    }
+  }
+
   const fetchPaymentPicking = () => {
-    if(seatsList === undefined) return;
+    if (seatsList === undefined) return;
     const seats = seatsList.filter((seat) => seat.seatStatus === -1);
     setSeatsNumber(seats.map((seat) => seat.seatId).join(", "));
     setSeatsPicking(seats);
@@ -74,9 +134,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
                     <BiTimeFive className="text-[#999]" />
                   </span>
                   <span>
-                    {`${formatDateEventDetail(
-                      event.date
-                    )} (07:30 PM - 09:30 PM)`}
+                    {`${formatDateEventDetail(event.date)} (${event.duration})`}
                   </span>
                 </p>
                 <div className="flex items-center gap-[10px]">
@@ -104,10 +162,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
                       ? `VIP ${`(${seat.seatId})`}`
                       : `Sweet Box ${`(${seat.seatId})`}`}
                   </p>
-                  <p className="my-0">
-                    {seat.price.toLocaleString()}{" "}
-                    x 1
-                  </p>
+                  <p className="my-0">{seat.price.toLocaleString()} x 1</p>
                 </div>
               ))}
             </div>
@@ -135,7 +190,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
               ) : (
                 ""
               )}
-              <Dialog open={open} onClose={handleClose}>
+              <Dialog open={openInfo} onClose={handleCloseInfo}>
                 <DialogTitle
                   className="text-main"
                   style={{ color: "#5669FF", fontSize: "24px" }}
@@ -173,6 +228,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
                       fullWidth
                       variant="standard"
                       style={{ flex: 4, margin: "0" }}
+                      onChange={(e) => setFullName(e.target.value)}
                     />
                   </div>
                   <div
@@ -195,6 +251,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
                       fullWidth
                       variant="standard"
                       style={{ flex: 4, margin: "0" }}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
                     />
                   </div>
                   <div
@@ -217,6 +274,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
                       fullWidth
                       variant="standard"
                       style={{ flex: 4, margin: "0" }}
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div
@@ -273,8 +331,65 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
                   </div>
                 </DialogContent>
                 <DialogActions>
-                  <Button onClick={handleClose}>Cancel</Button>
-                  <Button onClick={handleClose}>Submit</Button>
+                  <Button onClick={handleCloseInfo}>Cancel</Button>
+                  <Button onClick={handleSubmitDialogInfo}>Submit</Button>
+                </DialogActions>
+              </Dialog>
+
+              <Dialog
+                open={openConfirmationCode}
+                onClose={handleCloseConfirmationCode}
+              >
+                <DialogTitle
+                  className="text-main"
+                  style={{ color: "#5669FF", fontSize: "24px" }}
+                >
+                  Email Validation
+                </DialogTitle>
+                <DialogContent
+                  style={{
+                    height: "100%",
+                    position: "relative",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <DialogContentText>
+                    {`We just sent a confirmation code over to ${email}. Please enter the code below to confirm your payment.`}
+                  </DialogContentText>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "end",
+                    }}
+                  >
+                    <p
+                      style={{
+                        flex: 2,
+                        margin: "0",
+                        fontSize: "18px",
+                        width: "300px",
+                        display: "block",
+                      }}
+                    >
+                      Confirmation code:{" "}
+                    </p>
+                    <TextField
+                      autoFocus
+                      margin="dense"
+                      id="name"
+                      label="Enter code"
+                      type="number"
+                      fullWidth
+                      variant="standard"
+                      style={{ flex: 4, margin: "0" }}
+                    />
+                  </div>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleCloseConfirmationCode}>Cancel</Button>
+                  <Button onClick={hanldeSubmitConfirmationCode}>Submit</Button>
                 </DialogActions>
               </Dialog>
             </ThemeProvider>

@@ -70,46 +70,6 @@ const CreateEventPage = () => {
     }
   };
 
-  //Post Event
-  const handleCreateEvent = async () => {
-    if (!eventDate) return;
-    console.log(
-      "eventDate: ",
-      formatDateToStringCreateEvent(eventDate.toISOString())
-    );
-    console.log("city: ", city);
-    console.log("eventTypes: ", eventTypes);
-    console.log("selectedImage: ", selectedImage);
-    try {
-      setIsLoading(true);
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "ngrok-skip-browser-warning": "true",
-        },
-      };
-      let data = new FormData();
-      if (!selectedImage) return;
-      data.append("Image", selectedImage);
-      data.append(
-        "Date",
-        formatDateToStringCreateEvent(eventDate.toISOString())
-      );
-      data.append("City", city);
-      eventTypes.forEach((eventType) => {
-        data.append("Categories", eventType);
-      });
-      const response = await api.post("/Event", data, config);
-      console.log(response);
-      navigate("/");
-      setIsPostSuccess(true);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   //Fetch Provinces
   const fetchProvinces = async () => {
     try {
@@ -234,7 +194,7 @@ const CreateEventPage = () => {
       navigate("/");
       setIsPostSuccess(true);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      console.log(error);
     } finally {
       setIsLoading(false);
     }
