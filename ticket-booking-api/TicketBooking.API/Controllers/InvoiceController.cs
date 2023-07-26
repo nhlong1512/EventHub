@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using TicketBooking.API.Dto;
-using TicketBooking.API.Enum;
 using TicketBooking.API.Interfaces;
 
 namespace TicketBooking.API.Controller
 {
+	[ApiController]
+	[Route("api/[controller]")]
 	public class InvoiceController: ControllerBase
 	{
-		private readonly IInvoicerepository __invoicesRepository;
+		private readonly IInvoiceRepository __invoicesRepository;
 
-		public InvoiceController(IInvoicerepository invoicesRepository)
+		public InvoiceController(IInvoiceRepository invoicesRepository)
 		{
 			__invoicesRepository = invoicesRepository;
 		}
@@ -20,7 +21,7 @@ namespace TicketBooking.API.Controller
 		{
 			var result = __invoicesRepository.CreateInvoice(invoiceRequest);
 
-			if (result == AddInvoiceStatus.Fail)
+			if (!result)
 			{
 					ModelState.AddModelError("", "Some thing wrong while adding");
 					return BadRequest(ModelState);
@@ -30,20 +31,6 @@ namespace TicketBooking.API.Controller
 					return BadRequest();
 
 			return Ok("Success");
-		}
-
-    [HttpGet]
-		[ProducesResponseType(204, Type = typeof(string))]
-		public async Task<ActionResult> EmailValidate(
-			[FromQuery] string email, [FromQuery] string userName
-		)
-		{
-			if(!ModelState.IsValid)
-				return BadRequest();
-
-			var result = await __invoicesRepository.EmailValidate(email, userName);
-
-			return Ok(result);
 		}
 	}
 }

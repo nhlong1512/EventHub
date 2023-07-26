@@ -22,9 +22,11 @@ namespace TicketBooking.API.Controller
 
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<EventResponse>))]
-		public ActionResult GetEvents()
+		public ActionResult GetEvents([FromQuery] bool IsPublished)
 		{
-			var events = __mapper.Map<List<EventResponse>>(__eventRepository.GetEvents());
+			var events = IsPublished
+				? __mapper.Map<List<EventResponse>>(__eventRepository.GetPublishedEvents())
+				: __mapper.Map<List<EventResponse>>(__eventRepository.GetUnPublishedEvents());	
 
 			if(!ModelState.IsValid)
 			{
@@ -70,7 +72,35 @@ namespace TicketBooking.API.Controller
 				return NotFound();
 			}
 
-			__eventRepository.DeleteEvent(e);
+			if(!__eventRepository.DeleteEvent(e))
+			{
+				return Problem("Something wrong while deleting");
+			}
+
+			return Ok("Success");
+		}
+
+		[HttpPut("{eventId}")]
+		[ProducesResponseType(200, Type = typeof(string))]
+		[ProducesResponseType(400)]
+		public ActionResult SetPublished(string eventId)
+		{
+			var e = __eventRepository.GetEvent(eventId);
+
+			if(!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if (e == null)
+			{
+				return NotFound();
+			}
+
+			if(!__eventRepository.SetPublished(e))
+			{
+				return Problem("Something wrong while updating");
+			}
 
 			return Ok("Success");
 		}

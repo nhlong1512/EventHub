@@ -19,7 +19,11 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
-builder.Services.AddScoped<IInvoicerepository, InvoiceRepository>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+builder.Services.AddScoped<IEmailValidationRepository, EmailValidationRepository>();
+
+builder.Services.AddScoped<IReportRepository, ReportRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
