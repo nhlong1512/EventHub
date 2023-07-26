@@ -17,20 +17,20 @@ namespace TicketBooking.API.Repository
 			__dbContext = dbContext;
 		}
 
-		public async Task<AddInvoiceStatus> CreateInvoice(InvoiceRequest invoiceRequest)
+		public AddInvoiceStatus CreateInvoice(InvoiceRequest invoiceRequest)
 		{
-			string invoiceId = Guid.NewGuid().ToString();
+				string invoiceId = Guid.NewGuid().ToString();
 
-			if (AddInvoice(invoiceRequest, invoiceId) == 0)
-				return AddInvoiceStatus.Fail;
+				if (AddInvoice(invoiceRequest, invoiceId) == 0)
+						return AddInvoiceStatus.Fail;
 
-			if (AddSeatInvoice(invoiceRequest.seatIds, invoiceId) == 0)
-				return AddInvoiceStatus.Fail;
+				if (AddSeatInvoice(invoiceRequest.seatIds, invoiceId) == 0)
+						return AddInvoiceStatus.Fail;
 
-			return AddInvoiceStatus.Success;
+				return AddInvoiceStatus.Success;
 		}
 
-		private int AddInvoice(InvoiceRequest invoiceRequest, string invoiceId)
+    private int AddInvoice(InvoiceRequest invoiceRequest, string invoiceId)
 		{
 			var invoice = new Invoice()
 			{
@@ -61,7 +61,7 @@ namespace TicketBooking.API.Repository
 			return __dbContext.SaveChanges();
 		}
 
-		public async Task<AddInvoiceStatus> EmailValidate(string email, string userName)
+		public async Task<string> EmailValidate(string email, string userName)
 		{
 			IConfigurationRoot configuration = new ConfigurationBuilder()
 							.SetBasePath(Directory.GetCurrentDirectory())
@@ -69,9 +69,12 @@ namespace TicketBooking.API.Repository
 							.Build();
 
 			var emailClient = configuration.GetConnectionString("EmailClient");
+
 			var smtpClient = configuration.GetConnectionString("SmtpClient");
+
 			var password = configuration.GetConnectionString("Password");
-			var code = (new Random()).Next(100000, 999999).ToString();
+			
+			var code = new Random().Next(100000, 999999).ToString();
 
 			var client = new SmtpClient(smtpClient, 587)
 			{
@@ -91,10 +94,10 @@ namespace TicketBooking.API.Repository
 			}
 			catch (Exception)
 			{
-				return AddInvoiceStatus.InvalidEmail;
+				return "";
 			}
 
-			return AddInvoiceStatus.Success;
+			return code;
 		}
 	}
 }

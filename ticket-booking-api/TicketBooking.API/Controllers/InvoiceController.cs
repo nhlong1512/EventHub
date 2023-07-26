@@ -16,46 +16,34 @@ namespace TicketBooking.API.Controller
 
 		[HttpPost]
 		[ProducesResponseType(204, Type = typeof(string))]
-		public async Task<ActionResult> AddInvoice(InvoiceRequest invoiceRequest)
+		public ActionResult AddInvoice(InvoiceRequest invoiceRequest)
 		{
-			var result = await __invoicesRepository.CreateInvoice(invoiceRequest);
+			var result = __invoicesRepository.CreateInvoice(invoiceRequest);
 
-			if(result == AddInvoiceStatus.Fail)
+			if (result == AddInvoiceStatus.Fail)
 			{
-				ModelState.AddModelError("", "Some thing wrong while adding");
-				return BadRequest(ModelState);
+					ModelState.AddModelError("", "Some thing wrong while adding");
+					return BadRequest(ModelState);
 			}
 
-			if(result == AddInvoiceStatus.InvalidEmail)
-			{
-				ModelState.AddModelError("", "Cannot send to user email");
-				return BadRequest(ModelState);
-			}
-
-			if(!ModelState.IsValid)
-				return BadRequest();
+			if (!ModelState.IsValid)
+					return BadRequest();
 
 			return Ok("Success");
 		}
 
-		[HttpGet]
+    [HttpGet]
 		[ProducesResponseType(204, Type = typeof(string))]
 		public async Task<ActionResult> EmailValidate(
 			[FromQuery] string email, [FromQuery] string userName
 		)
 		{
-			var result = await __invoicesRepository.EmailValidate(email, userName);
-
-			if(result == AddInvoiceStatus.InvalidEmail)
-			{
-				ModelState.AddModelError("", "Cannot send to email");
-				return BadRequest(ModelState);
-			}
-
 			if(!ModelState.IsValid)
 				return BadRequest();
 
-			return Ok("Success");
+			var result = await __invoicesRepository.EmailValidate(email, userName);
+
+			return Ok(result);
 		}
 	}
 }

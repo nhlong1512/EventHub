@@ -4,7 +4,7 @@ namespace TicketBooking.API.Interfaces
 {
 	public interface IInvoicerepository
 	{
-		public Task<AddInvoiceStatus> CreateInvoice(InvoiceRequest invoice);
-		public Task<AddInvoiceStatus> EmailValidate(string email, string userName);
+		public AddInvoiceStatus CreateInvoice(InvoiceRequest invoice);
+		public Task<string> EmailValidate(string email, string userName);
 	}
 }
