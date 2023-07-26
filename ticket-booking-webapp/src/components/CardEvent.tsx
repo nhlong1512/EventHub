@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { SlCalender } from "react-icons/sl";
-import { IEvent } from "../models/IEvents";
+import { IEvent } from "../Dto/IEvents";
 import { VND } from "../utils/convertVND";
 import { formatDate } from "../utils/convertDateEvent";
 

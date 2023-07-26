@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import { ISeatEvent } from "../models/ISeat";
+import { ISeatEvent } from "../Dto/ISeat";
 import { Alert } from "@mui/material";
 
 interface Props {

@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ISeatEvent } from "../models/ISeat";
-import { IEvent } from "../models/IEvents";
+import { ISeatEvent } from "../Dto/ISeat";
+import { IEvent } from "../Dto/IEvents";
 import { formatDateEventDetail } from "../utils/convertDateEvent";
 import { BiTimeFive, BiSolidMap } from "react-icons/bi";
 

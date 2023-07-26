@@ -5,8 +5,8 @@ import api from "../api";
 import EventDescription from "../components/EventDescription";
 import SeatDescription from "../components/SeatDescription";
 import SeatsList from "../components/SeatsList";
-import { IEvent } from "../models/IEvents";
-import { ISeatEvent } from "../models/ISeat";
+import { IEvent } from "../Dto/IEvents";
+import { ISeatEvent } from "../Dto/ISeat";
 
 const EventDetailPage = () => {
   const { eventId } = useParams<{ eventId: string }>();
