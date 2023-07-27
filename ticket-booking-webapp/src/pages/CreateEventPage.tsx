@@ -70,7 +70,9 @@ const CreateEventPage = () => {
     const formattedSelectedDate = Date.parse(date.toString());
     const isDateValid = currentDate.getTime() < formattedSelectedDate;
     if (!isDateValid) {
-      alert("Selected date must be after or equal to today");
+      // alert("Selected date must be after or equal to today");
+      setErrDatePicker("Selected date must be after or equal to today");
+      return;
     }
     setErrDatePicker("");
     setEventDate(date);
@@ -158,17 +160,15 @@ const CreateEventPage = () => {
       alert("Date is required");
       return;
     }
-
     if (errDatePicker) {
       alert(errDatePicker);
       return;
     }
-
     if (!city) {
       alert("City is required");
       return;
     }
-    if (!eventTypes) {
+    if (eventTypes.length === 0) {
       alert("Event Type is required");
       return;
     }

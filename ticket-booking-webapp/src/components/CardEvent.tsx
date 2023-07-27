@@ -74,7 +74,7 @@ const CardEvent = ({ event, eventsList, setEventsList }: Props) => {
     setOpenPublishConfirmation(true);
   };
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, height: '100%' }}>
       <CardActionArea>
         <CardMedia
           component="img"
