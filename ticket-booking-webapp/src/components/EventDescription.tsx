@@ -10,7 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ISeatEvent } from "../Dto/ISeat";
-import { IEvent } from "../Dto/IEvents";
+import { IEvent } from "../Dto/IEvent";
 import { formatDateEventDetail } from "../utils/convertDateEvent";
 import { BiTimeFive, BiSolidMap } from "react-icons/bi";
 import api from "../api";
@@ -30,6 +30,8 @@ const theme = createTheme({
 });
 
 const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
+  console.log('event: ', event);
+  
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openInfo, setOpenInfo] = useState(false);
   const [openConfirmationCode, setOpenConfirmationCode] = useState(false);
@@ -46,13 +48,12 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
 
   const handleClickPaymentBtn = () => {
     setOpenInfo(true);
-    
   };
 
   const handleSubmitDialogInfo = async () => {
     try {
       setIsLoading(true);
-      const response = await api.get("/EmailValidation",  {
+      const response = await api.get("/Invoice", {
         params: {
           email: email,
           fullName: fullName,
@@ -62,10 +63,10 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
           "ngrok-skip-browser-warning": "true",
         },
       });
+      console.log(response);
       setIsSubmitInfo(true);
       setOpenConfirmationCode(true);
       handleCloseInfo();
-      
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -81,22 +82,31 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
           "ngrok-skip-browser-warning": "true",
         },
       };
-      if(!event?.id) return;
+      if (!event?.id) return;
       let postData = {
         fullName: fullName,
         mail: email,
         phone: phoneNumber,
         eventId: event?.id,
         seatIds: seatsPicking.map((seat) => seat.seatId.toLowerCase()),
-      }
+      };
       const response = await api.post("/Invoice", postData, config);
+      if (response && seatsList) {
+        let seatsUpdate = [...seatsList];
+        seatsUpdate.map((seat) => {
+          if (seat.seatStatus === -1) {
+            seat.seatStatus = 1;
+          }
+        });
+        setSeatsList(seatsUpdate);
+      }
     } catch (error) {
       console.log(error);
-    }finally{
+    } finally {
       setIsLoading(false);
       handleCloseConfirmationCode();
     }
-  }
+  };
 
   const fetchPaymentPicking = () => {
     if (seatsList === undefined) return;

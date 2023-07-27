@@ -191,7 +191,7 @@ const CreateEventPage = () => {
       formData.append("Prices", data.sweetboxPrice);
       const response = await api.post("/Event", formData, config);
       console.log(response);
-      navigate("/");
+      navigate("/unpublished-event");
       setIsPostSuccess(true);
     } catch (error) {
       console.log(error);

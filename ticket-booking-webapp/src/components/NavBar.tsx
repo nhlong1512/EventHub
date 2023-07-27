@@ -43,12 +43,21 @@ const NavBar = () => {
         </div>
       </div>
       <div className="flex gap-[24px]">
+        
         <Link to="/create-event">
           <Button
             variant="outlined"
             className="rounded-[20px] border-x-main border-y-main text-main px-[24px] py-[6px]"
           >
             Create event
+          </Button>
+        </Link>
+        <Link to="/unpublished-event">
+          <Button
+            variant="contained"
+            className="rounded-[20px] bg-main text-[#fff] px-[24px] py-[6px]"
+          >
+            Unpublished Event
           </Button>
         </Link>
         <Link to="/statistic">

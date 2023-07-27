@@ -6,8 +6,7 @@ import api from "../api";
 import { IEvent } from "../Dto/IEvent";
 import { useSearchStore } from "../store/search";
 
-const HomePage = () => {
-  //zustand searchStore
+const UnpublishedEvent = () => {
   const [searchString, setSearchString] = useSearchStore(
     (state) => [state.searchString, state.setSearchString],
     shallow
@@ -19,15 +18,13 @@ const HomePage = () => {
   const fetchEvents = async () => {
     try {
       setIsLoading(true);
-      const response = await api.get("/Event", 
-      {
+      const response = await api.get("/Event", {
         params: {
-          isPublished: 'true',
+          isPublished: "false",
         },
         headers: {
           "ngrok-skip-browser-warning": "true",
         },
-        
       });
       setEvents(response.data);
     } catch (error) {
@@ -52,9 +49,11 @@ const HomePage = () => {
       event.city.toLowerCase().includes(searchString.toLowerCase().trim())
   );
 
-
   return (
     <Container className="my-[80px] flex items-center justify-start self-start flex-col">
+      <h3 className="m-0 mb-[60px] text-[32px] leading-[40px] text-main">
+        Unpublished Events List
+      </h3>
       {isLoading ? (
         <div>
           <CircularProgress />
@@ -74,4 +73,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default UnpublishedEvent;
