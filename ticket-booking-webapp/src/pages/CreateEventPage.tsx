@@ -25,6 +25,7 @@ import { IProvince } from "../Dto/IProvince";
 import { formatDateToStringCreateEvent } from "../utils/convertDateEvent";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
+import { isBefore, parse } from "date-fns";
 
 const initEventTypes = [
   "Live Music",
@@ -63,11 +64,18 @@ const CreateEventPage = () => {
   const handleDateChange = (date: Date | null) => {
     if (!date) {
       setErrDatePicker("Date is required");
+      return;
     }
-    if (date) {
-      setEventDate(date);
-      setErrDatePicker("");
+    const currentDate = new Date();
+    const formattedSelectedDate = Date.parse(date.toString());
+    const isDateValid = currentDate.getTime() < formattedSelectedDate;
+    if (!isDateValid) {
+      // alert("Selected date must be after or equal to today");
+      setErrDatePicker("Selected date must be after or equal to today");
+      return;
     }
+    setErrDatePicker("");
+    setEventDate(date);
   };
 
   //Fetch Provinces
@@ -152,11 +160,15 @@ const CreateEventPage = () => {
       alert("Date is required");
       return;
     }
+    if (errDatePicker) {
+      alert(errDatePicker);
+      return;
+    }
     if (!city) {
       alert("City is required");
       return;
     }
-    if (!eventTypes) {
+    if (eventTypes.length === 0) {
       alert("Event Type is required");
       return;
     }
@@ -191,7 +203,7 @@ const CreateEventPage = () => {
       formData.append("Prices", data.sweetboxPrice);
       const response = await api.post("/Event", formData, config);
       console.log(response);
-      navigate("/");
+      navigate("/unpublished-event");
       setIsPostSuccess(true);
     } catch (error) {
       console.log(error);

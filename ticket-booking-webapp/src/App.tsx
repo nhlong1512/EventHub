@@ -7,7 +7,9 @@ import Layout from "./components/Layout";
 import CreateEventPage from "./pages/CreateEventPage";
 import EventDetailPage from "./pages/EventDetailPage";
 import HomePage from "./pages/HomePage";
+import MyBookingPage from "./pages/MyBookingPage";
 import StatisticPage from "./pages/StatisticPage";
+import UnpublishedEvent from "./pages/UnpublishedEvent";
 
 function App() {
   return (
@@ -17,7 +19,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/event/:eventId" element={<EventDetailPage />} />
           <Route path="/statistic" element={<StatisticPage />} />
+          <Route path="/my-booking" element={<MyBookingPage />} />
           <Route path="/create-event" element={<CreateEventPage />} />
+          <Route path="/unpublished-event" element={<UnpublishedEvent />} />
         </Route>
       </Routes>
     </LocalizationProvider>

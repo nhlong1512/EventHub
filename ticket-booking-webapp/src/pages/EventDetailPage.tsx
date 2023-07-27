@@ -5,7 +5,7 @@ import api from "../api";
 import EventDescription from "../components/EventDescription";
 import SeatDescription from "../components/SeatDescription";
 import SeatsList from "../components/SeatsList";
-import { IEvent } from "../Dto/IEvents";
+import { IEvent } from "../Dto/IEvent";
 import { ISeatEvent } from "../Dto/ISeat";
 
 const EventDetailPage = () => {
