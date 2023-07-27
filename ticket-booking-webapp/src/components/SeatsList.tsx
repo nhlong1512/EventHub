@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ISeatEvent } from "../models/ISeat";
+import { ISeatEvent } from "../Dto/ISeat";
 import Seat from "./Seat";
 
 interface Props {

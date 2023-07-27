@@ -12,6 +12,7 @@ export interface IEvent{
     city: string;
     status: number;
     stageName: string;
+    duration: string;
     categories: ICategory[];
     seatEvents: ISeatEvent[];
 }

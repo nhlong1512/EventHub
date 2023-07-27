@@ -3,7 +3,7 @@ import { Button, CircularProgress, Container } from "@mui/material";
 import EventsList from "../components/EventsList";
 import { shallow } from "zustand/shallow";
 import api from "../api";
-import { IEvent } from "../models/IEvents";
+import { IEvent } from "../Dto/IEvents";
 import { useSearchStore } from "../store/search";
 
 const HomePage = () => {
@@ -19,10 +19,15 @@ const HomePage = () => {
   const fetchEvents = async () => {
     try {
       setIsLoading(true);
-      const response = await api.get("/Event", {
+      const response = await api.get("/Event", 
+      {
+        params: {
+          isPublished: 'true',
+        },
         headers: {
           "ngrok-skip-browser-warning": "true",
         },
+        
       });
       setEvents(response.data);
     } catch (error) {

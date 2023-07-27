@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IEvent } from "../models/IEvents";
+import { IEvent } from "../Dto/IEvents";
 import CardEvent from "./CardEvent";
 
 interface Props {
