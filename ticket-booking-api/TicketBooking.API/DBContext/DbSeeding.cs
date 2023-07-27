@@ -2,17 +2,17 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using TicketBooking.API.Models;
 
-namespace TicketBooking.API.EF
+namespace TicketBooking.API.DBContext
 {
   public class ApplicationDbContextSeeding
   {
     public static void Run(ref ModelBuilder modelBuilder)
     {
-      StreamReader categoryReader = new("./EF/SeedingData/Category.json");
-      StreamReader eventReader = new("./EF/SeedingData/Event.json");
-      StreamReader seatReader = new("./EF/SeedingData/Seat.json");
-      StreamReader eventCategoryReader = new("./EF/SeedingData/EventCategory.json");
-      StreamReader seatEventReader = new("./EF/SeedingData/SeatEvent.json");
+      StreamReader categoryReader = new("./DBContext/SeedingData/Category.json");
+      StreamReader eventReader = new("./DBContext/SeedingData/Event.json");
+      StreamReader seatReader = new("./DBContext/SeedingData/Seat.json");
+      StreamReader eventCategoryReader = new("./DBContext/SeedingData/EventCategory.json");
+      StreamReader seatEventReader = new("./DBContext/SeedingData/SeatEvent.json");
 
       string categoriesJson = categoryReader.ReadToEnd();
       string eventJson = eventReader.ReadToEnd();

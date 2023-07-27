@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using TicketBooking.API.Dto;
-using TicketBooking.API.EF;
+using TicketBooking.API.DBContext;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
 using TicketBooking.API.Enum;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
+using TicketBooking.API.Helper;
 
 namespace TicketBooking.API.Repository
 {
@@ -177,12 +178,7 @@ namespace TicketBooking.API.Repository
 
 		private static async Task<string> UpLoadImage(IFormFile formFile, string eventId)
 		{
-			IConfigurationRoot configuration = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetCurrentDirectory())
-				.AddJsonFile("appsettings.json")
-				.Build();
-
-			var connectionString = configuration.GetConnectionString("TicketBookingStorage");
+			var connectionString = ConfigurationString.BlobStorage;
 			var blobServiceClient = new BlobServiceClient(connectionString);
 			var containerClient = blobServiceClient.GetBlobContainerClient("img");
 			var stream = formFile.OpenReadStream();

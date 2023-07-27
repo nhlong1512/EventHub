@@ -3,7 +3,7 @@ using TicketBooking.API.Enum;
 
 namespace TicketBooking.API.Dto
 {
-  public class EventDetail
+  public class EventDetailResponse
   {
     public string Id { get; set; }
     public string Image { get; set; }

@@ -9,7 +9,7 @@ namespace TicketBooking.API.Helper
     public MappingProfiles()
     {
       CreateMap<Event, EventResponse>();
-      CreateMap<Event, EventDetail>();
+      CreateMap<Event, EventDetailResponse>();
       CreateMap<Category, CategoryResponse>();
       CreateMap<Invoice, InvoiceRequest>();
     }

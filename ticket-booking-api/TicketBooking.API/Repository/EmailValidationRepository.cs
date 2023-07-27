@@ -1,28 +1,25 @@
 using System.Net;
 using System.Net.Mail;
 using TicketBooking.API.Interfaces;
+using TicketBooking.API.Helper;
 
 namespace TicketBooking.API.Repository
 {
 	public class EmailValidationRepository : IEmailValidationRepository
 	{
-		private readonly IConfigurationRoot __configuration;
 		private readonly SmtpClient __smtpClient;
 
 		public EmailValidationRepository()
 		{
-			__configuration = new ConfigurationBuilder()
-			.SetBasePath(Directory.GetCurrentDirectory())
-			.AddJsonFile("appsettings.json")
-			.Build();
 
-			__smtpClient = new SmtpClient(__configuration.GetConnectionString("SmtpClient"), 587)
+			__smtpClient = new SmtpClient(ConfigurationString.SmtpClient, 587)
 			{
 				EnableSsl = true,
 				UseDefaultCredentials = false,
 				Credentials = new NetworkCredential(
-					__configuration.GetConnectionString("EmailClient"),
-					__configuration.GetConnectionString("Password"))
+					ConfigurationString.EmailClient,
+					ConfigurationString.EmailPassword
+				)
 			};
 		}
 
@@ -32,7 +29,7 @@ namespace TicketBooking.API.Repository
 			var mailTitle = GetMailTitle(fullName);
 			var mailContent = GetMailContent(fullName, code);
 			var message = new MailMessage(
-				from: __configuration.GetConnectionString("EmailClient"),
+				from: ConfigurationString.EmailClient,
 				to: mail,
 				mailTitle,
 				mailContent

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Dto;
+using TicketBooking.API.Helper;
 using AutoMapper;
 
 namespace TicketBooking.API.Controller
@@ -37,7 +38,7 @@ namespace TicketBooking.API.Controller
 		}
 
 		[HttpGet("{eventId}")]
-		[ProducesResponseType(200, Type = typeof(IEnumerable<EventDetail>))]
+		[ProducesResponseType(200, Type = typeof(IEnumerable<EventDetailResponse>))]
 		[ProducesResponseType(400)]
 		public ActionResult GetEvent(string eventId)
 		{
@@ -52,7 +53,7 @@ namespace TicketBooking.API.Controller
 				return BadRequest(ModelState);
 			}
 
-			return Ok(__mapper.Map<EventDetail>(e));
+			return Ok(__mapper.Map<EventDetailResponse>(e));
 		}
 
 		[HttpDelete("{eventId}")]
@@ -74,10 +75,10 @@ namespace TicketBooking.API.Controller
 
 			if(!__eventRepository.DeleteEvent(e))
 			{
-				return Problem("Something wrong while deleting");
+				return Problem(ResponseStatus.DeleteError);
 			}
 
-			return Ok("Success");
+			return Ok(ResponseStatus.Success);
 		}
 
 		[HttpPut("{eventId}")]
@@ -92,10 +93,10 @@ namespace TicketBooking.API.Controller
 
 			if(!__eventRepository.SetPublished(eventId))
 			{
-				return Problem("Something wrong while updating");
+				return Problem(ResponseStatus.UpdateError);
 			}
 
-			return Ok("Success");
+			return Ok(ResponseStatus.Success);
 		}
 
 		[HttpPost]
@@ -113,14 +114,14 @@ namespace TicketBooking.API.Controller
 
 			if(!result)
 			{
-				ModelState.AddModelError("", "Some thing wrong while adding");
+				ModelState.AddModelError("", ResponseStatus.AddError);
 				return BadRequest(ModelState);
 			}
 
 			if(!ModelState.IsValid)
 				return BadRequest();
 
-			return Ok("Success");
+			return Ok(ResponseStatus.Success);
 		}
 	}
 }

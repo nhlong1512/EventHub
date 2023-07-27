@@ -1,19 +1,71 @@
 using TicketBooking.API.Dto;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
-using TicketBooking.API.EF;
+using TicketBooking.API.DBContext;
 using TicketBooking.API.Enum;
 using Microsoft.EntityFrameworkCore;
 
 namespace TicketBooking.API.Repository
 {
-	public class InvoiceRepository : IInvoiceRepository
+    public class InvoiceRepository : IInvoiceRepository
 	{
 		private readonly ApplicationDbContext __dbContext;
 
 		public InvoiceRepository(ApplicationDbContext dbContext)
 		{
 			__dbContext = dbContext;
+		}
+
+		public List<InvoiceResponse>? GetInvoices(string mail)
+		{
+			var invoices = __dbContext.Invoices
+				.Where(x => x.Mail == mail)
+				.Include(x => x.Event)
+				.Include(x => x.Seats)
+				.ToList();
+
+			if (invoices.Count == 0)
+				return null;
+
+			var result = new List<InvoiceResponse>();
+
+			foreach (var invoice in invoices)
+			{
+				var invoiceResponse = new InvoiceResponse
+				{
+					EventId = invoice.EventId,
+					Title = invoice.Event.Title,
+					Date = invoice.Event.Date,
+					InvoiceId = invoice.Id,
+					StageName = invoice.Event.StageName,
+					Location = invoice.Event.Location,
+					Duration = invoice.Event.Duration,
+					IsValidated = invoice.IsValidated,
+					Image = invoice.Event.Image,
+					Seats = new List<SeatResponse>(),
+				};
+
+				foreach(var seat in invoice.Seats)
+				{
+					var seatEvent = __dbContext.SeatEvents
+						.Where(x => x.EventId == invoice.EventId)
+						.Where(x => x.SeatId == seat.Id)
+						.FirstOrDefault();
+
+					var seatResponse = new SeatResponse() 
+					{
+						Name = seat.Name,
+						Type = seat.Type,
+						Price = seatEvent.Price,
+					};
+
+					invoiceResponse.Seats.Add(seatResponse);
+				}
+
+				result.Add(invoiceResponse);
+			}
+
+			return result;
 		}
 
 		public string AddInvoice(InvoiceRequest invoiceRequest, string code)
@@ -36,7 +88,7 @@ namespace TicketBooking.API.Repository
 
 			var addSeatInvoice = AddSeatInvoice(invoiceRequest.seatIds, invoiceId);
 
-			if(addSeatInvoice == 0)
+			if (addSeatInvoice == 0)
 				return "";
 
 			if (result == 0)
@@ -47,9 +99,10 @@ namespace TicketBooking.API.Repository
 
 		public int ValidateInvoice(string invoiceId, string code)
 		{
-			var invoice = __dbContext.Invoice
+			var invoice = __dbContext.Invoices
 				.Where(x => x.Id == invoiceId)
 				.Where(x => x.Code == code)
+				.Where(x => !x.IsValidated)
 				.Include(x => x.Seats)
 				.FirstOrDefault();
 
@@ -57,8 +110,8 @@ namespace TicketBooking.API.Repository
 				return 0;
 
 			var updateSeatEvent = UpdateSeatEvent(invoice.Seats.ToList(), invoice.EventId);
-			
-			if(updateSeatEvent == 0)
+
+			if (updateSeatEvent == 0)
 				return 0;
 
 			invoice.IsValidated = true;

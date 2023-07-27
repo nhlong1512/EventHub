@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TicketBooking.API.Dto;
 using TicketBooking.API.Interfaces;
+using TicketBooking.API.Helper;
 
 namespace TicketBooking.API.Controller
 {
@@ -20,6 +21,21 @@ namespace TicketBooking.API.Controller
 			__emailValidationRepository = emailValidationRepository;
 		}
 
+		[HttpGet("{mail}")]
+		[ProducesResponseType(200, Type = typeof(List<InvoiceResponse>))]
+		public ActionResult GetInvoice(string mail)
+		{
+			var result = __invoicesRepository.GetInvoices(mail);
+
+			if(result == null)
+				return NotFound();
+
+			if(!ModelState.IsValid)
+				return BadRequest(ModelState);
+
+			return Ok(result);	
+		}
+
 		[HttpPost]
 		[ProducesResponseType(204, Type = typeof(string))]
 		public async Task<ActionResult> AddInvoice(InvoiceRequest invoiceRequest)
@@ -31,19 +47,19 @@ namespace TicketBooking.API.Controller
 
 			if (code == "")
 			{
-				return Problem("Something wrong while sending code to customer");
+				return Problem(ResponseStatus.ServiceError);
 			}
 
 			string invoiceId = __invoicesRepository.AddInvoice(invoiceRequest, code);
 
 			if (invoiceId == "")
 			{
-				ModelState.AddModelError("", "Some thing wrong while adding");
+				ModelState.AddModelError("", ResponseStatus.AddError);
 				return BadRequest(ModelState);
 			}
 
 			if (!ModelState.IsValid)
-				return BadRequest();
+				return BadRequest(ModelState);
 
 			return Ok(invoiceId);
 		}
@@ -57,10 +73,10 @@ namespace TicketBooking.API.Controller
 			int result = __invoicesRepository.ValidateInvoice(invoiceId, code);
 
 			if (result == 0)
-				return Problem("Something wrong while validating invoice");
+				return Problem(ResponseStatus.UpdateError);
 
 			if (!ModelState.IsValid)
-				return BadRequest();
+				return BadRequest(ModelState);
 
 			return Ok(result.ToString());
 		}
