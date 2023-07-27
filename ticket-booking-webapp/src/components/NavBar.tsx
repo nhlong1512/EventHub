@@ -20,7 +20,6 @@ const NavBar = () => {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchString(event.target.value);
   };
-  
 
   return (
     <div className="flex justify-between items-center px-[40px] py-[20px] border-0 border-b-[1px] border-b-[#ccc] border-solid bg-[#fff]">
@@ -43,13 +42,20 @@ const NavBar = () => {
         </div>
       </div>
       <div className="flex gap-[24px]">
-        
         <Link to="/create-event">
           <Button
             variant="outlined"
             className="rounded-[20px] border-x-main border-y-main text-main px-[24px] py-[6px]"
           >
             Create event
+          </Button>
+        </Link>
+        <Link to="/my-booking">
+          <Button
+            variant="outlined"
+            className="rounded-[20px] border-x-main border-y-main text-main px-[24px] py-[6px]"
+          >
+            My Booking
           </Button>
         </Link>
         <Link to="/unpublished-event">

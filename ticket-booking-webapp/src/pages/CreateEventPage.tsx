@@ -25,6 +25,7 @@ import { IProvince } from "../Dto/IProvince";
 import { formatDateToStringCreateEvent } from "../utils/convertDateEvent";
 import { useNavigate } from "react-router-dom";
 import { Controller, useForm } from "react-hook-form";
+import { isBefore, parse } from "date-fns";
 
 const initEventTypes = [
   "Live Music",
@@ -63,11 +64,16 @@ const CreateEventPage = () => {
   const handleDateChange = (date: Date | null) => {
     if (!date) {
       setErrDatePicker("Date is required");
+      return;
     }
-    if (date) {
-      setEventDate(date);
-      setErrDatePicker("");
+    const currentDate = new Date();
+    const formattedSelectedDate = Date.parse(date.toString());
+    const isDateValid = currentDate.getTime() < formattedSelectedDate;
+    if (!isDateValid) {
+      alert("Selected date must be after or equal to today");
     }
+    setErrDatePicker("");
+    setEventDate(date);
   };
 
   //Fetch Provinces
@@ -152,6 +158,12 @@ const CreateEventPage = () => {
       alert("Date is required");
       return;
     }
+
+    if (errDatePicker) {
+      alert(errDatePicker);
+      return;
+    }
+
     if (!city) {
       alert("City is required");
       return;
