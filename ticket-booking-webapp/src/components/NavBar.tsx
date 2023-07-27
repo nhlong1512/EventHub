@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useSearchStore } from "../store/search";
 import { shallow } from "zustand/shallow";
+import { useEmailStore } from "../store/email";
 
 const theme = createTheme({
   palette: {
@@ -14,6 +15,11 @@ const theme = createTheme({
 const NavBar = () => {
   const [searchString, setSearchString] = useSearchStore(
     (state) => [state.searchString, state.setSearchString],
+    shallow
+  );
+
+  const [emailStore, setEmailStore] = useEmailStore(
+    (state) => [state.emailStore, state.setEmailStore],
     shallow
   );
 
@@ -50,6 +56,7 @@ const NavBar = () => {
             Create event
           </Button>
         </Link>
+
         <Link to="/my-booking">
           <Button
             variant="outlined"

@@ -15,6 +15,8 @@ import { IEvent } from "../Dto/IEvent";
 import { formatDateEventDetail } from "../utils/convertDateEvent";
 import { BiTimeFive, BiSolidMap } from "react-icons/bi";
 import api from "../api";
+import { useEmailStore } from "../store/email";
+import shallow from "zustand/shallow";
 
 interface Props {
   seatsList: ISeatEvent[] | undefined;
@@ -33,7 +35,11 @@ const theme = createTheme({
 const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
-  // console.log("event: ", event);
+
+  const [emailStore, setEmailStore] = useEmailStore(
+    (state) => [state.emailStore, state.setEmailStore],
+    shallow
+  );
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [openInfo, setOpenInfo] = useState(false);
@@ -68,7 +74,6 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
       alert("Email is required");
       return;
     }
-
     if (!expression.test(email)) {
       alert("Email is not valid");
       return;
@@ -91,6 +96,9 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
       };
       const response = await api.post("/Invoice", postData, config);
       console.log(response);
+      if(response) {
+        setEmailStore(email);
+      }
       setInvoiceId(response.data);
       setIsSubmitInfo(true);
       setOpenConfirmationCode(true);
@@ -106,7 +114,6 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
   const hanldeSubmitConfirmationCode = async () => {
     try {
       setIsLoading(true);
-      
       const response = await api.get("/Invoice", {
         params: {
           invoiceId: invoiceId,
