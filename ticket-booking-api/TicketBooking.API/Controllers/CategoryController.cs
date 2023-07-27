@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
-using TicketBooking.API.Interfaces;
 using AutoMapper;
+using TicketBooking.API.Interfaces;
 using TicketBooking.API.Dto;
 
 namespace TicketBooking.API.Controller
@@ -9,12 +9,12 @@ namespace TicketBooking.API.Controller
 	[Route("api/[controller]")]
 	public class CategoryController : ControllerBase
 	{
-		private readonly ICategoryRepository __categoryReposirory;
+		private readonly ICategoryRepository __categoryRepository;
 		private readonly IMapper __mapper;
 
-		public CategoryController(ICategoryRepository categoryReposirory, IMapper mapper)
+		public CategoryController(ICategoryRepository categoryRepository, IMapper mapper)
 		{
-			__categoryReposirory = categoryReposirory;
+			__categoryRepository = categoryRepository;
 			__mapper = mapper;
 		}
 
@@ -22,11 +22,12 @@ namespace TicketBooking.API.Controller
 		[ProducesResponseType(204, Type = typeof(IEnumerable<CategoryResponse>))]
 		public ActionResult GetCategories()
 		{
-			var result = __mapper.Map<List<CategoryResponse>>(__categoryReposirory.GetCategories());
+			var result = __mapper
+				.Map<List<CategoryResponse>>(__categoryRepository.GetCategories());
 
 			if(!ModelState.IsValid)
 			{
-				return BadRequest();
+				return BadRequest(ModelState);
 			}
 
 			return Ok(result);

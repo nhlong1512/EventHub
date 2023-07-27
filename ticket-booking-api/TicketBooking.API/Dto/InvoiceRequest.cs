@@ -2,7 +2,7 @@ namespace TicketBooking.API.Dto
 {
 	public class InvoiceRequest
 	{
-		public string Name { get; set; }
+		public string FullName { get; set; }
 		public string Mail { get; set; }
 		public string Phone { get; set; }
 		public string EventId { get; set; }

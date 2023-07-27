@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using TicketBooking.API.Dto;
-using TicketBooking.API.EF;
+using TicketBooking.API.DBContext;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
+using TicketBooking.API.Enum;
 using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
-using TicketBooking.API.Enum;
+using TicketBooking.API.Helper;
 
 namespace TicketBooking.API.Repository
 {
@@ -18,12 +19,33 @@ namespace TicketBooking.API.Repository
 			__dbContext = applicationDbContext;
 		}
 
-		public ICollection<Event> GetEvents()
+		public ICollection<Event> GetPublishedEvents()
 		{
-			var result = __dbContext.Events.
-				Where(x => !x.IsDeleted).
-				Include(x => x.Categories).
-				ToList();
+			var result = __dbContext.Events
+				.Where(x => !x.IsDeleted && x.IsPublished)
+				.Include(x => x.Categories)
+				.ToList();
+
+			foreach (var e in result)
+			{
+				foreach (var category in e.Categories)
+				{
+					category.Events = null;
+					category.UpdatedAt = null;
+					category.CreatedAt = null;
+					category.DeletedAt = null;
+				}
+			}
+
+			return result;
+		}
+
+		public ICollection<Event> GetUnPublishedEvents()
+		{
+			var result = __dbContext.Events
+				.Where(x => !x.IsDeleted && !x.IsPublished)
+				.Include(x => x.Categories)
+				.ToList();
 
 			foreach (var e in result)
 			{
@@ -78,14 +100,6 @@ namespace TicketBooking.API.Repository
 			return result;
 		}
 
-		public void DeleteEvent(Event e)
-		{
-			e.IsDeleted = true;
-			e.DeletedAt = DateTime.Now;
-			__dbContext.Update(e);
-			__dbContext.SaveChanges();
-		}
-
 		public async Task<bool> CreateEvent(EventRequest eventRequest)
 		{
 			var newEventId = Guid.NewGuid().ToString();
@@ -98,8 +112,8 @@ namespace TicketBooking.API.Repository
 			if (AddSeatEvent(eventRequest, newEventId) == 0)
 				return false;
 
-			if(AddEventCategory(eventRequest.Categories, newEventId) == 0)
-			  return false;
+			if (AddEventCategory(eventRequest.Categories, newEventId) == 0)
+				return false;
 
 			return true;
 		}
@@ -135,8 +149,8 @@ namespace TicketBooking.API.Repository
 				{
 					SeatId = seat.Id,
 					EventId = eventId,
-					SeatStatus = seat.Name == "F18" || seat.Name == "F1" 
-						? SeatStatus.Banned 
+					SeatStatus = seat.Name == "F18" || seat.Name == "F1"
+						? SeatStatus.Banned
 						: SeatStatus.Free,
 					Price = eventRequest.Prices[(int)seat.Type]
 				};
@@ -148,7 +162,7 @@ namespace TicketBooking.API.Repository
 
 		private int AddEventCategory(List<string> categoryNames, string eventId)
 		{
-			foreach(var categoryName in categoryNames)
+			foreach (var categoryName in categoryNames)
 			{
 				var category = __dbContext.Categories.Where(c => c.Name == categoryName).FirstOrDefault();
 				var eventCategory = new EventCategory()
@@ -158,18 +172,13 @@ namespace TicketBooking.API.Repository
 				};
 				__dbContext.Add(eventCategory);
 			}
-			
+
 			return __dbContext.SaveChanges();
 		}
 
-		private async Task<string> UpLoadImage(IFormFile formFile, string eventId)
+		private static async Task<string> UpLoadImage(IFormFile formFile, string eventId)
 		{
-			IConfigurationRoot configuration = new ConfigurationBuilder()
-				.SetBasePath(Directory.GetCurrentDirectory())
-				.AddJsonFile("appsettings.json")
-				.Build();
-
-			var connectionString = configuration.GetConnectionString("TicketBookingStorage");
+			var connectionString = ConfigurationString.BlobStorage;
 			var blobServiceClient = new BlobServiceClient(connectionString);
 			var containerClient = blobServiceClient.GetBlobContainerClient("img");
 			var stream = formFile.OpenReadStream();
@@ -181,6 +190,36 @@ namespace TicketBooking.API.Repository
 				conditions: null);
 
 			return blobClient.Uri.ToString();
+		}
+
+		public bool DeleteEvent(Event e)
+		{
+			e.IsDeleted = true;
+			e.DeletedAt = DateTime.Now;
+			__dbContext.Update(e);
+			return __dbContext.SaveChanges() != 0;
+		}
+
+		public bool SetPublished(string eventId)
+		{
+			var e = __dbContext.Events
+				.Where(x=>x.Id == eventId)
+				.FirstOrDefault();
+
+			if(e == null)
+			{
+				return false;
+			}
+
+			e.IsPublished = true;
+			e.UpdatedAt = DateTime.Now;
+
+      __dbContext.Entry(e).Property(x => x.IsPublished).IsModified = true;
+      __dbContext.Entry(e).Property(x => x.UpdatedAt).IsModified = true;
+
+			var res = __dbContext.SaveChanges();
+
+			return res != 0;
 		}
 	}
 }

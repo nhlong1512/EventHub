@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Dto;
+using TicketBooking.API.Helper;
 using AutoMapper;
 
 namespace TicketBooking.API.Controller
@@ -22,9 +23,11 @@ namespace TicketBooking.API.Controller
 
 		[HttpGet]
 		[ProducesResponseType(200, Type = typeof(IEnumerable<EventResponse>))]
-		public ActionResult GetEvents()
+		public ActionResult GetEvents([FromQuery] bool IsPublished)
 		{
-			var events = __mapper.Map<List<EventResponse>>(__eventRepository.GetEvents());
+			var events = IsPublished
+				? __mapper.Map<List<EventResponse>>(__eventRepository.GetPublishedEvents())
+				: __mapper.Map<List<EventResponse>>(__eventRepository.GetUnPublishedEvents());	
 
 			if(!ModelState.IsValid)
 			{
@@ -35,7 +38,7 @@ namespace TicketBooking.API.Controller
 		}
 
 		[HttpGet("{eventId}")]
-		[ProducesResponseType(200, Type = typeof(IEnumerable<EventDetail>))]
+		[ProducesResponseType(200, Type = typeof(IEnumerable<EventDetailResponse>))]
 		[ProducesResponseType(400)]
 		public ActionResult GetEvent(string eventId)
 		{
@@ -50,7 +53,7 @@ namespace TicketBooking.API.Controller
 				return BadRequest(ModelState);
 			}
 
-			return Ok(__mapper.Map<EventDetail>(e));
+			return Ok(__mapper.Map<EventDetailResponse>(e));
 		}
 
 		[HttpDelete("{eventId}")]
@@ -70,9 +73,30 @@ namespace TicketBooking.API.Controller
 				return NotFound();
 			}
 
-			__eventRepository.DeleteEvent(e);
+			if(!__eventRepository.DeleteEvent(e))
+			{
+				return Problem(ResponseStatus.DeleteError);
+			}
 
-			return Ok("Success");
+			return Ok(ResponseStatus.Success);
+		}
+
+		[HttpPut("{eventId}")]
+		[ProducesResponseType(200, Type = typeof(string))]
+		[ProducesResponseType(400)]
+		public ActionResult SetPublished(string eventId)
+		{
+			if(!ModelState.IsValid)
+			{
+				return BadRequest(ModelState);
+			}
+
+			if(!__eventRepository.SetPublished(eventId))
+			{
+				return Problem(ResponseStatus.UpdateError);
+			}
+
+			return Ok(ResponseStatus.Success);
 		}
 
 		[HttpPost]
@@ -90,14 +114,14 @@ namespace TicketBooking.API.Controller
 
 			if(!result)
 			{
-				ModelState.AddModelError("", "Some thing wrong while adding");
+				ModelState.AddModelError("", ResponseStatus.AddError);
 				return BadRequest(ModelState);
 			}
 
 			if(!ModelState.IsValid)
 				return BadRequest();
 
-			return Ok("Success");
+			return Ok(ResponseStatus.Success);
 		}
 	}
 }

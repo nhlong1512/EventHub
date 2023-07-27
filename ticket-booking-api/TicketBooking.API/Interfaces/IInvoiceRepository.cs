@@ -1,10 +1,10 @@
 using TicketBooking.API.Dto;
-using TicketBooking.API.Enum;
 namespace TicketBooking.API.Interfaces
 {
-	public interface IInvoicerepository
+	public interface IInvoiceRepository
 	{
-		public Task<AddInvoiceStatus> CreateInvoice(InvoiceRequest invoice);
-		public Task<AddInvoiceStatus> EmailValidate(string email, string userName);
+		public List<InvoiceResponse>? GetInvoices(string mail);
+		public string AddInvoice(InvoiceRequest invoice, string code);
+		public int ValidateInvoice(string invoiceId, string code);
 	}
 }

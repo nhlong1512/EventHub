@@ -1,14 +1,13 @@
 using TicketBooking.API.Dto;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
-using TicketBooking.API.EF;
-using System.Net.Mail;
-using System.Net;
+using TicketBooking.API.DBContext;
 using TicketBooking.API.Enum;
+using Microsoft.EntityFrameworkCore;
 
 namespace TicketBooking.API.Repository
 {
-	public class InvoiceRepository : IInvoicerepository
+    public class InvoiceRepository : IInvoiceRepository
 	{
 		private readonly ApplicationDbContext __dbContext;
 
@@ -17,31 +16,106 @@ namespace TicketBooking.API.Repository
 			__dbContext = dbContext;
 		}
 
-		public async Task<AddInvoiceStatus> CreateInvoice(InvoiceRequest invoiceRequest)
+		public List<InvoiceResponse>? GetInvoices(string mail)
 		{
-			string invoiceId = Guid.NewGuid().ToString();
+			var invoices = __dbContext.Invoices
+				.Where(x => x.Mail == mail)
+				.Include(x => x.Event)
+				.Include(x => x.Seats)
+				.ToList();
 
-			if (AddInvoice(invoiceRequest, invoiceId) == 0)
-				return AddInvoiceStatus.Fail;
+			if (invoices.Count == 0)
+				return null;
 
-			if (AddSeatInvoice(invoiceRequest.seatIds, invoiceId) == 0)
-				return AddInvoiceStatus.Fail;
+			var result = new List<InvoiceResponse>();
 
-			return AddInvoiceStatus.Success;
+			foreach (var invoice in invoices)
+			{
+				var invoiceResponse = new InvoiceResponse
+				{
+					EventId = invoice.EventId,
+					Title = invoice.Event.Title,
+					Date = invoice.Event.Date,
+					InvoiceId = invoice.Id,
+					StageName = invoice.Event.StageName,
+					Location = invoice.Event.Location,
+					Duration = invoice.Event.Duration,
+					IsValidated = invoice.IsValidated,
+					Image = invoice.Event.Image,
+					Seats = new List<SeatResponse>(),
+				};
+
+				foreach(var seat in invoice.Seats)
+				{
+					var seatEvent = __dbContext.SeatEvents
+						.Where(x => x.EventId == invoice.EventId)
+						.Where(x => x.SeatId == seat.Id)
+						.FirstOrDefault();
+
+					var seatResponse = new SeatResponse() 
+					{
+						Name = seat.Name,
+						Type = seat.Type,
+						Price = seatEvent.Price,
+					};
+
+					invoiceResponse.Seats.Add(seatResponse);
+				}
+
+				result.Add(invoiceResponse);
+			}
+
+			return result;
 		}
 
-		private int AddInvoice(InvoiceRequest invoiceRequest, string invoiceId)
+		public string AddInvoice(InvoiceRequest invoiceRequest, string code)
 		{
+			var invoiceId = Guid.NewGuid().ToString();
+
 			var invoice = new Invoice()
 			{
 				Id = invoiceId,
-				Name = invoiceRequest.Name,
+				Name = invoiceRequest.FullName,
 				Mail = invoiceRequest.Mail,
 				Phone = invoiceRequest.Phone,
 				EventId = invoiceRequest.EventId,
+				Code = code,
 			};
 
 			__dbContext.Add(invoice);
+
+			var result = __dbContext.SaveChanges();
+
+			var addSeatInvoice = AddSeatInvoice(invoiceRequest.seatIds, invoiceId);
+
+			if (addSeatInvoice == 0)
+				return "";
+
+			if (result == 0)
+				return "";
+
+			return invoiceId;
+		}
+
+		public int ValidateInvoice(string invoiceId, string code)
+		{
+			var invoice = __dbContext.Invoices
+				.Where(x => x.Id == invoiceId)
+				.Where(x => x.Code == code)
+				.Where(x => !x.IsValidated)
+				.Include(x => x.Seats)
+				.FirstOrDefault();
+
+			if (invoice == null)
+				return 0;
+
+			var updateSeatEvent = UpdateSeatEvent(invoice.Seats.ToList(), invoice.EventId);
+
+			if (updateSeatEvent == 0)
+				return 0;
+
+			invoice.IsValidated = true;
+			__dbContext.Update(invoice);
 
 			return __dbContext.SaveChanges();
 		}
@@ -50,7 +124,7 @@ namespace TicketBooking.API.Repository
 		{
 			foreach (var seatId in seatIds)
 			{
-				SeatInvoice seatInvoice = new SeatInvoice()
+				SeatInvoice seatInvoice = new()
 				{
 					SeatId = seatId,
 					InvoiceId = invoiceId,
@@ -61,40 +135,27 @@ namespace TicketBooking.API.Repository
 			return __dbContext.SaveChanges();
 		}
 
-		public async Task<AddInvoiceStatus> EmailValidate(string email, string userName)
+		private int UpdateSeatEvent(List<Seat> seats, string eventId)
 		{
-			IConfigurationRoot configuration = new ConfigurationBuilder()
-							.SetBasePath(Directory.GetCurrentDirectory())
-							.AddJsonFile("appsettings.json")
-							.Build();
+			var seatIds = new List<string>();
 
-			var emailClient = configuration.GetConnectionString("EmailClient");
-			var smtpClient = configuration.GetConnectionString("SmtpClient");
-			var password = configuration.GetConnectionString("Password");
-			var code = (new Random()).Next(100000, 999999).ToString();
-
-			var client = new SmtpClient(smtpClient, 587)
+			foreach (var seat in seats)
 			{
-				EnableSsl = true,
-				UseDefaultCredentials = false,
-				Credentials = new NetworkCredential(emailClient, password)
-			};
-
-			try
-			{
-				await client.SendMailAsync(new MailMessage(
-					from: emailClient,
-					to: email,
-					"[EventBooking] CUSTOMER'S PAYMENT INFORMATION",
-					$"Hello ${userName}, thanks for using our service.\nYour confirmation code is ${code}"
-				));
-			}
-			catch (Exception)
-			{
-				return AddInvoiceStatus.InvalidEmail;
+				seatIds.Add(seat.Id);
 			}
 
-			return AddInvoiceStatus.Success;
+			var seatEvents = __dbContext.SeatEvents
+				.Where(x => seatIds.Contains(x.SeatId))
+				.Where(x => x.EventId == eventId)
+				.ToList();
+
+			foreach (var seatEvent in seatEvents)
+			{
+				seatEvent.SeatStatus = SeatStatus.Picked;
+				__dbContext.Update(seatEvent);
+			}
+
+			return __dbContext.SaveChanges();
 		}
 	}
 }

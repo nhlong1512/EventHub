@@ -12,6 +12,7 @@ namespace TicketBooking.API.Models
     public DateTime Date { get; set; }
     public string Location { get; set; }
     public string StageName { get; set; }
+    public bool IsPublished { get; set; }
     public string? City { get; set; }
     public EventStatus Status { get; set; }
     public DateTime? UpdatedAt { get; set; }

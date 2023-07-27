@@ -18,6 +18,8 @@ namespace TicketBooking.API.Configurations
       builder.Property(x=>x.DeletedAt).HasDefaultValue(null);
       builder.Property(x=>x.CreatedAt).HasDefaultValue(DateTime.Now);
       builder.Property(x=>x.IsDeleted).HasDefaultValue(false);
+			builder.Property(x=>x.Code).HasDefaultValue("");
+			builder.Property(x=>x.IsValidated).HasDefaultValue(false);
       builder.Property(x=>x.EventId).IsRequired();
 
 			builder.HasMany(x=>x.Seats).WithMany(e=>e.Invoices).UsingEntity<SeatInvoice>(

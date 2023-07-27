@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using TicketBooking.API.EF;
+using TicketBooking.API.DBContext;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Repository;
 
@@ -19,18 +19,20 @@ builder.Services.AddScoped<IEventRepository, EventRepository>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
-builder.Services.AddScoped<IInvoicerepository, InvoiceRepository>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
+
+builder.Services.AddScoped<IEmailValidationRepository, EmailValidationRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("MyPolicies", policy =>
+    options.AddPolicy("public", policy =>
     {
         policy
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
 
@@ -50,7 +52,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseCors("MyPolicies");
+app.UseCors("public");
 
 app.UseAuthorization();
 

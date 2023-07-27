@@ -2,6 +2,7 @@
   {
     "Id": "e1",
     "Duration": "7:30 PM - 9:30 PM",
+    "IsPublished": true,
     "Title": "[MÂY LANG THANG] LIVESHOW PHAN MẠNH QUỲNH KM TRẦN MINH DŨNG",
     "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/18/AA2A4B.jpg",
     "MinPrice": 350000,
@@ -12,6 +13,7 @@
   {
     "Id": "e2",
     "Duration": "10:00 PM - 11:30 PM",
+    "IsPublished": true,
     "Title": "[MÂY LANG THANG] PHƯƠNG UYÊN",
     "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/18/238BEE.jpg",
     "MinPrice": 450000,
@@ -22,6 +24,7 @@
   {
     "Id": "e3",
     "Duration": "7:30 PM - 9:30 PM",
+    "IsPublished": true,
     "Title": "[MÂY LANG THANG HÀ NỘI] LIVESHOW TUẤN NGỌC",
     "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/13/23D46F.jpg",
     "MinPrice": 5000000,
@@ -32,6 +35,7 @@
   {
     "Id": "e4",
     "Duration": "7:30 PM - 9:30 PM",
+    "IsPublished": true,
     "Title": "[MÂY LANG THANG CẦN THƠ] LIVESHOW ƯNG HOÀNG PHÚC & PHẠM QUỲNH ANH",
     "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/23/B8A309.jpg",
     "MinPrice": 350000,
@@ -42,6 +46,7 @@
   {
     "Id": "e5",
     "Duration": "6:30 PM - 7:00 PM",
+    "IsPublished": true,
     "Title": "[MÂY LANG THANG ĐÀ NẴNG] LIVESHOW TRUNG QUÂN IDOL",
     "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/23/46B510.jpg",
     "MinPrice": 500000,
@@ -52,6 +57,7 @@
   {
     "Id": "e6",
     "Duration": "7:30 PM - 9:30 PM",
+    "IsPublished": true,
     "Title": "[HBSO] ROCK SYMPHONY VOL.3",
     "Image": "https://images.tkbcdn.com/1/1560/600/Upload/eventcover/2023/07/10/AA7A83.jpg",
     "MinPrice": 450000,

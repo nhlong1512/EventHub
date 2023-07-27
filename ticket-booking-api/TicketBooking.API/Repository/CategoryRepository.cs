@@ -1,4 +1,4 @@
-using TicketBooking.API.EF;
+using TicketBooking.API.DBContext;
 using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
 

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using TicketBooking.API.Configurations;
 using TicketBooking.API.Models;
 
-namespace TicketBooking.API.EF
+namespace TicketBooking.API.DBContext
 {
   public class ApplicationDbContext: DbContext
   {
@@ -24,7 +24,7 @@ namespace TicketBooking.API.EF
     public DbSet<Event> Events { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Seat> Seats { get; set; }
-    public DbSet<Invoice> Invoice { get; set; }
+    public DbSet<Invoice> Invoices { get; set; }
     public DbSet<SeatEvent> SeatEvents { get; set; }
     public DbSet<SeatInvoice> SeatInvoices { get; set; }
     public DbSet<EventCategory> EventCategories { get; set; }

@@ -6,6 +6,8 @@ namespace TicketBooking.API.Models
 		public string Name { get; set; }
 		public string Mail { get; set; }
 		public string Phone { get; set; }
+		public string Code { get; set; }
+		public bool IsValidated { get; set; }
 		public DateTime? UpdatedAt { get; set; }
 		public DateTime? CreatedAt { get; set; }
 		public DateTime? DeletedAt { get; set; }
