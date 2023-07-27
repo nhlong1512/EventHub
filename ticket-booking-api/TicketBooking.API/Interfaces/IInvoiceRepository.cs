@@ -3,6 +3,7 @@ namespace TicketBooking.API.Interfaces
 {
 	public interface IInvoiceRepository
 	{
-		public bool CreateInvoice(InvoiceRequest invoice);
+		public string AddInvoice(InvoiceRequest invoice, string code);
+		public int ValidateInvoice(string invoiceId, string code);
 	}
 }

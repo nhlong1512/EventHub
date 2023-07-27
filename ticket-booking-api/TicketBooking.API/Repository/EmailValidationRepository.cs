@@ -6,13 +6,44 @@ namespace TicketBooking.API.Repository
 {
 	public class EmailValidationRepository : IEmailValidationRepository
 	{
-		public EmailValidationRepository(){}
+		private readonly IConfigurationRoot __configuration;
+		private readonly SmtpClient __smtpClient;
 
-		public async Task<string> GetValidationCode(string email, string userName)
+		public EmailValidationRepository()
 		{
-			var code = new Random().Next(100000, 999999).ToString();
+			__configuration = new ConfigurationBuilder()
+			.SetBasePath(Directory.GetCurrentDirectory())
+			.AddJsonFile("appsettings.json")
+			.Build();
 
-			if(!await SendCodeToEmail(email, code, userName))
+			__smtpClient = new SmtpClient(__configuration.GetConnectionString("SmtpClient"), 587)
+			{
+				EnableSsl = true,
+				UseDefaultCredentials = false,
+				Credentials = new NetworkCredential(
+					__configuration.GetConnectionString("EmailClient"),
+					__configuration.GetConnectionString("Password"))
+			};
+		}
+
+		public async Task<string> SendValidationCode(string fullName, string mail)
+		{
+			var code = GetCode();
+			var mailTitle = GetMailTitle(fullName);
+			var mailContent = GetMailContent(fullName, code);
+			var message = new MailMessage(
+				from: __configuration.GetConnectionString("EmailClient"),
+				to: mail,
+				mailTitle,
+				mailContent
+			)
+			{ IsBodyHtml = true };
+
+			try
+			{
+				await __smtpClient.SendMailAsync(message);
+			}
+			catch (Exception)
 			{
 				return "";
 			}
@@ -20,47 +51,17 @@ namespace TicketBooking.API.Repository
 			return code;
 		}
 
-		public async Task<bool> SendCodeToEmail(string email, string code, string userName)
+		private string GetMailTitle(string name)
 		{
-			var configuration = new ConfigurationBuilder()
-			.SetBasePath(Directory.GetCurrentDirectory())
-			.AddJsonFile("appsettings.json")
-			.Build();
-
-			var emailClient = configuration.GetConnectionString("EmailClient");
-			var smtpClient = configuration.GetConnectionString("SmtpClient");
-			var password = configuration.GetConnectionString("Password");
-
-			var client = new SmtpClient(smtpClient, 587)
-			{
-				EnableSsl = true,
-				UseDefaultCredentials = false,
-				Credentials = new NetworkCredential(emailClient, password)
-			};
-
-			var message = new MailMessage(
-				from: emailClient,
-				to: email,
-				GetMailTitle(userName),
-				GetMailContent(userName, code)
-			)
-			{
-				IsBodyHtml = true
-			};
-
-			try
-			{
-				await client.SendMailAsync(message);
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-
-			return true;
+			return $"[EventBooking] {name.ToUpper()}'S PAYMENT INFORMATION";
 		}
 
-		public string GetMailContent(string name, string code)
+		private string GetCode()
+		{
+			return new Random().Next(100000, 999999).ToString();
+		}
+
+		private string GetMailContent(string name, string code)
 		{
 			return
 			@$"<html lang=""en"">
@@ -81,10 +82,5 @@ namespace TicketBooking.API.Repository
 				</body>
 			</html>";
 		}
-
-		public string GetMailTitle(string name)
-		{
-			return $"[EventBooking] {name.ToUpper()}'S PAYMENT INFORMATION";
-		}
-  }
+	}
 }

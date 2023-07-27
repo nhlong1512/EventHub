@@ -3,6 +3,7 @@ using TicketBooking.API.Interfaces;
 using TicketBooking.API.Models;
 using TicketBooking.API.EF;
 using TicketBooking.API.Enum;
+using Microsoft.EntityFrameworkCore;
 
 namespace TicketBooking.API.Repository
 {
@@ -15,24 +16,10 @@ namespace TicketBooking.API.Repository
 			__dbContext = dbContext;
 		}
 
-		public bool CreateInvoice(InvoiceRequest invoiceRequest)
+		public string AddInvoice(InvoiceRequest invoiceRequest, string code)
 		{
-			string invoiceId = Guid.NewGuid().ToString();
+			var invoiceId = Guid.NewGuid().ToString();
 
-			if (AddInvoice(invoiceRequest, invoiceId) == 0)
-				return false;
-
-			if (AddSeatInvoice(invoiceRequest.seatIds, invoiceId) == 0)
-				return false;
-
-			if (UpdateSeatEvent(invoiceRequest.seatIds, invoiceRequest.EventId) == 0)
-				return false;
-
-			return true;
-		}
-
-    private int AddInvoice(InvoiceRequest invoiceRequest, string invoiceId)
-		{
 			var invoice = new Invoice()
 			{
 				Id = invoiceId,
@@ -40,9 +27,42 @@ namespace TicketBooking.API.Repository
 				Mail = invoiceRequest.Mail,
 				Phone = invoiceRequest.Phone,
 				EventId = invoiceRequest.EventId,
+				Code = code,
 			};
 
 			__dbContext.Add(invoice);
+
+			var result = __dbContext.SaveChanges();
+
+			var addSeatInvoice = AddSeatInvoice(invoiceRequest.seatIds, invoiceId);
+
+			if(addSeatInvoice == 0)
+				return "";
+
+			if (result == 0)
+				return "";
+
+			return invoiceId;
+		}
+
+		public int ValidateInvoice(string invoiceId, string code)
+		{
+			var invoice = __dbContext.Invoice
+				.Where(x => x.Id == invoiceId)
+				.Where(x => x.Code == code)
+				.Include(x => x.Seats)
+				.FirstOrDefault();
+
+			if (invoice == null)
+				return 0;
+
+			var updateSeatEvent = UpdateSeatEvent(invoice.Seats.ToList(), invoice.EventId);
+			
+			if(updateSeatEvent == 0)
+				return 0;
+
+			invoice.IsValidated = true;
+			__dbContext.Update(invoice);
 
 			return __dbContext.SaveChanges();
 		}
@@ -51,7 +71,7 @@ namespace TicketBooking.API.Repository
 		{
 			foreach (var seatId in seatIds)
 			{
-				SeatInvoice seatInvoice = new SeatInvoice()
+				SeatInvoice seatInvoice = new()
 				{
 					SeatId = seatId,
 					InvoiceId = invoiceId,
@@ -62,10 +82,17 @@ namespace TicketBooking.API.Repository
 			return __dbContext.SaveChanges();
 		}
 
-		private int UpdateSeatEvent(List<string> seatIds, string eventId) 
+		private int UpdateSeatEvent(List<Seat> seats, string eventId)
 		{
+			var seatIds = new List<string>();
+
+			foreach (var seat in seats)
+			{
+				seatIds.Add(seat.Id);
+			}
+
 			var seatEvents = __dbContext.SeatEvents
-				.Where(x => seatIds.FindIndex(y => y == x.SeatId) >= 0)
+				.Where(x => seatIds.Contains(x.SeatId))
 				.Where(x => x.EventId == eventId)
 				.ToList();
 

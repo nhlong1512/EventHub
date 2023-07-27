@@ -9,7 +9,7 @@ namespace TicketBooking.API.Interfaces
 		public ICollection<Event> GetUnPublishedEvents();
 		public Event? GetEvent(string eventId);
 		public Task<bool> CreateEvent(EventRequest eventRequest);
-		public bool SetPublished(Event e);
+		public bool SetPublished(string eventId);
 		public bool DeleteEvent(Event e);
   }
 }

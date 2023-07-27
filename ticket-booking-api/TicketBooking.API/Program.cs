@@ -32,9 +32,9 @@ builder.Services.AddCors(options =>
     options.AddPolicy("MyPolicies", policy =>
     {
         policy
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
 

@@ -6,31 +6,63 @@ namespace TicketBooking.API.Controller
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class InvoiceController: ControllerBase
+	public class InvoiceController : ControllerBase
 	{
 		private readonly IInvoiceRepository __invoicesRepository;
+		private readonly IEmailValidationRepository __emailValidationRepository;
 
-		public InvoiceController(IInvoiceRepository invoicesRepository)
+		public InvoiceController(
+			IInvoiceRepository invoicesRepository,
+			IEmailValidationRepository emailValidationRepository
+		)
 		{
 			__invoicesRepository = invoicesRepository;
+			__emailValidationRepository = emailValidationRepository;
 		}
 
 		[HttpPost]
 		[ProducesResponseType(204, Type = typeof(string))]
-		public ActionResult AddInvoice(InvoiceRequest invoiceRequest)
+		public async Task<ActionResult> AddInvoice(InvoiceRequest invoiceRequest)
 		{
-			var result = __invoicesRepository.CreateInvoice(invoiceRequest);
+			string code = await __emailValidationRepository.SendValidationCode(
+				invoiceRequest.FullName,
+				invoiceRequest.Mail
+			);
 
-			if (!result)
+			if (code == "")
 			{
-					ModelState.AddModelError("", "Some thing wrong while adding");
-					return BadRequest(ModelState);
+				return Problem("Something wrong while sending code to customer");
+			}
+
+			string invoiceId = __invoicesRepository.AddInvoice(invoiceRequest, code);
+
+			if (invoiceId == "")
+			{
+				ModelState.AddModelError("", "Some thing wrong while adding");
+				return BadRequest(ModelState);
 			}
 
 			if (!ModelState.IsValid)
-					return BadRequest();
+				return BadRequest();
 
-			return Ok("Success");
+			return Ok(invoiceId);
+		}
+
+		[HttpGet]
+		[ProducesResponseType(200, Type = typeof(string))]
+		public ActionResult ValidateInvoice(
+				[FromQuery] string invoiceId,
+				[FromQuery] string code)
+		{
+			int result = __invoicesRepository.ValidateInvoice(invoiceId, code);
+
+			if (result == 0)
+				return Problem("Something wrong while validating invoice");
+
+			if (!ModelState.IsValid)
+				return BadRequest();
+
+			return Ok(result.ToString());
 		}
 	}
 }

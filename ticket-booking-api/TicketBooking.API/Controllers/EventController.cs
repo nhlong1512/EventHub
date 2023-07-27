@@ -85,19 +85,12 @@ namespace TicketBooking.API.Controller
 		[ProducesResponseType(400)]
 		public ActionResult SetPublished(string eventId)
 		{
-			var e = __eventRepository.GetEvent(eventId);
-
 			if(!ModelState.IsValid)
 			{
 				return BadRequest(ModelState);
 			}
 
-			if (e == null)
-			{
-				return NotFound();
-			}
-
-			if(!__eventRepository.SetPublished(e))
+			if(!__eventRepository.SetPublished(eventId))
 			{
 				return Problem("Something wrong while updating");
 			}

@@ -63,7 +63,7 @@ namespace TicketBooking.API.Repository
 		public Event? GetEvent(string eventId)
 		{
 			var result = __dbContext.Events
-				.Where(x => (x.Id == eventId) && (!x.IsDeleted) && (x.IsPublished))
+				.Where(x => (x.Id == eventId) && (!x.IsDeleted))
 				.Include(x => x.SeatEvents)
 				.ThenInclude(x => x.Seat)
 				.Include(x => x.Categories)
@@ -204,12 +204,26 @@ namespace TicketBooking.API.Repository
 			return __dbContext.SaveChanges() != 0;
 		}
 
-		public bool SetPublished(Event e)
+		public bool SetPublished(string eventId)
 		{
+			var e = __dbContext.Events
+				.Where(x=>x.Id == eventId)
+				.FirstOrDefault();
+
+			if(e == null)
+			{
+				return false;
+			}
+
 			e.IsPublished = true;
-			e.DeletedAt = DateTime.Now;
-			__dbContext.Update(e);
-			return __dbContext.SaveChanges() != 0;
+			e.UpdatedAt = DateTime.Now;
+
+      __dbContext.Entry(e).Property(x => x.IsPublished).IsModified = true;
+      __dbContext.Entry(e).Property(x => x.UpdatedAt).IsModified = true;
+
+			var res = __dbContext.SaveChanges();
+
+			return res != 0;
 		}
 	}
 }
