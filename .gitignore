@@ -3,8 +3,8 @@
 /ticket-booking-webapp/node_modules
 /ticket-booking-webapp/build
 
-/ticket-booking-api/TicketBookingAPI.app/bin
-/ticket-booking-api/TicketBookingAPI.app/obj
-
-/ticket-booking-api/TicketBookingAPI.data/bin
-/ticket-booking-api/TicketBookingAPI.data/obj
+/ticket-booking-api/TicketBooking.API/bin
+/ticket-booking-api/TicketBooking.API/Migrations
+/ticket-booking-api/TicketBooking.API/obj
+/ticket-booking-api/TicketBooking.API/.vscode
+/ticket-booking-api/.vscode

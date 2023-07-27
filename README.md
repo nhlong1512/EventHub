@@ -8,15 +8,50 @@ Netpower internship project
 |
 | - -  ticket-booking-api/
 			|
-			| - - - TicketBookingAPI.data
+			| - - - TicketBooking.API/
 			|
-			| - - - TicketBookingAPI.app
+			| - - - TicketBooking.API.sln
 ```
+
+## Installation and Run
+
+### Setup local database instruction
+1. Install Docker on Linux or WSL
+2. Make sure you stop your local SQL Server database service
+3. Download image and build container
+```bash
+docker pull mcr.microsoft.com/azure-sql-edge
+docker run --cap-add SYS_PTRACE -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=TicketBooking.database.v1' -p 1433:1433 --name azuresql -d mcr.microsoft.com/azure-sql-edge
+```
+4. Database is running now. If you want to start database service later , run
+```bash
+docker start azuresql
+```
+
+### Go to TicketBooking.API project in "ticket-booking-api"
+1. Setup data
+```bash
+dotnet ef migrations add init
+dotnet ef database update
+```
+2. Run API
+```bash
+dotnet run
+```
+
+### Go to folder "ticket-booking-webapp"
+> run
+```bash
+npm i
+npm start
+```
+
+> Now webapp is running at <<<http://localhost:3000>>> on your local machine.
 
 ## Tech stack for Ticket Booking
 
 - Web application: ReactJS
 
-- API: ASP.NET Core 7.0
+- API: ASP.NET Core 7.0, Entity Framework Core 7.0
 
-> All related libraries, installation and usage information can be found in each folder of project
+- Other services: Azure Database, Azure Blob Storage
