@@ -8,8 +8,8 @@ import { useSearchStore } from "../store/search";
 
 const HomePage = () => {
   //zustand searchStore
-  const [searchString, setSearchString] = useSearchStore(
-    (state) => [state.searchString, state.setSearchString],
+  const [searchString] = useSearchStore(
+    (state) => [state.searchString],
     shallow
   );
   const [events, setEvents] = useState<IEvent[]>([]);

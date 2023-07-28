@@ -51,7 +51,6 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
   const handleCloseConfirmationCode = () => setOpenConfirmationCode(false);
   const [seatsPicking, setSeatsPicking] = useState<ISeatEvent[]>([]);
   const [seatsNumber, setSeatsNumber] = useState<string>("");
-  const [isSubmitInfo, setIsSubmitInfo] = useState<boolean>(false);
   const [code, setCode] = useState<string>("");
   const [invoiceId, setInvoiceId] = useState<string>("");
   //Form data
@@ -101,7 +100,6 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
         setEmailStore(email);
       }
       setInvoiceId(response.data);
-      setIsSubmitInfo(true);
       setOpenConfirmationCode(true);
       handleCloseInfo();
     } catch (error) {
