@@ -53,7 +53,6 @@ const CardEvent = ({ event, eventsList, setEventsList }: Props) => {
           "ngrok-skip-browser-warning": "true",
         },
       });
-      console.log("responsePublished: ", response);
       if(response && eventsList && setEventsList) {
         const newEventsList = eventsList.filter((eventItem) => eventItem.id !== event.id);
         setEventsList(newEventsList);
@@ -70,7 +69,6 @@ const CardEvent = ({ event, eventsList, setEventsList }: Props) => {
 
   const handleClickPublish = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log("publish: ", event.id);
     setOpenPublishConfirmation(true);
   };
   return (

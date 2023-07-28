@@ -22,6 +22,5 @@ export const formatDateToStringCreateEvent = (selectedDate: string) => {
   dateObject.setHours(21);
   dateObject.setMinutes(15);
   const formattedDate = dateObject.toISOString().slice(0, 19);
-  console.log(formattedDate);
   return formattedDate;
 };

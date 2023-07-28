@@ -17,3 +17,22 @@ export interface IEvent{
     categories: ICategory[];
     seatEvents: ISeatEvent[];
 }
+
+
+export interface IEventBooking{ 
+    eventId: string;
+    image: string;
+    title: string;
+    date: string;
+    location: string;
+    stageName: string;
+    duration: string;
+    seats: ISeatBooking[];
+}
+
+export interface ISeatBooking {
+    name: string;
+    type: number;
+    price: number;
+}
+
