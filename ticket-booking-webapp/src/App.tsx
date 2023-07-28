@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/event/:eventId" element={<EventDetailPage />} />
-          <Route path="/statistic" element={<StatisticPage />} />
+          {/* <Route path="/statistic" element={<StatisticPage />} /> */}
           <Route path="/my-booking/:email" element={<MyBookingPage />} />
           <Route path="/create-event" element={<CreateEventPage />} />
           <Route path="/unpublished-event" element={<UnpublishedEvent />} />
