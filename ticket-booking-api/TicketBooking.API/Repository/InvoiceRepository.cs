@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TicketBooking.API.Repository
 {
-    public class InvoiceRepository : IInvoiceRepository
+	public class InvoiceRepository : IInvoiceRepository
 	{
 		private readonly ApplicationDbContext __dbContext;
 
@@ -20,14 +20,16 @@ namespace TicketBooking.API.Repository
 		{
 			var invoices = __dbContext.Invoices
 				.Where(x => x.Mail == mail)
+				.Where(x => x.IsValidated)
 				.Include(x => x.Event)
 				.Include(x => x.Seats)
 				.ToList();
 
-			if (invoices.Count == 0)
-				return null;
-
 			var result = new List<InvoiceResponse>();
+
+			if (invoices.Count == 0)
+				return result;
+
 
 			foreach (var invoice in invoices)
 			{
@@ -40,19 +42,18 @@ namespace TicketBooking.API.Repository
 					StageName = invoice.Event.StageName,
 					Location = invoice.Event.Location,
 					Duration = invoice.Event.Duration,
-					IsValidated = invoice.IsValidated,
 					Image = invoice.Event.Image,
 					Seats = new List<SeatResponse>(),
 				};
 
-				foreach(var seat in invoice.Seats)
+				foreach (var seat in invoice.Seats)
 				{
 					var seatEvent = __dbContext.SeatEvents
 						.Where(x => x.EventId == invoice.EventId)
 						.Where(x => x.SeatId == seat.Id)
 						.FirstOrDefault();
 
-					var seatResponse = new SeatResponse() 
+					var seatResponse = new SeatResponse()
 					{
 						Name = seat.Name,
 						Type = seat.Type,

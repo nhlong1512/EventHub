@@ -27,7 +27,7 @@ namespace TicketBooking.API.Repository
 		{
 			var code = GetCode();
 			var mailTitle = GetMailTitle(fullName);
-			var mailContent = GetMailContent(fullName, code);
+			var mailContent = GetMailContent(fullName, code, mail);
 			var message = new MailMessage(
 				from: ConfigurationString.EmailClient,
 				to: mail,
@@ -58,7 +58,7 @@ namespace TicketBooking.API.Repository
 			return new Random().Next(100000, 999999).ToString();
 		}
 
-		private string GetMailContent(string name, string code)
+		private string GetMailContent(string name, string code, string mail)
 		{
 			return
 			@$"<html lang=""en"">
@@ -75,6 +75,8 @@ namespace TicketBooking.API.Repository
 						Hello {name}, thanks for using our service.
 						<br/>
 						Your confirmation code is <strong style=""color: blue;"">{code}</strong>
+						<br/>
+						Link to your bookings: <a style=""color: blue;"" href=""https://ticket-booking-eight.vercel.app/my-booking/{mail}"">Booking</a>
 					</h3>
 				</body>
 			</html>";
