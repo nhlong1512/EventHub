@@ -1,7 +1,7 @@
 import { Button, CircularProgress, Container } from "@mui/material";
 import { useEffect, useState } from "react";
 import { BiSolidMap, BiTimeFive } from "react-icons/bi";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import shallow from "zustand/shallow";
 import api from "../api";
 import { IEventBooking, ISeatBooking } from "../Dto/IEvent";

@@ -8,8 +8,8 @@ import { useSearchStore } from "../store/search";
 
 const HomePage = () => {
   //zustand searchStore
-  const [searchString, setSearchString] = useSearchStore(
-    (state) => [state.searchString, state.setSearchString],
+  const [searchString] = useSearchStore(
+    (state) => [state.searchString],
     shallow
   );
   const [events, setEvents] = useState<IEvent[]>([]);
@@ -48,8 +48,6 @@ const HomePage = () => {
       event.date.toLowerCase().includes(searchString.toLowerCase().trim()) ||
       event.city.toLowerCase().includes(searchString.toLowerCase().trim())
   );
-
-  console.log(filterEventsSearch);
 
   return (
     <Container className="my-[80px] flex items-center justify-start self-start flex-col">
