@@ -72,14 +72,14 @@ const NavBar = () => {
             Unpublished Event
           </Button>
         </Link>
-        <Link to="/statistic">
+        {/* <Link to="/statistic">
           <Button
             variant="contained"
             className="rounded-[20px] bg-main text-[#fff] px-[24px] py-[6px]"
           >
             Statistic
           </Button>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
