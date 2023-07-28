@@ -49,8 +49,6 @@ const HomePage = () => {
       event.city.toLowerCase().includes(searchString.toLowerCase().trim())
   );
 
-  console.log(filterEventsSearch);
-
   return (
     <Container className="my-[80px] flex items-center justify-start self-start flex-col">
       {isLoading ? (

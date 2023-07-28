@@ -59,6 +59,8 @@ const CreateEventPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isPostSuccess, setIsPostSuccess] = useState<boolean>(false);
   const [errDatePicker, setErrDatePicker] = useState<string>("");
+  //Handle upload file image
+  const [selectedImage, setSelectedImage] = useState<File>();
 
   const handleDateChange = (date: Date | null) => {
     if (!date) {
@@ -116,9 +118,6 @@ const CreateEventPage = () => {
     );
   };
 
-  //Handle upload file image
-  const [selectedImage, setSelectedImage] = useState<File>();
-
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       if (!e.target.files[0]) return;
@@ -153,10 +152,6 @@ const CreateEventPage = () => {
   const { errors } = formState;
 
   const onSubmit = async (data: FormValues) => {
-    if (!eventDate) {
-      alert("Date is required");
-      return;
-    }
     if (errDatePicker) {
       alert(errDatePicker);
       return;
@@ -167,6 +162,9 @@ const CreateEventPage = () => {
     }
     if (eventTypes.length === 0) {
       alert("Event Type is required");
+      return;
+    }
+    if (!eventDate) {
       return;
     }
     try {

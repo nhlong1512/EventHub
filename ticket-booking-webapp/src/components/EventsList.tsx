@@ -7,8 +7,6 @@ interface Props {
   events: IEvent[];
 }
 const EventsList = ({ events }: Props) => {
-  console.log(events);
-
   const [eventsList, setEventsList] = useState<IEvent[]>([]);
 
   useEffect(() => {
