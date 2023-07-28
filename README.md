@@ -1,12 +1,19 @@
 # Ticket Booking
 Netpower internship project
 
+## Branch structure
+```
+| - - - master (deployed, cannot be installed and run locally)
+|
+| - - - submission (is for installed and run locally)
+```
+
 ## Repository structure
 ```
 | - - - ticket-booking-webapp/
 |
 |
-| - -  ticket-booking-api/
+| - - - ticket-booking-api/
 			|
 			| - - - TicketBooking.API/
 			|
@@ -14,11 +21,11 @@ Netpower internship project
 ```
 
 ## Installation and Run
-
+> 🔥🔥🔥 Make sure you are in branch "submission"
 ### Setup local database instruction
 1. Install Docker on Linux or WSL
 2. Make sure you stop your local SQL Server database service
-3. Download image and build container
+3. Running database using Docker
 ```bash
 docker pull mcr.microsoft.com/azure-sql-edge
 docker run --cap-add SYS_PTRACE -e 'ACCEPT_EULA=1' -e 'MSSQL_SA_PASSWORD=TicketBooking.database.v1' -p 1433:1433 --name azuresql -d mcr.microsoft.com/azure-sql-edge
