@@ -12,6 +12,7 @@ const HomePage = () => {
     (state) => [state.searchString, state.setSearchString],
     shallow
   );
+  console.log(searchString)
 
   const [events, setEvents] = useState<IEvent[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -52,6 +53,8 @@ const HomePage = () => {
       event.city.toLowerCase().includes(searchString.toLowerCase().trim())
   );
 
+  console.log(filterEventsSearch);
+  
 
   return (
     <Container className="my-[80px] flex items-center justify-start self-start flex-col">

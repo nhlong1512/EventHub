@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { IEvent } from "../Dto/IEvent";
 import CardEvent from "./CardEvent";
@@ -7,7 +7,14 @@ interface Props {
   events: IEvent[];
 }
 const EventsList = ({ events }: Props) => {
-  const [eventsList, setEventsList] = useState<IEvent[]>(events);
+  console.log(events);
+  
+  const [eventsList, setEventsList] = useState<IEvent[]>([]);
+
+  useEffect(() => {
+    setEventsList(events);
+  }, [events])
+  
   return (
     <div className="flex gap-[24px] flex-wrap">
       {eventsList.map((event, eventIndex) => {
