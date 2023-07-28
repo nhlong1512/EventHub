@@ -27,9 +27,6 @@ namespace TicketBooking.API.Controller
 		{
 			var result = __invoicesRepository.GetInvoices(mail);
 
-			if(result == null)
-				return NotFound();
-
 			if(!ModelState.IsValid)
 				return BadRequest(ModelState);
 
