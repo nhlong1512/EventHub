@@ -4,7 +4,6 @@
 /ticket-booking-webapp/build
 
 /ticket-booking-api/TicketBooking.API/bin
-/ticket-booking-api/TicketBooking.API/Migrations
 /ticket-booking-api/TicketBooking.API/obj
 /ticket-booking-api/TicketBooking.API/.vscode
 /ticket-booking-api/.vscode
