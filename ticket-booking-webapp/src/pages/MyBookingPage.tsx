@@ -1,24 +1,40 @@
-import { CircularProgress, Container } from "@mui/material";
+import { Button, CircularProgress, Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { BiSolidMap, BiTimeFive } from "react-icons/bi";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import shallow from "zustand/shallow";
 import api from "../api";
 import { IEvent, IEventBooking, ISeatBooking } from "../Dto/IEvent";
 import { ISeatEvent } from "../Dto/ISeat";
 import { useEmailStore } from "../store/email";
 import { formatDateEventDetail } from "../utils/convertDateEvent";
+import { createTheme, makeStyles, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#5669FF",
+    },
+  },
+});
 
 const MyBookingPage = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { email } = useParams<{ email: string }>();
   // const email = `huulongn15@gmail.com`;
+
   const [emailStore, setEmailStore] = useEmailStore(
     (state) => [state.emailStore, state.setEmailStore],
     shallow
   );
 
-  
+  if (!emailStore) {
+    navigate("/require-info");
+  }
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [eventsBooking, setEventsBooking] = useState<IEventBooking[]>([]);
-
 
   const fetchBookingByEmail = async () => {
     try {
@@ -28,7 +44,6 @@ const MyBookingPage = () => {
           "ngrok-skip-browser-warning": "true",
         },
       });
-      console.log(response);
       if (response.data) {
         setEventsBooking(response.data);
       }
@@ -51,7 +66,6 @@ const MyBookingPage = () => {
     return totalPrice;
   };
 
-  // console.log(getTotalPrice(eventsBooking[0].seats));
 
   return (
     <Container className="mt-[80px] mb-[80px]">
@@ -60,8 +74,27 @@ const MyBookingPage = () => {
           <CircularProgress />
           <p>Loading...</p>
         </div>
+      ) : eventsBooking.length === 0 ? (
+        <div className="flex justify-center flex-col items-center">
+          <h3 className="m-0 mb-[60px] text-[32px] leading-[40px] text-main">
+            You have no booking yet.
+          </h3>
+          <ThemeProvider theme={theme}>
+            <Button
+              variant="contained"
+              className="flex w-[200px] text-[16px] py-[10px] rounded-[10px]"
+              onClick={() => navigate("/")}
+            >
+              Book now
+            </Button>
+          </ThemeProvider>
+        </div>
       ) : (
         <div>
+          <h3 className="m-0 mb-[60px] text-[32px] leading-[40px] text-main">
+            All bookings of {" "}
+            <span className="underline">{emailStore}</span> .
+          </h3>
           {eventsBooking.map((event) => (
             <div className="mt-[20px] flex gap-[50px] p-[20px] rounded-[20px] border-[#ccc] border-solid border-[4px] min-h-[230px]">
               <div className="flex flex-row flex-[7] gap-[16px]">

@@ -17,6 +17,7 @@ import { BiTimeFive, BiSolidMap } from "react-icons/bi";
 import api from "../api";
 import { useEmailStore } from "../store/email";
 import shallow from "zustand/shallow";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   seatsList: ISeatEvent[] | undefined;
@@ -36,6 +37,7 @@ const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
 
+  const navigate = useNavigate();
   const [emailStore, setEmailStore] = useEmailStore(
     (state) => [state.emailStore, state.setEmailStore],
     shallow
@@ -95,7 +97,6 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
         seatIds: seatsPicking.map((seat) => seat.seatId.toUpperCase()),
       };
       const response = await api.post("/Invoice", postData, config);
-      console.log(response);
       if(response) {
         setEmailStore(email);
       }
@@ -103,6 +104,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
       setIsSubmitInfo(true);
       setOpenConfirmationCode(true);
       handleCloseInfo();
+      
     } catch (error) {
       console.log(error);
     } finally {
@@ -123,7 +125,6 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
           "ngrok-skip-browser-warning": "true",
         },
       });
-      console.log(response);
       if (response && seatsList) {
         let seatsUpdate = [...seatsList];
         seatsUpdate.map((seat) => {
@@ -132,6 +133,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
           }
         });
         setSeatsList(seatsUpdate);
+        navigate(`/my-booking/${email}`)
       }
       handleCloseConfirmationCode();
     } catch (error) {
@@ -236,7 +238,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
 
               <Dialog open={openInfo} onClose={handleCloseInfo}>
                 {isLoading ? (
-                  <div className="flex justify-center">
+                  <div className="flex justify-center items-center">
                     <CircularProgress />
                     <p>Loading...</p>
                   </div>
@@ -390,7 +392,7 @@ const EventDescription = ({ seatsList, setSeatsList, event }: Props) => {
               </Dialog>
 
               {isLoading ? (
-                <div className="flex justify-center">
+                <div className="flex justify-center items-center">
                   <CircularProgress />
                   <p>Loading...</p>
                 </div>

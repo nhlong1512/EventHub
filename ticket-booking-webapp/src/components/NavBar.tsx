@@ -56,8 +56,7 @@ const NavBar = () => {
             Create event
           </Button>
         </Link>
-
-        <Link to="/my-booking">
+        <Link to={emailStore ? `/my-booking/${emailStore}` : "require-info"}>
           <Button
             variant="outlined"
             className="rounded-[20px] border-x-main border-y-main text-main px-[24px] py-[6px]"
