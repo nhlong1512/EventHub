@@ -1,2 +1,2 @@
-export const BASE_URL = "https://d96c-203-205-32-159.ngrok-free.app/api";
+export const BASE_URL = "http://172.190.186.255/api";
 export const PROVINCE_API = "https://provinces.open-api.vn/api/";
