@@ -1,5 +1,4 @@
-# Ticket Booking
-Netpower internship project
+# Event Hub - Event Booking
 
 ## Branch structure
 ```
